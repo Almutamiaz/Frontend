@@ -1,9 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 @layer base {
   :root {
@@ -77,6 +74,10 @@ body {
     --green-100: #84ebb4;
     --green-200: #1fc16b;
     --green-alpha-10: #1fc16b;
+
+    /* Other Vars */
+    --color1: #280c69;
+    --DescriptionColor: #4a4453;
   }
   .dark {
     --background: 240 10% 3.9%;

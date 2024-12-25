@@ -1,10 +1,12 @@
-import initTranslations from "../i18n";
-export default async function Home({ params }) {
-  const { locale } = await params;
-  const { t } = await initTranslations(locale, [locale]);
+import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/routing';
+ 
+export default function HomePage() {
+  const t = useTranslations();
   return (
     <div>
-      <h1 className="pr h1">{t("hakeem")}</h1>
+      <h1>{t('hakeem')}</h1>
+      <Link href="/about">{t('welcomeBack')}</Link>
     </div>
   );
 }
