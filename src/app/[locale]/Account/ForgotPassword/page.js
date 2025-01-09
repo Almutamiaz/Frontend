@@ -12,12 +12,12 @@ const Page = () => {
   const { locale } = useParams();
 
   return (
-    <div className="h-screen flex flex-col justify-center gap-6">
+    <div className="h-screen flex flex-col justify-center gap-6 bg-[var(--neutral-100)] z-[1]">
       <div className="flex justify-center items-center	gap-10 flex-col">
-        <div className="flex max-w-[466] w-full justify-center">
+        <div className="flex max-w-[466px] w-full justify-center">
           <Logo />
         </div>
-        <div className="flex flex-col gap-6 max-w-[466] w-full">
+        <div className="flex flex-col gap-6 max-w-[466px] w-full">
           <div className="flex flex-col gap-8 items-center">
             <div className="flex flex-col gap-4 items-center">
               <h6 className="color1 text-2xl font-bold leading-6">

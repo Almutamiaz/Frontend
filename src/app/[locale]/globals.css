@@ -75,9 +75,21 @@
     --green-200: #1fc16b;
     --green-alpha-10: #1fc16b;
 
+    /* Gray */
+    --gray: #f4f2ff;
+    --Gray-100: #f4f4f5;
+    --Gray-200: #E1E1E2;
+    --Gray-800: #27272a;
+
     /* Other Vars */
     --color1: #280c69;
+    --color2: #35236a;
+    --titleColor: #1e1926;
     --DescriptionColor: #4a4453;
+    --DescriptionColor2: #717171;
+    --DescriptionsColor: #878787;
+    --darkColor: #080020;
+    --Black: #000000;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -105,6 +117,11 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --primary-color: #fff;
+  }
+
+  .container {
+    max-width: 79.1% !important;
+    margin: 0 auto;
   }
 }
 
