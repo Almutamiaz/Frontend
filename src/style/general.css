@@ -1,51 +1,56 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap");
-
+:root {
+  --fontFamily: "Almarai", "Inter", sans-serif;
+}
+body {
+  font-family: var(--fontFamily);
+}
 /* Headings */
 .h1 {
-  font-family: "Almarai", "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-size: 58px;
   line-height: 87px;
   letter-spacing: 0px;
 }
 
 .h2 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-size: 48px;
   line-height: 72px;
   letter-spacing: 0px;
 }
 
 .h3 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-size: 40px;
   line-height: 60px;
   letter-spacing: 0px;
 }
 
 .h4 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-size: 34px;
   line-height: 51px;
   letter-spacing: 0px;
 }
 
 .h5 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-size: 28px;
   line-height: 42px;
   letter-spacing: 0px;
 }
 
 .h6 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-size: 24px;
   line-height: 36px;
   letter-spacing: 0px;
 }
 
 .h7 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-size: 20px;
   line-height: 30px;
   letter-spacing: 0px;
@@ -53,7 +58,7 @@
 
 /* Body Text */
 .b-1 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-style: italic;
   font-size: 16px;
   line-height: 24px;
@@ -61,7 +66,7 @@
 }
 
 .b-2 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-style: italic;
   font-size: 14px;
   line-height: 21px;
@@ -69,7 +74,7 @@
 }
 
 .b-3 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-style: italic;
   font-size: 12px;
   line-height: 18px;
@@ -77,7 +82,7 @@
 }
 
 .b-4 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-style: italic;
   font-size: 10px;
   line-height: 15px;
@@ -85,7 +90,7 @@
 }
 
 .b-5 {
-  font-family: "Inter", sans-serif;
+  font-family: var(--fontFamily);
   font-style: italic;
   font-size: 8px;
   line-height: 12px;
@@ -94,4 +99,11 @@
 
 .pr {
   color: var(--primary-color);
+}
+.color1 {
+  color: var(--color1);
+}
+
+.DescriptionColor {
+  color: var(--DescriptionColor);
 }
