@@ -3,19 +3,37 @@ import SearchIcon from "@/assets/icons/SearchIcon";
 import BookAppointmentImg from "@/assets/images/BookAppointmentIcon.png";
 import DoctorHomeVisits from "@/assets/images/DoctorHomeVisits.png";
 import OnlineConsolations from "@/assets/images/OnlineConsolations.png";
-import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
 import RobotImage from "@/assets/images/RobotImage.png";
 import PercentageImage from "@/assets/images/PercentageImage.png";
+import GooglePlayLight from "@/assets/images/GooglePlayLight.png";
+import AppStoreLight from "@/assets/images/AppStoreLight.png";
+import GooglePlayDark from "@/assets/images/GooglePlayDark.png";
+import AppStoreDark from "@/assets/images/AppStoreDark.png";
+import AppGalleryDark from "@/assets/images/AppGalleryDark.png";
+import HakeemApp from "@/assets/images/HakeemApp.png";
+import Arrow from "@/assets/images/Arrow.png";
+import HakeemAppQR from "@/assets/images/HakeemAppQR.png";
 import HeaderOfSection from "@/components/HeaderOfSection";
-import DoctorCard from "@/components/LandingPageComponents/DoctorCard";
 import ServiceCard from "@/components/LandingPageComponents/ServiceCard";
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import { useTranslations } from "next-intl";
 import DoctorsListSwiper from "@/components/LandingPageComponents/DoctorsListSwiper";
 import ServiceCategoryCard from "@/components/LandingPageComponents/ServiceCategoryCard";
 import MedicalCentresSwiper from "@/components/LandingPageComponents/MedicalCentresSwiper";
 import HakeemCard from "@/components/LandingPageComponents/HakeemCard";
 import StatisticCard from "@/components/LandingPageComponents/StatisticCard";
+import ArticleCard from "@/components/LandingPageComponents/ArticleCard";
+import ArrowIcon from "@/assets/icons/ArrowIcon";
+import HakeemHealthCareLogo from "@/assets/icons/HakeemHealthCareLogo";
+import Image from "next/image";
+import Link from "next/link";
+import FacebookIcon from "@/assets/icons/FacebookIcon";
+import TwitterIcon from "@/assets/icons/TwitterIcon";
+import LinkedInIcon from "@/assets/icons/LinkedInIcon";
+import InstagramIcon from "@/assets/icons/InstagramIcon";
+import CallIcon from "@/assets/icons/CallIcon";
+import LetterIcon from "@/assets/icons/LetterIcon";
+import LocationIcon from "@/assets/icons/LocationIcon";
 
 export default function HomePage() {
   const t = useTranslations();
@@ -207,7 +225,7 @@ export default function HomePage() {
         </div>
       </div>
       {/* ARTICLES FROM HEALTH EXPERTS SECTION */}
-      <div className="container flex flex-col gap-8">
+      <div className="container flex flex-col gap-8 items-center">
         <HeaderOfSection
           title={t("articlesFromHealthExperts")}
           description={t("healthArticlesDescription")}
@@ -217,8 +235,171 @@ export default function HomePage() {
           titleLH={38}
           DesMaxWidth={432}
         />
+        <div className="flex gap-2 w-full">
+          <ArticleCard
+            title={t("milkTypeQuestion")}
+            drName={"Dr Maher Mohamed"}
+          />
+          <ArticleCard
+            title={t("milkTypeQuestion")}
+            drName={"Dr Maher Mohamed"}
+          />
+          <ArticleCard
+            title={t("milkTypeQuestion")}
+            drName={"Dr Maher Mohamed"}
+          />
+        </div>
+        <Button
+          className="antdButtonHover rtl:[&>svg]:!rotate-[-135deg]"
+          style={{
+            color: "var(--primary-color)",
+            background: "var(--neutral-100)",
+            width: "220px",
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+            height: "40px",
+            fontSize: "16px",
+            fontWeight: 400,
+            lineHeight: "24px",
+          }}
+        >
+          {t("seeMore")}
+          <ArrowIcon deg={45} size={11} color="var(--primary-color)" mt={2} />
+        </Button>
       </div>
-      <div></div>
+      {/* DOWNLOAD HAKEEM APP SECTION */}
+      <div className="container rounded-[24px] bg-[#F3F1FD] flex py-[70] px-[60px] gap-5">
+        <div className="flex justify-center items-center flex-1 h-full">
+          <Image src={HakeemApp} alt="Hakeem App" />
+        </div>
+        <div className="flex flex-col gap-[50px] flex-1">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <span className="text-[32px] font-extrabold leading-[38.4px] text-[var(--color1)]">
+                {t("downloadHakeemApp")}
+              </span>
+              <span className="text-base font-medium leading-[19.84px] text-[var(--DescriptionColor2)]">
+                {t("downloadHakeemAppDescription")}
+              </span>
+            </div>
+            <div className="flex gap-6">
+              <Image src={GooglePlayDark} alt="Google Play Download App" />
+              <Image src={AppStoreDark} alt="App Store Download App" />
+              <Image src={AppGalleryDark} alt="App Gallery Download App" />
+            </div>
+            <div className="flex items-center justify-between w-full">
+              <div className="h-[1px] bg-[#ccc] flex-1"></div>
+              <span className="text-[20px] font-semibold leading-6 text-[var(--color1)] mx-6">
+                {t("or").toUpperCase()}
+              </span>
+              <div className="h-[1px] bg-[#ccc] flex-1"></div>
+            </div>
+          </div>
+          <div className="flex gap-5">
+            <div className="flex flex-col items-center gap-[6px] min-w-[320px]">
+              <div className="text-2xl font-bold leading-[28.8px] text-[var(--color1)] flex flex-col items-center self-start">
+                <span className="block">{t("scanQr")}</span>
+                <span className="block">{t("forDownloadApp")}</span>
+              </div>
+              <Image
+                src={Arrow}
+                alt="Arrow"
+                className="rtl:[transform:rotateY(180deg)]"
+              />
+            </div>
+            <Image src={HakeemAppQR} alt="Hakeem App QR Code" />
+          </div>
+        </div>
+      </div>
+      {/* FOOTER SECTION */}
+      <div className="h-[397px] bg-[#2A193C]">
+        <div className="container flex flex-col gap-[75px] pt-[59px] justify-between h-full">
+          <div className="flex justify-between">
+            <div className="flex flex-col gap-5">
+              <HakeemHealthCareLogo />
+              <div className="flex flex-col gap-[13px]">
+                <span className="text-base font-medium leading-6 text-[var(--neutral-100)]">
+                  {t("downloadOurApp")}
+                </span>
+                <div className="flex gap-[10px]">
+                  <Image src={GooglePlayLight} alt="Google Play Download App" />
+                  <Image src={AppStoreLight} alt="App Store Download App" />
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-12">
+              {/* PAGES */}
+              <div className="flex flex-col gap-5 [&_a]:text-sm [&_a]:font-medium [&_a]:leading-[16.94px] [&_a]:text-[var(--neutral-100)]">
+                <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
+                  {t("pages")}
+                </span>
+                <Link href={"#"}>{t("aboutUs")}</Link>
+                <Link href={"#"}>{t("bestDoctor")}</Link>
+                <Link href={"#"}>{t("offers")}</Link>
+                <Link href={"#"}>{t("blogs")}</Link>
+                <Link href={"#"}>{t("termsConditions")}</Link>
+              </div>
+              {/* SERVICES */}
+              <div className="flex flex-col gap-5 [&_a]:text-sm [&_a]:font-medium [&_a]:leading-[16.94px] [&_a]:text-[var(--neutral-100)]">
+                <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
+                  {t("services")}
+                </span>
+                <Link href={"#"}>{t("homeVisits")}</Link>
+                <Link href={"#"}>{t("onlineConsultation")}</Link>
+                <Link href={"#"}>{t("findDoctor")}</Link>
+                <Link href={"#"}>{t("laboratory")}</Link>
+                <Link href={"#"}>{t("xRay")}</Link>
+              </div>
+              {/* CONTACT */}
+              <div className="flex flex-col gap-5">
+                <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
+                  {t("contact")}
+                </span>
+                <div className="flex gap-4 items-center">
+                  <div className="flex justify-center items-center w-6 h-6">
+                    <CallIcon />
+                  </div>
+                  <span className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]">
+                    (406) 555-0120
+                  </span>
+                </div>
+                <div className="flex gap-4 items-center">
+                  <div className="flex justify-center items-center w-6 h-6">
+                    <LetterIcon />
+                  </div>
+                  <span className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]">
+                    hakeem_support@gmail.com
+                  </span>
+                </div>
+                <div className="flex gap-4 items-center">
+                  <div className="flex justify-center items-center w-6 h-6">
+                    <LocationIcon />
+                  </div>
+                  <span className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]">
+                    2972 Dammam Rd. Santa Ana, Illinois 85486
+                  </span>
+                </div>
+              </div>
+              {/* FOLLOW US */}
+              <div className="flex flex-col gap-6">
+                <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)]">
+                  {t("followUs")}
+                </span>
+                <div className="flex gap-2">
+                  <FacebookIcon />
+                  <TwitterIcon />
+                  <LinkedInIcon />
+                  <InstagramIcon />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-t-[0.5px] border-t-solid border-t-[#E7E7E7] py-[14px] text-base font-normal leading-[19.36px] flex justify-center text-[var(--neutral-100)]">
+            {t("copyright")}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
