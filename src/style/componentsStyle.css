@@ -1,0 +1,122 @@
+.ant-form-item {
+  margin: 0;
+}
+
+.ant-form-item input {
+  border: 1px solid #e8ecf4;
+  background-color: #f3f3f3;
+  border-radius: 100px;
+  height: 56px;
+  padding-inline-start: 28px;
+  font-family: var(--fontFamily);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.5px;
+  /* color: var(--DescriptionColor); */
+}
+
+.ant-form-item input::placeholder {
+  color: #8391a1;
+  font-family: var(--fontFamily);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.5px;
+}
+
+.ant-form-item input:hover {
+  border: 1px solid #e8ecf4;
+  background-color: #f3f3f3;
+}
+.ant-form-item .ant-input-outlined {
+  background-color: #f3f3f3;
+}
+.ant-form-item .ant-input-outlined:focus {
+  border: 1px solid #e8ecf4;
+  box-shadow: none;
+}
+
+/* ////////////////////////////////// */
+
+.ant-input-outlined.ant-input-password {
+  border: 1px solid #e8ecf4;
+  background-color: #f3f3f3;
+  border-radius: 100px;
+  height: 56px;
+  padding-inline-start: 28px;
+  font-family: var(--fontFamily);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.5px;
+  padding-top: 0;
+  padding-bottom: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+.ant-input-outlined.ant-input-password input {
+  border: none;
+}
+.ant-input-outlined.ant-input-password img {
+  cursor: pointer;
+}
+
+.ant-input-outlined.ant-input-password .ant-input-suffix {
+  margin-inline-end: 6px;
+}
+.ant-otp {
+  gap: 16px;
+}
+.ant-otp-input {
+  width: 80px;
+  height: 80px !important;
+  border-radius: 12px !important;
+  border: 1px solid #e8ecf4;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
+  color: #020617;
+}
+
+.ant-otp-input.successColor {
+  color: #28b446;
+  border: 1px solid #28b446;
+}
+
+.ArticleCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #080020 75%);
+  z-index: 1; /* Ensure it appears above the background but below the content */
+  pointer-events: none; /* Prevent it from blocking interactions */
+}
+
+.antdButtonHover:hover {
+  background: var(--primary-color) !important;
+  color: var(--neutral-100) !important;
+}
+
+.antdButtonHover:hover svg path {
+  stroke: var(--neutral-100);
+}
+
+.blurDiv {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 20px;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.3px);
+  -webkit-backdrop-filter: blur(3.3px);
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+[dir="rtl"] .DrawerIconClass svg {
+  transform: rotateY(180deg);
+}

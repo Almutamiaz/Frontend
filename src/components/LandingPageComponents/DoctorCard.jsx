@@ -1,0 +1,27 @@
+import StarIcon from "@/assets/icons/StarIcon";
+import Image from "next/image";
+
+const DoctorCard = ({ img, name, rate }) => {
+  return (
+    <div className="flex flex-col py-6 items-center justify-center gap-3 bg-[var(--neutral-100)] min-w-[162px] h-[235px] rounded-[12px]">
+      <Image
+        src={img}
+        alt="Doctor Image"
+        className="w-[124px] h-[124px] object-cover rounded-[50%] border-[0.5px] border-[var(--primary-color)] shadow-[0px_3px_12px_0px_#6060604D]"
+      />
+      <div className="flex flex-col gap-2 items-center">
+        <span className="text-sm font-semibold leading-[21px] text-[var(--Black)]">
+          {name}
+        </span>
+        <div className="flex gap-1 items-center">
+          <StarIcon />
+          <span className="text-[13px] font-semibold leading-[19.5px] text-[var(--Black)] mt-[3px]">
+            {rate}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DoctorCard;
