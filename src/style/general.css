@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --fontFamily: "Almarai", "Inter", sans-serif;
 }
@@ -106,4 +107,118 @@ body {
 
 .DescriptionColor {
   color: var(--DescriptionColor);
+}
+
+.firstCircle::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d7cafe99;
+  position: absolute;
+  right: 50px;
+  top: 25%;
+}
+
+.thirdCircle::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #d7cafe99;
+  position: absolute;
+  right: 17px;
+  top: 25%;
+}
+
+/* .testclass { */
+/* background-image: url('../assets/images/blur.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 10% 100%; */
+/* } */
+
+.blurCircle {
+  filter: blur(534px);
+  background: #9875fd;
+  overflow: hidden;
+}
+.testclass {
+  filter: blur(224px);
+  background: #9875fd;
+}
+
+.herotext {
+  background: linear-gradient(180deg, #ffffff 54.17%, #a98cfe 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ant-input {
+  font-family: var(--fontFamily);
+}
+
+.HeroSecionHomePage .ant-input-prefix {
+  margin-inline-start: 15px;
+  margin-inline-end: 12px;
+}
+
+.HeroSecionHomePage input::placeholder,
+.HeroSecionHomePage input {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #919191;
+}
+
+.HeroSecionHomePage .ant-input-affix-wrapper.ant-input-outlined {
+  border: none;
+  box-shadow: none;
+}
+
+.swiper-free-mode > .swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
+  -o-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+}
+
+.AlmaraiFont {
+  font-family: "Almarai", "Inter", sans-serif;
+}
+
+.InterFont {
+  font-family: "Inter", sans-serif;
+}
+
+/* LANDINGPAGE RESPONSIVE DESIGN */
+@media screen and (max-width: 600px) {
+  .HakeemHeader {
+    border: none;
+    padding: 0;
+    max-width: 100% !important;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .HeroSecionHomePage h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+  .circles {
+    display: none;
+  }
+
+  .HeroSectionParent {
+    height: 550px;
+    /* background: linear-gradient(
+      179.09deg,
+      rgba(126, 83, 253, 0.8) -17.71%,
+      rgba(67, 36, 189, 0.8) 99.22%
+    ); */
+  }
 }

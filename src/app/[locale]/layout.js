@@ -1,21 +1,26 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "./globals.css";
 import "../../style/general.css";
 import "../../style/componentsStyle.css";
+// import "swiper/css";
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConfigProvider } from "antd";
+import Header from "@/components/Header";
 export const metadata = {
   title: "حكيم للرعاية الطبية  | حكيم للرعاية الطبية",
   description: "Hakeem healthcare",
 };
 export default async function LocaleLayout({ children, params }) {
   const { locale } = await params;
+  // const router = usePathname();
 
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale)) {
+    // redirect("/ar");
     notFound();
     // <h1>test</h1>
   }
@@ -61,7 +66,10 @@ export default async function LocaleLayout({ children, params }) {
               enableSystem
               disableTransitionOnChange
             >
-              {children}
+              <div className="flex flex-col relative">
+                <Header />
+                {children}
+              </div>
             </ThemeProvider>
           </ConfigProvider>
         </NextIntlClientProvider>

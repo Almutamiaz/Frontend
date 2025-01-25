@@ -9,13 +9,13 @@ const Page = () => {
   const t = useTranslations();
 
   return (
-    <div className="flex h-full max-sm:flex-wrap">
-      <div className="w-[55.5%] max-sm:w-full">
+    <div className="flex h-full max-sm:flex-wrap z-[1]">
+      <div className="w-[55.5%] max-sm:w-full bg-[var(--neutral-100)]">
         <div className="h-screen flex justify-center items-center	gap-10 flex-col min-h-[700px]">
-          <div className="flex justify-start max-w-[466] w-full max-[900px]:justify-center">
+          <div className="flex justify-start max-w-[466px] w-full max-[900px]:justify-center">
             <Logo />
           </div>
-          <div className="flex flex-col gap-6 max-w-[466] w-full">
+          <div className="flex flex-col gap-6 max-w-[466px] w-full">
             <div className="flex flex-col gap-8 max-[900px]:items-center">
               <div className="flex flex-col gap-4 max-[900px]:items-center">
                 <h6 className="color1 text-2xl font-bold leading-6">
