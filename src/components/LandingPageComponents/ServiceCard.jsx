@@ -7,7 +7,7 @@ const ServiceCard = ({ bgColor, icon, title, description }) => {
   const t = useTranslations();
 
   return (
-    <div className="h-[369px] rounded-[20px] overflow-hidden shadow-[0px_3px_12px_0px_#88888824] max-w-[369px]">
+    <div className="h-[369px] rounded-[20px] overflow-hidden shadow-[0px_3px_12px_0px_#88888824] min-w-[369px] max-[450px]:min-w-[300px]">
       <div
         className="h-[193px] flex items-center justify-center"
         style={{ background: bgColor }}
@@ -27,6 +27,7 @@ const ServiceCard = ({ bgColor, icon, title, description }) => {
           titleWeight={700}
           DesWeight={400}
           DesAlignSelfStart
+          DesMaxWidth={320}
         />
         <div className="flex gap-3 items-center">
           <span className="text-[var(--color1)] text-base font-medium leading-6 tracking-[-0.03em]">

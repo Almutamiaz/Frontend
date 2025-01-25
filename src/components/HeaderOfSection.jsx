@@ -13,11 +13,14 @@ const HeaderOfSection = ({
   DesWeight = 500,
   DesMaxWidth,
   DesAlignSelfStart,
+  responsiveFontSizes = false,
 }) => {
   return (
     <div className="flex flex-col gap-2 items-center">
       <h2
-        className={`font-extrabold ${titleCenter ? "text-center" : ""}`}
+        className={`font-extrabold ${titleCenter ? "text-center" : ""} ${
+          responsiveFontSizes ? "max-[420px]:!text-[24px]" : ""
+        }`}
         style={{
           fontSize: `${titleSize}px`,
           lineHeight: `${titleLH}px`,
@@ -29,7 +32,9 @@ const HeaderOfSection = ({
         {title}
       </h2>
       <p
-        className={`font-medium ${DesCenter ? "text-center" : ""}`}
+        className={`font-medium ${DesCenter ? "text-center" : "self-start"} ${
+          responsiveFontSizes ? "max-[420px]:!text-[16px]" : ""
+        }`}
         style={{
           fontSize: `${DesSize}px`,
           lineHeight: `${DesLH}px`,

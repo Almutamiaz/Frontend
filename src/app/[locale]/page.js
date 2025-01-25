@@ -34,21 +34,22 @@ import InstagramIcon from "@/assets/icons/InstagramIcon";
 import CallIcon from "@/assets/icons/CallIcon";
 import LetterIcon from "@/assets/icons/LetterIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
+import FiltersDrawer from "@/components/FiltersDrawer";
 
 export default function HomePage() {
   const t = useTranslations();
   return (
     <div className="flex flex-col gap-[60px]">
       {/* HERO SECTION */}
-      <div className="h-[660px] bg-[#593BB4] rounded-b-[20px] flex flex-col justify-end">
+      <div className="HeroSectionParent h-[660px] bg-[#593BB4] rounded-b-[20px] flex flex-col justify-end">
         <div className="h-[calc(100%-108px)] w-[100%] mx-auto overflow-hidden relative flex items-center justify-center">
-          <div className="firstCircle absolute w-full max-w-[63.24vw] rounded-[50%] border border-[#FFFFFF1A] h-[63.24vw] top-12 left-0 right-0 mx-auto max-sm:top-[65%] max-sm:max-w-[83.24vw] max-sm:h-[83.24vw]      max-md:top-[55%] max-md:max-w-[73.24vw] max-md:h-[73.24vw]   max-lg:top-[140px] max-lg:max-w-[84.24vw] max-lg:h-[84.24vw]   max-xl:top-[92px] max-xl:max-w-[77.24vw] max-xl:h-[77.24vw]   max-2xl:top-[70px] max-2xl:max-w-[70.24vw] max-2xl:h-[70.24vw]"></div>
-          <div className="absolute w-full max-w-[49vw] rounded-[50%] border border-[#FFFFFF1A] h-[49vw] top-[180.45px] left-0 right-0 mx-auto border-dashed max-sm:top-[75%] max-sm:max-w-[69vw] max-sm:h-[69vw]      max-md:top-[65%] max-md:max-w-[59vw] max-md:h-[59vw]   max-lg:top-[246.45px] max-lg:max-w-[70vw] max-lg:h-[70vw]   max-xl:top-[224.45px] max-xl:max-w-[63vw] max-xl:h-[63vw]   max-2xl:top-[202.45px] max-2xl:max-w-[56vw] max-2xl:h-[56vw]"></div>
-          <div className="blurCircle absolute w-full max-w-[34.64vw] rounded-[50%] border border-[#FFFFFF1A] h-[34.64vw] top-[250px] left-0 right-0 mx-auto"></div>
-          <div className="thirdCircle absolute w-full max-w-[34.64vw] rounded-[50%] border border-[#FFFFFF1A] h-[34.64vw] top-[314.14px] left-0 right-0 mx-auto max-sm:top-[85%] max-sm:max-w-[54.64vw] max-sm:h-[54.64vw]      max-md:top-[75%] max-md:max-w-[44.64vw] max-md:h-[44.64vw]   max-lg:top-[380.14px] max-lg:max-w-[55.64vw] max-lg:h-[55.64vw]   max-xl:top-[358.14px] max-xl:max-w-[48.64vw] max-xl:h-[48.64vw]   max-2xl:top-[336.14px] max-2xl:max-w-[41.64vw] max-2xl:h-[41.64vw]"></div>
-          <div className="testclass absolute w-full max-w-[586.93px] rounded-[50%] border border-[#FFFFFF1A] h-[586.93px] top-[397px] left-0 right-0 mx-auto"></div>
-          <div className="HeroSecionHomePage flex flex-col gap-6 z-[1]">
-            <h1 className="herotext text-[52px] font-bold leading-[60px] tracking-[-0.0506em] max-w-[761px] text-[var(--neutral-100)] text-center bbbbbbb">
+          <div className="circles firstCircle absolute w-full max-w-[63.24vw] rounded-[50%] border border-[#FFFFFF1A] h-[63.24vw] top-12 left-0 right-0 mx-auto max-sm:top-[65%] max-sm:max-w-[83.24vw] max-sm:h-[83.24vw]      max-md:top-[55%] max-md:max-w-[73.24vw] max-md:h-[73.24vw]   max-lg:top-[140px] max-lg:max-w-[84.24vw] max-lg:h-[84.24vw]   max-xl:top-[92px] max-xl:max-w-[77.24vw] max-xl:h-[77.24vw]   max-2xl:top-[70px] max-2xl:max-w-[70.24vw] max-2xl:h-[70.24vw]"></div>
+          <div className="circles absolute w-full max-w-[49vw] rounded-[50%] border border-[#FFFFFF1A] h-[49vw] top-[180.45px] left-0 right-0 mx-auto border-dashed max-sm:top-[75%] max-sm:max-w-[69vw] max-sm:h-[69vw]      max-md:top-[65%] max-md:max-w-[59vw] max-md:h-[59vw]   max-lg:top-[246.45px] max-lg:max-w-[70vw] max-lg:h-[70vw]   max-xl:top-[224.45px] max-xl:max-w-[63vw] max-xl:h-[63vw]   max-2xl:top-[202.45px] max-2xl:max-w-[56vw] max-2xl:h-[56vw]"></div>
+          <div className="circles blurCircle absolute w-full max-w-[34.64vw] rounded-[50%] border border-[#FFFFFF1A] h-[34.64vw] top-[250px] left-0 right-0 mx-auto"></div>
+          <div className="circles thirdCircle absolute w-full max-w-[34.64vw] rounded-[50%] border border-[#FFFFFF1A] h-[34.64vw] top-[314.14px] left-0 right-0 mx-auto max-sm:top-[85%] max-sm:max-w-[54.64vw] max-sm:h-[54.64vw]      max-md:top-[75%] max-md:max-w-[44.64vw] max-md:h-[44.64vw]   max-lg:top-[380.14px] max-lg:max-w-[55.64vw] max-lg:h-[55.64vw]   max-xl:top-[358.14px] max-xl:max-w-[48.64vw] max-xl:h-[48.64vw]   max-2xl:top-[336.14px] max-2xl:max-w-[41.64vw] max-2xl:h-[41.64vw]"></div>
+          <div className="circles testclass absolute w-full max-w-[586.93px] rounded-[50%] border border-[#FFFFFF1A] h-[586.93px] top-[397px] left-0 right-0 mx-auto"></div>
+          <div className="HeroSecionHomePage flex flex-col gap-6 z-[1] max-[850px]:px-5">
+            <h1 className="herotext text-[52px] font-bold leading-[60px] tracking-[-0.0506em] max-w-[761px] text-[var(--neutral-100)] text-center">
               {t("personalisedHealthcareSearch")}
             </h1>
             <Input
@@ -67,7 +68,7 @@ export default function HomePage() {
                   {t("lookingFor")}
                 </span>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap justify-center">
                 {dummyData.map((item) => (
                   <div
                     className="px-4 py-[10px] bg-[#C7C7C738] text-[var(--neutral-100)] text-xs font-normal leading-[14.52px] rounded-[87px] cursor-pointer"
@@ -82,13 +83,15 @@ export default function HomePage() {
         </div>
       </div>
       {/* HAKEEM SERVICES SECTION */}
-      <div className="container flex flex-col gap-8 items-center">
+      <div className="container flex flex-col gap-8 items-center overflow-visible">
         <HeaderOfSection
           title={t("hakeemServices")}
           description={t("bookServicesDescription")}
           titleCenter
+          responsiveFontSizes
+          DesCenter
         />
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap justify-center">
           <ServiceCard
             title={t("bookAppointment")}
             description={t("bookAppointmentDescription")}
@@ -127,6 +130,8 @@ export default function HomePage() {
           titleWeight={700}
           DesWeight={400}
           titleCenter
+          responsiveFontSizes
+          DesCenter
         />
         {/* <div className="py-3 flex gap-2 flex-nowrap overflow-x-auto w-full">
           {[...dummyData, ...dummyData].map((item) => (
@@ -146,14 +151,18 @@ export default function HomePage() {
           title={t("servicesCategory")}
           description={t("servicesCategoryDescription")}
           titleCenter
+          responsiveFontSizes
+          DesCenter
         />
         <div className="flex flex-col gap-4 w-full">
-          <div className="flex gap-4 subb">
-            <ServiceCategoryCard flex={2} />
+          <div className="flex gap-4 flex-wrap">
             <ServiceCategoryCard flex={1} />
-            <ServiceCategoryCard flex={1} />
+            <div className="flex gap-4 min-w-[624px] flex-1 flex-wrap max-[800px]:min-w-full">
+              <ServiceCategoryCard flex={1} minWidthMobile />
+              <ServiceCategoryCard flex={1} minWidthMobile />
+            </div>
           </div>
-          <div className="flex gap-4 subb">
+          <div className="flex gap-4 flex-wrap">
             <ServiceCategoryCard flex={1} />
             <ServiceCategoryCard flex={2} />
           </div>
@@ -174,11 +183,12 @@ export default function HomePage() {
           DesWeight={500}
           titleCenter
           DesCenter
+          responsiveFontSizes
         />
         <MedicalCentresSwiper key={5} />
       </div>
       {/* HAKEEM CARDS SECTION */}
-      <div className="container flex gap-5">
+      <div className="container flex gap-5 flex-wrap">
         <HakeemCard
           title={t("hakeemSmart")}
           subTitle={t("hakeemSmartDescription")}
@@ -206,18 +216,18 @@ export default function HomePage() {
       <div className="bg-[var(--Gray-100)] flex pt-[58px] pb-[67px]">
         <div className="container flex flex-col items-center gap-12">
           <div>
-            <p className="text-[56px] font-extrabold leading-[67.2px] text-[var(--darkColor)] max-w-[641px] rtl:max-w-[518px] text-center">
+            <p className="text-[56px] font-extrabold leading-[67.2px] text-[var(--darkColor)] max-w-[641px] rtl:max-w-[518px] text-center max-[450px]:text-[32px] max-[450px]:leading-[40px]">
               {t("empowering")}{" "}
               <span className="text-[#6441EF]">{t("healthcare")}</span>{" "}
               {t("simplifyingAccess")}
             </p>
           </div>
-          <div className="flex gap-8 items-center">
+          <div className="flex gap-8 items-center flex-wrap justify-center">
             {statsData.map((item, i) => (
               <>
                 <StatisticCard num={item.value} title={item.title} />
                 {i + 1 != statsData.length && (
-                  <div className="rounded-[4px] w-[2px] h-[84px] bg-[#023C5D]"></div>
+                  <div className="rounded-[4px] w-[2px] h-[84px] bg-[#023C5D] max-[660px]:hidden"></div>
                 )}
               </>
             ))}
@@ -234,8 +244,9 @@ export default function HomePage() {
           titleSize={32}
           titleLH={38}
           DesMaxWidth={432}
+          responsiveFontSizes
         />
-        <div className="flex gap-2 w-full">
+        <div className="flex gap-2 w-full flex-wrap">
           <ArticleCard
             title={t("milkTypeQuestion")}
             drName={"Dr Maher Mohamed"}
@@ -269,21 +280,21 @@ export default function HomePage() {
         </Button>
       </div>
       {/* DOWNLOAD HAKEEM APP SECTION */}
-      <div className="container rounded-[24px] bg-[#F3F1FD] flex py-[70] px-[60px] gap-5">
-        <div className="flex justify-center items-center flex-1 h-full">
+      <div className="container rounded-[24px] bg-[#F3F1FD] flex py-[70] px-[60px] max-sm:px-5 gap-5 flex-wrap">
+        <div className="flex justify-center items-center flex-1 h-full min-w-[300px] max-sm:min-w-full">
           <Image src={HakeemApp} alt="Hakeem App" />
         </div>
         <div className="flex flex-col gap-[50px] flex-1">
           <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
-              <span className="text-[32px] font-extrabold leading-[38.4px] text-[var(--color1)]">
+            <div className="flex flex-col gap-2 align-center">
+              <span className="text-[32px] font-extrabold leading-[38.4px] text-[var(--color1)] max-[750px]:text-center">
                 {t("downloadHakeemApp")}
               </span>
-              <span className="text-base font-medium leading-[19.84px] text-[var(--DescriptionColor2)]">
+              <span className="text-base font-medium leading-[19.84px] text-[var(--DescriptionColor2)] max-[750px]:text-center">
                 {t("downloadHakeemAppDescription")}
               </span>
             </div>
-            <div className="flex gap-6">
+            <div className="flex gap-6 flex-wrap justify-center">
               <Image src={GooglePlayDark} alt="Google Play Download App" />
               <Image src={AppStoreDark} alt="App Store Download App" />
               <Image src={AppGalleryDark} alt="App Gallery Download App" />
@@ -296,11 +307,11 @@ export default function HomePage() {
               <div className="h-[1px] bg-[#ccc] flex-1"></div>
             </div>
           </div>
-          <div className="flex gap-5">
-            <div className="flex flex-col items-center gap-[6px] min-w-[320px]">
+          <div className="flex gap-5 justify-between max-sm:justify-center max-sm:flex-wrap">
+            <div className="flex flex-col items-center gap-[6px] ms-[auto] max-sm:ms-0">
               <div className="text-2xl font-bold leading-[28.8px] text-[var(--color1)] flex flex-col items-center self-start">
                 <span className="block">{t("scanQr")}</span>
-                <span className="block">{t("forDownloadApp")}</span>
+                <span className="block text-center">{t("forDownloadApp")}</span>
               </div>
               <Image
                 src={Arrow}
@@ -313,13 +324,13 @@ export default function HomePage() {
         </div>
       </div>
       {/* FOOTER SECTION */}
-      <div className="h-[397px] bg-[#2A193C]">
+      <div className="min-h-[397px] bg-[#2A193C]">
         <div className="container flex flex-col gap-[75px] pt-[59px] justify-between h-full">
-          <div className="flex justify-between">
+          <div className="flex justify-between gap-8 flex-wrap max-[1440px]:justify-center">
             <div className="flex flex-col gap-5">
               <HakeemHealthCareLogo />
               <div className="flex flex-col gap-[13px]">
-                <span className="text-base font-medium leading-6 text-[var(--neutral-100)]">
+                <span className="text-base font-medium leading-6 text-[var(--neutral-100)] max-[1440px]:text-center">
                   {t("downloadOurApp")}
                 </span>
                 <div className="flex gap-[10px]">
@@ -328,7 +339,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-12">
+            <div className="flex gap-12 flex-wrap max-[1440px]:w-full max-[1440px]:justify-between">
               {/* PAGES */}
               <div className="flex flex-col gap-5 [&_a]:text-sm [&_a]:font-medium [&_a]:leading-[16.94px] [&_a]:text-[var(--neutral-100)]">
                 <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
@@ -400,6 +411,8 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      <FiltersDrawer/>
     </div>
   );
 }

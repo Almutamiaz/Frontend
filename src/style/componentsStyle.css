@@ -101,3 +101,22 @@
 .antdButtonHover:hover svg path {
   stroke: var(--neutral-100);
 }
+
+.blurDiv {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 20px;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.3px);
+  -webkit-backdrop-filter: blur(3.3px);
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+[dir="rtl"] .DrawerIconClass svg {
+  transform: rotateY(180deg);
+}

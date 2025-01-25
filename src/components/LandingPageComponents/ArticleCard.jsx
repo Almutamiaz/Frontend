@@ -3,7 +3,7 @@ import Image from "next/image";
 const ArticleCard = ({ drName, title }) => {
   return (
     <div
-      className="ArticleCard rounded-[12px] h-[500px] relative overflow-hidden px-6 pb-8 flex items-end"
+      className="ArticleCard rounded-[12px] h-[500px] relative overflow-hidden px-6 pb-8 flex items-end min-w-[300px] max-[450px]:min-w-full"
       style={{
         background: `url(${Milk.src})`,
         backgroundSize: "cover !important", // Ensures the image covers the entire div

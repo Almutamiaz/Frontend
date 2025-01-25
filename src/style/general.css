@@ -109,15 +109,6 @@ body {
   color: var(--DescriptionColor);
 }
 
-/* .aaaaaaaaaaaa h1{
-  background: rgb(255,255,255);
-  background: linear-gradient(180deg, rgba(255,255,255,1) 68%, rgba(169,140,254,1) 80%);
-}
-
-.bbbbbbb {
-  background: linear-gradient(180deg, #ffffff 54.17%, #a98cfe 100%);
-} */
-
 .firstCircle::after {
   content: "";
   display: block;
@@ -192,4 +183,42 @@ body {
   -webkit-transition-timing-function: linear !important;
   -o-transition-timing-function: linear !important;
   transition-timing-function: linear !important;
+}
+
+.AlmaraiFont {
+  font-family: "Almarai", "Inter", sans-serif;
+}
+
+.InterFont {
+  font-family: "Inter", sans-serif;
+}
+
+/* LANDINGPAGE RESPONSIVE DESIGN */
+@media screen and (max-width: 600px) {
+  .HakeemHeader {
+    border: none;
+    padding: 0;
+    max-width: 100% !important;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .HeroSecionHomePage h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+  .circles {
+    display: none;
+  }
+
+  .HeroSectionParent {
+    height: 550px;
+    /* background: linear-gradient(
+      179.09deg,
+      rgba(126, 83, 253, 0.8) -17.71%,
+      rgba(67, 36, 189, 0.8) 99.22%
+    ); */
+  }
 }

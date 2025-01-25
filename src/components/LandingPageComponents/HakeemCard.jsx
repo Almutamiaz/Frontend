@@ -15,10 +15,11 @@ const HakeemCard = ({
 }) => {
   return (
     <div
-      className="h-[232px] rounded-[20px] flex items-center ps-5 relative overflow-hidden"
+      className="h-[232px] rounded-[20px] flex items-center px-5 relative overflow-hidden min-w-[300px] max-[380px]:min-w-full"
       style={{ backgroundColor: bgColor, flex: flexSize }}
     >
-      <div className="flex flex-col gap-5 z-[1]">
+      <div className="blurDiv hidden max-[950px]:block  max-[783px]:hidden max-[500px]:block"></div>
+      <div className="flex flex-col gap-5 z-[3]">
         <div className="flex flex-col gap-1" style={{ color: textColor }}>
           <span className="text-2xl font-bold leading-[48px]">{title}</span>
           <span className="text-base font-normal leading-6 max-w-[330px]">
