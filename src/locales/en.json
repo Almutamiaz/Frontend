@@ -89,6 +89,10 @@
   "forDownloadApp": "For Download App",
   "advancedFilter": "Advanced Filter",
   "reset": "Reset",
+  "priceRange": "Price Range",
+  "medicalInsurance": "Medical Insurance",
+  "rate": "Rate",
+  "gender": "Gender",
 
   "hakeem": "Hakeem healthcare"
 }

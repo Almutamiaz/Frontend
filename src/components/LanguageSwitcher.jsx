@@ -20,7 +20,8 @@ const LanguageSwitcher = () => {
   const menuProps = {
     items,
     onClick: () => {
-      redirect(`${locale == "ar" ? "/en" : "/ar"}${cleanPathname(pathname)}`);
+      window.location.href = `${locale == "ar" ? "/en" : "/ar"}${cleanPathname(pathname)}`;
+      // redirect(`${locale == "ar" ? "/en" : "/ar"}${cleanPathname(pathname)}`);
     },
   };
 

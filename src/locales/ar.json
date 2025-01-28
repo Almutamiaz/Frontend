@@ -89,6 +89,10 @@
   "forDownloadApp": "لتحميل التطبيق",
   "advancedFilter": "فلتر متقدم",
   "reset": "إعادة تعيين",
+  "priceRange": "نطاق السعر",
+  "medicalInsurance": "التأمين الطبي",
+  "rate": "التقييم",
+  "gender": "الجنس",
 
   "hakeem": "حكيم للرعاية الطبية"
 }
