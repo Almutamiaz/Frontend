@@ -35,6 +35,7 @@ import CallIcon from "@/assets/icons/CallIcon";
 import LetterIcon from "@/assets/icons/LetterIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import FiltersDrawer from "@/components/FiltersDrawer";
+import HeroSectionInput from "@/components/LandingPageComponents/HeroSectionInput";
 
 export default function HomePage() {
   const t = useTranslations();
@@ -52,7 +53,8 @@ export default function HomePage() {
             <h1 className="herotext text-[52px] font-bold leading-[60px] tracking-[-0.0506em] max-w-[761px] text-[var(--neutral-100)] text-center">
               {t("personalisedHealthcareSearch")}
             </h1>
-            <Input
+            <HeroSectionInput />
+            {/* <Input
               style={{
                 height: "54px",
                 borderRadius: "100px",
@@ -60,7 +62,8 @@ export default function HomePage() {
               }}
               placeholder={t("searchPlaceholder")}
               prefix={<SearchIcon />}
-            />
+              // onClick={() => console.log("clicked")}
+            /> */}
             <div className="flex flex-col gap-4 items-center">
               <div className="flex gap-1 items-center">
                 <PulseIcon />
@@ -412,7 +415,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <FiltersDrawer/>
+      <FiltersDrawer />
     </div>
   );
 }

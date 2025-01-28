@@ -6,6 +6,7 @@ import Link from "next/link";
 import HakeemHealthCareLogo from "@/assets/icons/HakeemHealthCareLogo";
 import LoginSignUpHeaderLink from "./LoginSignUpHeaderLink";
 import HeaderDrawer from "./HeaderDrawer";
+import ClientLink from "./ClientLink";
 
 const Header = () => {
   const t = useTranslations();
@@ -19,7 +20,7 @@ const Header = () => {
         <Link className="!font-[700] !text-[var(--neutral-100)]" href={"#"}>
           {t("home")}
         </Link>
-        <Link href={"#"}> {t("explore")}</Link>
+        <ClientLink href={"Explore"}> {t("explore")}</ClientLink>
         <Link href={"#"}> {t("services")}</Link>
         <Link href={"#"}> {t("aboutUs")}</Link>
         <Link href={"#"}> {t("contactUs")}</Link>

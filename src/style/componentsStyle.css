@@ -120,3 +120,56 @@
 [dir="rtl"] .DrawerIconClass svg {
   transform: rotateY(180deg);
 }
+
+.FiltersDrawerCollapse .ant-collapse-header {
+  padding: 16px 0 !important;
+}
+.FiltersDrawerCollapse .ant-collapse-item {
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.FiltersDrawerCollapse .ant-collapse-item:last-of-type .ant-collapse-header {
+  border-bottom: none;
+}
+
+.FiltersDrawerCollapse
+  .ant-collapse-item
+  .ant-collapse-content
+  .ant-collapse-content-box {
+  padding: 8px 0 24px;
+}
+
+.FiltersDrawerCheckBox .ant-checkbox-inner {
+  border-color: var(--neutral-900);
+  width: 20px;
+  height: 20px;
+}
+
+.FiltersDrawerCheckBox .ant-checkbox-wrapper:hover .ant-checkbox-inner {
+  border-color: var(--neutral-900) !important;
+}
+
+.FiltersDrawerCheckBox .ant-checkbox-wrapper-checked .ant-checkbox-inner {
+  border-color: var(--primary-800) !important;
+}
+
+.FiltersDrawerCheckBox .ant-checkbox-wrapper-checked:hover .ant-checkbox-inner {
+  border-color: var(--primary-800) !important;
+}
+.FiltersDrawerCheckBox
+  .ant-checkbox-wrapper-checked
+  .ant-checkbox-inner::after {
+  transform: rotate(45deg) scale(1) translate(-50%, -60%);
+}
+.FiltersDrawerCheckBox .ant-checkbox-wrapper-checked .ant-checkbox-inner,
+.FiltersDrawerCheckBox .ant-checkbox-wrapper-checked:hover .ant-checkbox-inner {
+  background-color: var(--primary-800) !important;
+}
+
+.FiltersDrawerCheckBox label span:not(:first-of-type) {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.36px;
+  color: var(--neutral-1000);
+  font-family: var(--fontFamily)
+}
