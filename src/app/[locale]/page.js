@@ -36,6 +36,7 @@ import LetterIcon from "@/assets/icons/LetterIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import FiltersDrawer from "@/components/FiltersDrawer";
 import HeroSectionInput from "@/components/LandingPageComponents/HeroSectionInput";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
   const t = useTranslations();

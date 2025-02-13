@@ -10,6 +10,7 @@ import "../../style/componentsStyle.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConfigProvider } from "antd";
 import Header from "@/components/Header";
+import BreadCrumb from "@/components/BreadCrumb";
 export const metadata = {
   title: "حكيم للرعاية الطبية  | حكيم للرعاية الطبية",
   description: "Hakeem healthcare",
@@ -68,6 +69,7 @@ export default async function LocaleLayout({ children, params }) {
             >
               <div className="flex flex-col relative">
                 <Header />
+                <BreadCrumb />
                 {children}
               </div>
             </ThemeProvider>

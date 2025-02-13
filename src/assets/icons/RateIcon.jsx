@@ -1,10 +1,10 @@
 import React from "react";
 
-const RateIcon = ({ color = "#0F0138" }) => {
+const RateIcon = ({ size = 15, color = "#0F0138" }) => {
   return (
     <svg
-      width="19"
-      height="19"
+      width={size}
+      height={size}
       viewBox="0 0 19 19"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

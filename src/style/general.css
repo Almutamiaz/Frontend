@@ -161,22 +161,46 @@ body {
   font-family: var(--fontFamily);
 }
 
-.HeroSecionHomePage .ant-input-prefix {
+.HeroSecionHomePage .ant-input-prefix,
+.ExplorePageParentOfInput .ant-input-prefix,
+.inputStyles .ant-input-prefix {
   margin-inline-start: 15px;
   margin-inline-end: 12px;
 }
 
 .HeroSecionHomePage input::placeholder,
-.HeroSecionHomePage input {
+.HeroSecionHomePage input,
+.ExplorePageParentOfInput input::placeholder,
+.ExplorePageParentOfInput input,
+.inputStyles input::placeholder,
+.inputStyles input {
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
   color: #919191;
 }
 
+.inputStyles input::placeholder {
+  color: var(--neutral-600) !important;
+}
+
+.inputStyles .ant-input-outlined {
+  border: 1px solid var(--neutral-300);
+  box-shadow: none;
+}
+
 .HeroSecionHomePage .ant-input-affix-wrapper.ant-input-outlined {
   border: none;
   box-shadow: none;
+}
+
+.ExplorePageParentOfInput {
+  box-shadow: 0px 3px 12px 0px #8d8d8d24;
+  border-radius: 100px;
+}
+.ExplorePageParentOfInput .ant-input-affix-wrapper.ant-input-outlined {
+  border: 1px solid #e7e7e7;
+  /* box-shadow: 0px 3px 12px 0px #8d8d8d24; */
 }
 
 .swiper-free-mode > .swiper-wrapper {
@@ -191,6 +215,21 @@ body {
 
 .InterFont {
   font-family: "Inter", sans-serif;
+}
+
+/* ant-select ant-select-outlined */
+/* .ant-select-outlined, */
+.ant-select-selector {
+  border: 1px solid var(--neutral-300) !important;
+  box-shadow: none !important;
+  border-radius: 100px !important;
+  font-family: var(--fontFamily) !important;
+  padding-inline-start: 24px !important;
+  padding-inline-end: 18px !important;
+}
+
+.ant-select-selector .ant-select-selection-placeholder {
+  color: var(--neutral-600);
 }
 
 /* LANDINGPAGE RESPONSIVE DESIGN */
@@ -221,4 +260,12 @@ body {
       rgba(67, 36, 189, 0.8) 99.22%
     ); */
   }
+}
+
+.ExploreSection {
+  background: linear-gradient(
+    90deg,
+    rgba(100, 65, 239, 0.1) 0%,
+    rgba(100, 65, 239, 0.52) 100%
+  );
 }
