@@ -34,16 +34,17 @@
     /* Primary Colors */
     --primary-100: #bfa9fe;
     --primary-200: #7e53fd;
-    --primary-300: #5016fc;
+    --primary-300: #7e53fd;
     --primary-400: #4B0FFC;
     --primary-500: #270294;
+    --primary-700: #18015C;
     --primary-800: #0F0138;
     --primary-alpha-10: #7e53fd;
 
     /* Secondary Colors */
     --secondary-100: #ffe3a7;
     --secondary-200: #ffc64f;
-    --secondary-300: #ffb211;
+    --secondary-300: #EB8D26;
     --secondary-400: #d38e00;
     --secondary-500: #956500;
     --secondary-alpha-10: #ffc64f;
