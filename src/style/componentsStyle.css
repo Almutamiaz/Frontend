@@ -31,8 +31,170 @@
   background-color: #f3f3f3;
 }
 .ant-form-item .ant-input-outlined:focus {
-  border: 1px solid #e8ecf4;
+  border: 1px solid var(--primary-color);
   box-shadow: none;
+}
+
+.ant-form-item .ant-form-item-explain-error {
+  font-family: var(--fontFamily);
+}
+
+.customInputStyle input {
+  border-radius: 8px;
+  background-color: var(--neutral-100);
+  border: 1px solid #d4d4d48c;
+  height: 48px;
+  font-family: var(--fontFamily);
+}
+
+.customInputStyle input:hover {
+  border: 1px solid #d4d4d48c;
+  background-color: var(--neutral-100);
+}
+.customInputStyle .ant-input-outlined {
+  background-color: var(--neutral-100);
+  border: 1px solid #d4d4d48c;
+}
+.customInputNumberStyle input {
+  border-radius: 8px;
+  background-color: var(--neutral-100);
+  border: 1px solid #d4d4d48c;
+  height: 48px;
+  /* color: var(--DescriptionColor2) !important; */
+}
+
+.customInputNumberStyle .ant-input-number-group-addon {
+  border: 1px solid #d4d4d48c;
+  background-color: var(--neutral-100);
+  padding-inline-start: 16px;
+  font-family: var(--fontFamily);
+}
+.customInputNumberStyle .ant-input-number-outlined {
+  border-inline-start: 0;
+  border-top: 1px solid #d4d4d48c;
+  border-bottom: 1px solid #d4d4d48c;
+  border-inline-end: 1px solid #d4d4d48c;
+}
+
+.customInputNumberStyle .ant-input-number-outlined:hover {
+  border: 1px solid #d4d4d48c;
+  border-inline-start: 0;
+}
+.customInputNumberStyle .ant-input-number-outlined:focus-within {
+  box-shadow: none;
+  border: 1px solid #d4d4d48c;
+  border-inline-start: 0;
+}
+/* Here is the CSS code for the input field. I have added the border-radius to the input field. You can change the border-radius value as per your requirement. */
+.numberInputStyle .ant-input-number {
+  width: 100%;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: #f3f3f3;
+  border: 1px solid #e8ecf4;
+  height: 56px;
+  box-shadow: none;
+}
+
+.numberInputStyle .ant-form-item-control-input-content {
+  height: 56px;
+}
+
+.numberInputStyle .ant-input-number input {
+  border: none;
+  padding-inline-start: 25px;
+}
+.numberInputStyle .ant-input-number input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  letter-spacing: 0px;
+  color: #8391a1;
+}
+
+.PhoneInputStyle {
+  /* padding-inline-start: 25px; */
+  direction: ltr !important;
+}
+
+.PhoneInputStyle input {
+  width: 100% !important;
+  height: 56px !important;
+  border-radius: 100px !important;
+  background-color: #f3f3f3 !important;
+  border: 1px solid #e8ecf4 !important;
+  overflow: hidden;
+  border-inline-start: none !important;
+  padding-inline-start: 85px !important;
+  padding-inline-end: 25px !important;
+  color: #8391a1 !important;
+  font-family: var(--fontFamily) !important;
+}
+
+.PhoneInputStyle input::placeholder {
+  color: #8391a1 !important;
+}
+
+.PhoneInputStyle .country-list {
+  font-family: var(--fontFamily) !important;
+}
+
+.PhoneInputStyle .flag-dropdown {
+  border-top-left-radius: 100px !important;
+  border-bottom-left-radius: 100px !important;
+  border: 1px solid #e8ecf4 !important;
+  border-inline-end: none !important;
+  /* background-color: #f00 !important; */
+  padding-inline-start: 25px !important;
+  background-color: #f3f3f3 !important;
+}
+.PhoneInputStyle .selected-flag {
+  border-top-left-radius: 100px !important;
+  border-bottom-left-radius: 100px !important;
+  background-color: #f3f3f3 !important;
+}
+
+.PhoneInputStyle .selected-flag:hover {
+  border-top-left-radius: 100px !important;
+  border-bottom-left-radius: 100px !important;
+  background-color: #f3f3f3 !important;
+}
+.ant-form-item-has-error .PhoneInputStyle input {
+  border: 1px solid #ff4d4f !important;
+}
+
+.ant-form-item-has-error .flag-dropdown {
+  border: 1px solid #ff4d4f !important;
+  border-inline-end: none !important;
+}
+
+.SideBarSegmented {
+  background-color: var(--neutral-100);
+}
+
+.SideBarSegmented .ant-segmented-group {
+  gap: 12px;
+}
+.SideBarSegmented .ant-segmented-item {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-inline-start: 12px;
+  font-family: var(--fontFamily);
+}
+
+.SideBarSegmented .ant-segmented-item-selected {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-inline-start: 12px;
+  background-color: #e7e7e7;
+  font-family: var(--fontFamily);
+}
+.SideBarSegmented .ant-segmented-thumb {
+  background-color: #e7e7e7;
+}
+.SideBarSegmented .ant-segmented-item-label {
+  display: flex;
+  padding: 0;
 }
 
 /* ////////////////////////////////// */
@@ -42,7 +204,7 @@
   background-color: #f3f3f3;
   border-radius: 100px;
   height: 56px;
-  padding-inline-start: 28px;
+  padding-inline-start: 0px;
   font-family: var(--fontFamily);
   font-size: 14px;
   font-weight: 400;
@@ -54,6 +216,7 @@
 }
 .ant-input-outlined.ant-input-password input {
   border: none;
+  padding-inline-start: 28px;
 }
 .ant-input-outlined.ant-input-password img {
   cursor: pointer;
@@ -139,6 +302,14 @@
   padding: 8px 0 24px;
 }
 
+.SettingSideBarCollapse .ant-collapse-header {
+  padding-inline-start: 16px !important;
+  font-family: var(--fontFamily);
+}
+.SettingSideBarCollapse .ant-collapse-content-box {
+  font-family: var(--fontFamily);
+}
+
 .FiltersDrawerCheckBox .ant-checkbox-inner {
   border-color: var(--neutral-900);
   width: 20px;
@@ -196,4 +367,274 @@
 
 .ant-breadcrumb li:last-of-type .ant-breadcrumb-link {
   font-family: var(--fontFamily);
+}
+
+/* .antdSwitchStyle .ant-switch-handle {
+  width: 14px;
+  height: 14px;
+  top: -2px;
+  inset-inline-start: -3px;
+}
+
+.antdSwitchStyle.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: 10px;
+} */
+
+/* .antdSwitchStyle .ant-switch-inner {
+  padding-inline-start: 0px !important;
+  padding-inline-end: 0px !important;
+  } */
+
+.antdSwitchStyle.ant-switch-checked,
+.antdSwitchStyle2.ant-switch-checked {
+  background: var(--primary-200) !important;
+}
+
+.radioPaymentMethod .ant-radio-inner {
+  width: 24px;
+  height: 24px;
+}
+
+.radioPaymentMethod .ant-radio-checked .ant-radio-inner {
+  border-color: #6441ef !important;
+  background-color: #6441ef !important;
+}
+
+.dobCompleteProfile {
+  height: 56px;
+  border-radius: 100px;
+  border: 1px solid #c0c0c0;
+  background-color: #f3f3f3;
+}
+.dobCompleteProfile:hover {
+  border: 1px solid #c0c0c0;
+}
+
+.dobCompleteProfile:focus-within {
+  box-shadow: none;
+  border: 1px solid #c0c0c0;
+}
+
+.dobCompleteProfile input {
+  color: var(--neutral-1000) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 22px !important;
+  letter-spacing: 0px !important;
+}
+
+.dobSignUp {
+  border: 1px solid #e8ecf4;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f3f3f3;
+  padding: 0;
+}
+.dobSignUp:hover {
+  border: 1px solid #e8ecf4;
+  background-color: #f3f3f3;
+}
+.dobSignUp:focus-within {
+  border: 1px solid #e8ecf4;
+}
+
+.dobSignUp input {
+  /* color: #8391a1 !important; */
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 125% !important;
+  letter-spacing: 0px !important;
+  width: 100%;
+  height: 56px !important;
+  border: none !important;
+  padding-inline-start: 25px !important;
+}
+
+.dobSignUp input::placeholder {
+  color: #8391a1 !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 125% !important;
+  letter-spacing: 0px !important;
+  font-family: var(--fontFamily) !important;
+}
+
+.selectBoxStyle .ant-select-selector {
+  background-color: #f3f3f3 !important;
+  border: 1px solid #c0c0c0 !important;
+}
+
+.InputNumberStyle {
+  width: 100%;
+  border-radius: 100px;
+  background-color: #f3f3f3 !important;
+  border: 1px solid #c0c0c0 !important;
+}
+.InputNumberStyle input {
+  height: 56px;
+  padding-inline-start: 24px !important;
+  font-family: var(--fontFamily);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0px;
+}
+.InputNumberStyle:focus-within {
+  box-shadow: none;
+  border: 1px solid #c0c0c0;
+}
+
+.radioInputStyle .ant-radio-inner {
+  width: 16px;
+  height: 16px;
+  border-color: var(--DescriptionColor);
+}
+.radioInputStyle:hover .ant-radio-inner {
+  cursor: pointer;
+  border-color: var(--DescriptionColor);
+}
+
+.radioInputStyle .ant-radio-checked .ant-radio-inner {
+  border-color: #6441ef !important;
+  background-color: #6441ef !important;
+}
+
+.ant-radio-wrapper-checked.radioInputStyle .ant-radio-checked .ant-radio-inner {
+  border-color: var(--DescriptionColor) !important;
+  background-color: transparent !important;
+}
+
+.ant-radio-wrapper-checked.radioInputStyle
+  .ant-radio-checked
+  .ant-radio-inner::after {
+  background-color: #6441ef !important;
+  transform: scale(0.6);
+}
+
+.ant-form-item-has-error .parentOfGenderInputSignUp div {
+  border: 1px solid #ff4d4f !important;
+}
+
+/* .customInputNumberStyle input {
+  border-radius: 8px;
+  background-color: var(--neutral-100);
+  border: 1px solid #d4d4d48c;
+  height: 48px;
+}
+
+.customInputNumberStyle .ant-input-number-group-addon {
+  border: 1px solid #d4d4d48c;
+  background-color: var(--neutral-100);
+  padding-inline-start: 16px;
+  font-family: var(--fontFamily);
+}
+.customInputNumberStyle .ant-input-number-outlined {
+  border-inline-start: 0;
+  border-top: 1px solid #d4d4d48c;
+  border-bottom: 1px solid #d4d4d48c;
+  border-inline-end: 1px solid #d4d4d48c;
+}
+
+.customInputNumberStyle .ant-input-number-outlined:hover {
+  border: 1px solid #d4d4d48c;
+  border-inline-start: 0;
+}
+.customInputNumberStyle .ant-input-number-outlined:focus-within {
+  box-shadow: none;
+  border: 1px solid #d4d4d48c;
+  border-inline-start: 0;
+} */
+.phoneNumberWithCountryFlag {
+  width: 100%;
+}
+
+.phoneNumberWithCountryFlag input {
+  height: 56px;
+  padding-inline-start: 0 !important;
+}
+
+.phoneNumberWithCountryFlag .ant-input-number-outlined {
+  border-radius: 100px;
+  border: 1px solid #e8ecf4;
+  border-inline-start: none;
+  background-color: #f3f3f3;
+}
+.phoneNumberWithCountryFlag .ant-input-number-group-addon {
+  border-radius: 100px;
+  border: 1px solid #e8ecf4;
+  background-color: #f3f3f3;
+}
+
+.phoneNumberWithCountryFlag .ant-input-number-outlined:hover {
+  border: 1px solid #e8ecf4;
+  border-inline-start: 0;
+}
+
+.phoneNumberWithCountryFlag .ant-input-number-outlined:focus-within {
+  border: 1px solid var(--primary-color);
+  box-shadow: none;
+  border-inline-start: 0;
+}
+
+.phoneNumberWithCountryFlag
+  .ant-input-number-wrapper.ant-input-number-group:focus-within
+  .ant-input-number-group-addon {
+  border: 1px solid var(--primary-color) !important;
+  border-inline-end: none !important;
+}
+
+.phoneNumberWithCountryFlag
+  .ant-input-number-wrapper.ant-input-number-group:focus-within
+  .ant-input-number-outlined {
+  border: 1px solid var(--primary-color) !important;
+  border-inline-start: none !important;
+}
+
+.phoneNumberWithCountryFlag .ant-select-selector {
+  border: none !important;
+  padding-inline-start: 25px !important;
+  padding-inline-end: 10px !important;
+}
+
+.phoneNumberWithCountryFlag .ant-select-selection-item {
+  display: flex !important;
+  gap: 4px !important;
+  align-items: center !important;
+  font-family: var(--fontFamily) !important;
+}
+
+.phoneNumberWithCountryFlag
+  .ant-select-item.ant-select-item-option
+  .ant-select-item-option-content {
+  display: flex !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+
+.phoneNumberWithCountryFlag .ant-input-number-group-wrapper {
+  width: 100%;
+}
+
+.borderColorWhenFoucs .ant-input-outlined:focus-within,
+.borderColorWhenFoucs .ant-picker-outlined:focus-within,
+.borderColorWhenFoucs .ant-input-number-outlined:focus-within {
+  border: 1px solid var(--primary-color) !important;
+}
+
+.phoneNumberWithCountryFlag.ant-form-item-has-error
+  .ant-input-number.ant-input-number-in-form-item {
+  border-inline-start: none !important;
+}
+
+.phoneNumberWithCountryFlag .ant-input-number-focused {
+  box-shadow: none !important;
+}
+
+.ant-form-item-has-error.phoneNumberWithCountryFlag
+  .ant-input-number-group-addon {
+  background-color: transparent !important;
+}
+
+.phoneNumberWithCountryFlag.ant-form-item-has-error input:hover {
+  background-color: transparent !important;
 }

@@ -8,6 +8,7 @@ const LOCALES = ["en", "ar"]; // Define your supported locales
 
 const BreadCrumb = () => {
   const pathname = usePathname();
+  const BlockedPathes = ["MyReservations", "MyProfile"];
   let pathSegments = pathname.split("/").filter((seg) => seg);
   const { locale } = useParams();
   const t = useTranslations();
@@ -33,7 +34,8 @@ const BreadCrumb = () => {
     }),
   ];
 
-  return pathSegments.length > 0 ? (
+  return pathSegments.length > 0 &&
+    BlockedPathes.every((path) => !pathname.includes(path)) ? (
     <div className="absolute top-[132px] container self-center">
       <Breadcrumb items={breadcrumbItems} />
     </div>

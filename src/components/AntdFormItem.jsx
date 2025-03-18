@@ -1,5 +1,5 @@
 "use client";
-import { Form, Input } from "antd";
+import { DatePicker, Form, Input, InputNumber } from "antd";
 import { useEffect, useRef, useState } from "react";
 
 const AntdFormItem = ({
@@ -7,7 +7,15 @@ const AntdFormItem = ({
   placeholder,
   passwordInput,
   otpInput,
+  NumberInput,
+  datePickerInput,
+  NumberInputPrefix,
   classNameProp = "",
+  required = false,
+  requiredMessage,
+  moreProps,
+  rules,
+  dependencies,
 }) => {
   const otpRef = useRef(null);
   const [correctOtp, setCorrectOtp] = useState(false);
@@ -47,7 +55,19 @@ const AntdFormItem = ({
   }, [correctOtp]);
 
   return (
-    <Form.Item name={name} className={classNameProp}>
+    <Form.Item
+      name={name}
+      className={classNameProp}
+      dependencies={dependencies}
+      rules={
+        rules || [
+          {
+            required: required,
+            message: requiredMessage,
+          },
+        ]
+      }
+    >
       {passwordInput ? (
         <Input.Password
           placeholder={placeholder}
@@ -83,7 +103,7 @@ const AntdFormItem = ({
                   x2="5.44013"
                   y2="18.0432"
                   stroke="#6A707C"
-                  stroke-width="1.3"
+                  strokeWidth="1.3"
                 />
               </svg>
             )
@@ -91,6 +111,25 @@ const AntdFormItem = ({
         />
       ) : otpInput ? (
         <Input.OTP length={4} {...sharedProps} ref={otpRef} />
+      ) : NumberInput ? (
+        <InputNumber
+          type="number"
+          placeholder={placeholder}
+          controls={false}
+          addonBefore={NumberInputPrefix}
+          changeOnWheel={false}
+          {...moreProps}
+        />
+      ) : datePickerInput ? (
+        <DatePicker
+          format={{
+            format: "DD-MM-YYYY",
+            type: "mask",
+          }}
+          className="dobCompleteProfile dobSignUp"
+          suffixIcon={null}
+          placeholder={placeholder}
+        />
       ) : (
         <Input placeholder={placeholder} />
       )}
