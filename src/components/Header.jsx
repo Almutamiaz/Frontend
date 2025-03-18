@@ -9,12 +9,30 @@ import LoginSignUpHeaderLink from "./LoginSignUpHeaderLink";
 import HeaderDrawer from "./HeaderDrawer";
 import ClientLink from "./ClientLink";
 import { usePathname } from "next/navigation";
+import { useUser } from "@/Context/UserContext";
+// import axiosServices from "../../utils/axios";
+import { useEffect } from "react";
 
 const Header = () => {
   const t = useTranslations();
   const pathname = usePathname();
   const pathName = pathname.replace(/^\/[a-z]{2}/, "");
-  console.log(!["/en", "/ar"].includes(pathname));
+  const { user } = useUser();
+  // console.log(!["/en", "/ar"].includes(pathname));
+
+  // const testFunction = async () => {
+  //   // const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  //   const todo = await axiosServices.get(
+  //     "https://jsonplaceholder.typicode.com/todos/1"
+  //   );
+  //   // const todo = await response.json();
+  //   console.log(todo.data);
+  //   console.log("first")
+  // };
+
+  // useEffect(() => {
+  //   testFunction();
+  // }, []);
   return (
     <div
       className="HakeemHeader border-2 border-[#FFFFFFAD] h-[76px] rounded-[100px] absolute top-8 container self-center px-10 flex items-center justify-between overflow-hidden"

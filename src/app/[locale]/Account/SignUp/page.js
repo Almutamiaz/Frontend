@@ -9,9 +9,9 @@ const Page = () => {
   const t = useTranslations();
 
   return (
-    <div className="flex h-full max-sm:flex-wrap z-[1]">
-      <div className="w-[55.5%] max-sm:w-full bg-[var(--neutral-100)]">
-        <div className="h-screen flex justify-center items-center	gap-10 flex-col min-h-[800px]">
+    <div className="flex max-sm:flex-wrap z-[1]">
+      <div className="w-[55.5%] max-sm:w-full bg-[var(--neutral-100)] pt-10">
+        <div className=" flex justify-center items-center	gap-10 flex-col min-h-[800px]">
           <div className="flex justify-start max-w-[466px] w-full max-[900px]:justify-center">
             <Logo />
           </div>

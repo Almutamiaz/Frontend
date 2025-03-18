@@ -5,29 +5,23 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import "../../style/general.css";
 import "../../style/componentsStyle.css";
-// import "swiper/css";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConfigProvider } from "antd";
 import Header from "@/components/Header";
 import BreadCrumb from "@/components/BreadCrumb";
+import { UserProvider } from "@/Context/UserContext";
 export const metadata = {
   title: "حكيم للرعاية الطبية  | حكيم للرعاية الطبية",
   description: "Hakeem healthcare",
 };
 export default async function LocaleLayout({ children, params }) {
   const { locale } = await params;
-  // const router = usePathname();
 
-  // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale)) {
-    // redirect("/ar");
     notFound();
-    // <h1>test</h1>
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
   return (
     <html lang={`${locale}-SA`}>
@@ -67,11 +61,13 @@ export default async function LocaleLayout({ children, params }) {
               enableSystem
               disableTransitionOnChange
             >
-              <div className="flex flex-col relative">
-                <Header />
-                <BreadCrumb />
-                {children}
-              </div>
+              <UserProvider>
+                <div className="flex flex-col relative">
+                  <Header />
+                  <BreadCrumb />
+                  {children}
+                </div>
+              </UserProvider>
             </ThemeProvider>
           </ConfigProvider>
         </NextIntlClientProvider>

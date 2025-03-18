@@ -12,7 +12,7 @@ const LoginWithSection = ({ signUp }) => {
 
   return (
     <div className="flex flex-col gap-10 items-center">
-      <div className="flex flex-col gap-5 items-center w-full max-[900px]:w-[90%]">
+      {/* <div className="flex flex-col gap-5 items-center w-full max-[900px]:w-[90%]">
         <div className="flex items-center justify-between w-full">
           <div className="h-[1px] w-[32%] bg-[#E8ECF4]"></div>
           <p className="text-[14px] font-semibold leading-[16.94px] text-[#6A707C]">
@@ -28,7 +28,7 @@ const LoginWithSection = ({ signUp }) => {
             <AppleIcon />
           </Button>
         </div>
-      </div>
+      </div> */}
       <div className="flex justify-center">
         <p className="text-[16px] font-medium leading-[22.4px] tracking-[0.01em] text-[#1E232C] text-center max-[900px]:px-2">
           {t(signUp ? "alreadyHaveAccount" : "noAccount")}

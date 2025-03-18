@@ -19,7 +19,7 @@ const UnMaskPasswordIcon = () => {
         x2="5.44013"
         y2="18.0432"
         stroke="#6A707C"
-        stroke-width="1.3"
+        strokeWidth="1.3"
       />
     </svg>
   );
