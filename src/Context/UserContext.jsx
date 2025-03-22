@@ -6,19 +6,8 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("token") || null);
   const [doctors, setDoctors] = useState(null);
-
-  // Fetch user data on mount (client-side only)
-  useEffect(() => {
-    const fetchUser = async () => {
-      // const response = await fetch("/api/user");
-      // const data = await response.json();
-      setUser(123);
-    };
-
-    fetchUser();
-  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

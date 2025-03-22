@@ -43,7 +43,7 @@ const LanguageSwitcher = () => {
       // getPopupContainer={() => dropDown?.current}
       // overlayClassName="antdDropdown"
     >
-      <div className="flex gap-[5px] items-center text-[var(--neutral-100)]">
+      <div className="flex gap-[5px] items-center text-[var(--neutral-100)] cursor-pointer">
         <span>{locale.toUpperCase()}</span>
         <DownArrow
           propsClassName={`transition-transform duration-300 ${dropDownOpened ? "rotate-180" : ""}`}

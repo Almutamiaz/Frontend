@@ -11,6 +11,7 @@ import { ConfigProvider } from "antd";
 import Header from "@/components/Header";
 import BreadCrumb from "@/components/BreadCrumb";
 import { UserProvider } from "@/Context/UserContext";
+import NotificationProvider from "@/Context/NotificationProvider";
 export const metadata = {
   title: "حكيم للرعاية الطبية  | حكيم للرعاية الطبية",
   description: "Hakeem healthcare",
@@ -32,44 +33,46 @@ export default async function LocaleLayout({ children, params }) {
         }}
       >
         <NextIntlClientProvider messages={messages}>
-          <ConfigProvider
-            theme={{
-              fontFamily: "var(--fontFamily)",
-              components: {
-                Button: {
-                  defaultBg: "var(--primary-color)",
-                  defaultColor: "var(--neutral-100)",
-                  borderRadius: 100,
-                  controlHeight: 56,
-                  defaultBorderColor: "var(--primary-color)",
-                  defaultHoverBg: "var(--neutral-100)",
-                  defaultHoverBorderColor: "var(--primary-color)",
-                  defaultHoverColor: "var(--primary-color)",
-                  defaultActiveColor: "var(--primary-400)",
-                  defaultActiveBorderColor: "var(--primary-400)",
-                  contentFontSize: 16,
-                  fontWeight: 600,
-                  contentLineHeight: "19.36px",
-                  fontFamily: "var(--fontFamily)",
+          <NotificationProvider>
+            <ConfigProvider
+              theme={{
+                fontFamily: "var(--fontFamily)",
+                components: {
+                  Button: {
+                    defaultBg: "var(--primary-color)",
+                    defaultColor: "var(--neutral-100)",
+                    borderRadius: 100,
+                    controlHeight: 56,
+                    defaultBorderColor: "var(--primary-color)",
+                    defaultHoverBg: "var(--neutral-100)",
+                    defaultHoverBorderColor: "var(--primary-color)",
+                    defaultHoverColor: "var(--primary-color)",
+                    defaultActiveColor: "var(--primary-400)",
+                    defaultActiveBorderColor: "var(--primary-400)",
+                    contentFontSize: 16,
+                    fontWeight: 600,
+                    contentLineHeight: "19.36px",
+                    fontFamily: "var(--fontFamily)",
+                  },
                 },
-              },
-            }}
-          >
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
+              }}
             >
-              <UserProvider>
-                <div className="flex flex-col relative">
-                  <Header />
-                  <BreadCrumb />
-                  {children}
-                </div>
-              </UserProvider>
-            </ThemeProvider>
-          </ConfigProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <UserProvider>
+                  <div className="flex flex-col relative">
+                    <Header />
+                    <BreadCrumb />
+                    {children}
+                  </div>
+                </UserProvider>
+              </ThemeProvider>
+            </ConfigProvider>
+          </NotificationProvider>
         </NextIntlClientProvider>
       </body>
     </html>

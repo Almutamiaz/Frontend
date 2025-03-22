@@ -16,6 +16,7 @@ const AntdFormItem = ({
   moreProps,
   rules,
   dependencies,
+  onOtpInput,
 }) => {
   const otpRef = useRef(null);
   const [correctOtp, setCorrectOtp] = useState(false);
@@ -23,12 +24,13 @@ const AntdFormItem = ({
     console.log("onChange:", text);
     // setCorrectOtp(true);
   };
-  const onInput = (value) => {
-    console.log("onInput:", value);
-  };
+  // const onInput = (value) => {
+  //   console.log("onInput:", value);
+  //   value.length === 4 && setCorrectOtp(true);
+  // };
   const sharedProps = {
     onChange,
-    onInput,
+    onInput: onOtpInput,
   };
 
   useEffect(() => {
@@ -43,12 +45,13 @@ const AntdFormItem = ({
           child.addEventListener("blur", () => {
             child.placeholder = "*";
           });
+          // child.classList.add("successColor");
 
-          if (correctOtp) {
-            child.classList.add("successColor");
-          } else {
-            child.classList.remove("successColor");
-          }
+          // if (correctOtp) {
+          //   child.classList.add("successColor");
+          // } else {
+          //   child.classList.remove("successColor");
+          // }
         });
       }
     }

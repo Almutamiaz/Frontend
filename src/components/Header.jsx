@@ -11,28 +11,34 @@ import ClientLink from "./ClientLink";
 import { usePathname } from "next/navigation";
 import { useUser } from "@/Context/UserContext";
 // import axiosServices from "../../utils/axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
+import axiosInstance from "../../utils/axios";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Header = () => {
   const t = useTranslations();
   const pathname = usePathname();
   const pathName = pathname.replace(/^\/[a-z]{2}/, "");
-  const { user } = useUser();
-  // console.log(!["/en", "/ar"].includes(pathname));
+  const { user, setUser } = useUser();
+  const [loading, setLoading] = useState(true);
 
-  // const testFunction = async () => {
-  //   // const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  //   const todo = await axiosServices.get(
-  //     "https://jsonplaceholder.typicode.com/todos/1"
-  //   );
-  //   // const todo = await response.json();
-  //   console.log(todo.data);
-  //   console.log("first")
-  // };
+  const fetchUserData = async () => {
+    try {
+      const { data } = await axiosInstance.get("/my-profile");
+      setUser(data?.data);
+    } catch (error) {
+      setUser(null);
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   testFunction();
-  // }, []);
+  useEffect(() => {
+    user?.id ? setLoading(false) : fetchUserData();
+  }, []);
   return (
     <div
       className="HakeemHeader border-2 border-[#FFFFFFAD] h-[76px] rounded-[100px] absolute top-8 container self-center px-10 flex items-center justify-between overflow-hidden"
@@ -65,15 +71,27 @@ const Header = () => {
           {t("support")}
         </span>
         <LanguageSwitcher />
-        <Button
-          style={{
-            background: `var(--neutral-100)`,
-            color: `var(--color2)`,
-          }}
-          className="text-base font-normal leading-5 px-5 py-3 hover:!border hover:!border-solid hover:!border-[var(--neutral-100)] border-[var(--neutral-100)] hover:!bg-transparent hover:!text-[var(--neutral-100)]"
-        >
-          <LoginSignUpHeaderLink />
-        </Button>
+        {loading ? (
+          <LoadingSpinner color="white" />
+        ) : user ? (
+          <Image
+            src={user?.photo || DummyDoctorImage}
+            alt={t("userProfileImage")}
+            width={43}
+            height={43}
+            className="w-[43px] h-[43px] object-cover rounded-[50%] border border-[#FFFFFF]"
+          />
+        ) : (
+          <Button
+            style={{
+              background: `var(--neutral-100)`,
+              color: `var(--color2)`,
+            }}
+            className="text-base font-normal leading-5 px-5 py-3 hover:!border hover:!border-solid hover:!border-[var(--neutral-100)] border-[var(--neutral-100)] hover:!bg-transparent hover:!text-[var(--neutral-100)]"
+          >
+            <LoginSignUpHeaderLink />
+          </Button>
+        )}
       </div>
       <HeaderDrawer />
     </div>

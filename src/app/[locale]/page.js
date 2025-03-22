@@ -299,9 +299,27 @@ export default function HomePage() {
               </span>
             </div>
             <div className="flex gap-6 flex-wrap justify-center">
-              <Image src={GooglePlayDark} alt="Google Play Download App" />
-              <Image src={AppStoreDark} alt="App Store Download App" />
-              <Image src={AppGalleryDark} alt="App Gallery Download App" />
+              <a
+                href="https://play.google.com/store/apps/details?id=com.hakeem.patient.hakeem_patient&hl=en_US"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src={GooglePlayDark} alt="Google Play Download App" />
+              </a>
+              <a
+                href="https://apps.apple.com/sa/app/hakeem-%D8%AD%D9%83%D9%8A%D9%85/id1669070452"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src={AppStoreDark} alt="App Store Download App" />
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.hakeem.patient.hakeem_patient&hl=en_US"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src={AppGalleryDark} alt="App Gallery Download App" />
+              </a>
             </div>
             <div className="flex items-center justify-between w-full">
               <div className="h-[1px] bg-[#ccc] flex-1"></div>
@@ -338,8 +356,23 @@ export default function HomePage() {
                   {t("downloadOurApp")}
                 </span>
                 <div className="flex gap-[10px]">
-                  <Image src={GooglePlayLight} alt="Google Play Download App" />
-                  <Image src={AppStoreLight} alt="App Store Download App" />
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.hakeem.patient.hakeem_patient&hl=en_US"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={GooglePlayLight}
+                      alt="Google Play Download App"
+                    />
+                  </a>
+                  <a
+                    href="https://apps.apple.com/sa/app/hakeem-%D8%AD%D9%83%D9%8A%D9%85/id1669070452"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image src={AppStoreLight} alt="App Store Download App" />
+                  </a>
                 </div>
               </div>
             </div>

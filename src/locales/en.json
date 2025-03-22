@@ -199,6 +199,8 @@
   "newPasswordDoNotMatch": "The new password that you entered does not match!",
   "passwordMinLength": "Password must be at least 8 characters!",
   "passportIdValidation": "Passport ID must be 6 to 9 characters, containing only uppercase letters and numbers.",
+  "pleaseEnterOtpCode": "Please enter OTP code",
+  "userProfileImage": "User Profile Image",
 
   "hakeem": "Hakeem healthcare"
 }

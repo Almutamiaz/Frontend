@@ -9,13 +9,13 @@ import SettingsIcon2 from "@/assets/icons/SettingsIcon2";
 import WalletIcon2 from "@/assets/icons/WalletIcon2";
 import { Collapse, Segmented } from "antd";
 import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 const AllowedPaths = ["/en/MyReservations"];
 const SideBar = () => {
   const pathname = usePathname();
-  console.log(pathname);
   const t = useTranslations();
+  const router = useRouter();
   // return AllowedPaths.includes(pathname) ? <div>test</div> : null;
 
   // accountSettings
@@ -84,7 +84,7 @@ const SideBar = () => {
           },
         ]}
         value={pathname.split("/").pop()}
-        onChange={(e) => (window.location.href = e)}
+        onChange={(e) => router.push(e)}
       />
       <div className="w-full h-[1px] bg-[#E7E7E7]"></div>
       <Collapse

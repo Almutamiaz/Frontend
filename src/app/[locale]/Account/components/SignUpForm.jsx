@@ -11,9 +11,10 @@ import dayjs from "dayjs";
 import SelectBox from "@/components/SelectBox";
 import Image from "next/image";
 import axios from "axios";
+import { useAppNotification } from "@/Context/NotificationProvider";
 const { Option } = Select;
 
-const SignUpForm = () => {
+const SignUpForm = ({ setShowVerificationCode, setPhoneNum }) => {
   const [form] = Form.useForm();
   const [gender, setGender] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -23,6 +24,19 @@ const SignUpForm = () => {
   const [countries, setCountries] = useState([]);
   const [csrfToken, setCsrfToken] = useState(null);
   const t = useTranslations();
+
+  const notificationApi = useAppNotification();
+  const showNotification = (message) => {
+    notificationApi.success({
+      message: message,
+      showProgress: true,
+      pauseOnHover: true,
+      style: {
+        fontFamily: "var(--fontFamily)",
+      },
+    });
+  };
+
   const fetchCountries = async () => {
     try {
       const response = await axiosInstance.get("/countries");
@@ -50,7 +64,7 @@ const SignUpForm = () => {
     }
   };
   const handleRegister = async (values) => {
-    fetchCSRF();
+    await fetchCSRF();
     const body = {
       ...values,
       confirm_condition: 1,
@@ -63,8 +77,24 @@ const SignUpForm = () => {
 
     try {
       const response = await axiosInstance.post("/auth/register", body);
-      console.log("Success:", response.data);
+      if (response.data.code === 200) {
+        showNotification(response.data.message);
+        setPhoneNum({
+          phone: values.phone,
+          intro: +countries.find((country) => country.id === selectedCountry)
+            ?.phone_code,
+        });
+        setShowVerificationCode(true);
+      }
     } catch (error) {
+      notificationApi.error({
+        message: error.response?.data?.message,
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          fontFamily: "var(--fontFamily)",
+        },
+      });
       console.error("Error:", error.response?.data || error.message);
     } finally {
       setLoading(false);

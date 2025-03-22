@@ -243,6 +243,15 @@
   color: #28b446;
   border: 1px solid #28b446;
 }
+.verifiedSuccessfully input {
+  color: #28b446;
+  border: 1px solid #28b446;
+}
+
+.verifiedFailed input {
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+}
 
 .ArticleCard::after {
   content: "";

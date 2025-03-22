@@ -18,7 +18,7 @@ const segments = pathName.split("/").filter((segment) => segment.length > 0);
 const locale =
   segments[0] === "ar" || segments[0] === "en" ? segments[0] : "ar";
 
-// console.log(locale); // Outputs "ar" for http://localhost:3000/ar/Account/SignUp
+console.log(locale); // Outputs "ar" for http://localhost:3000/ar/Account/SignUp
 
 const axiosInstance = axios.create({
   baseURL: "/backend/api",
@@ -26,13 +26,13 @@ const axiosInstance = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem("token") || "",
+    Authorization: localStorage.getItem("token") || "",
     "X-localization": locale,
   },
 });
 axiosInstance.interceptors.request.use(function (config) {
   const token = localStorage.getItem("token");
-  config.headers.Authorization = "Bearer " + token;
+  config.headers.Authorization = token;
   return config;
 });
 

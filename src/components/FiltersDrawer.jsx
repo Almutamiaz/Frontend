@@ -22,7 +22,7 @@ const options = [
 
 const FiltersDrawer = () => {
   const { locale } = useParams();
-  const [open, setOpen] = useState(!false);
+  const [open, setOpen] = useState(false);
   const [pricesCheckBoxesValues, setPricesCheckBoxesValues] = useState([]);
   const t = useTranslations();
   const [openedCollapses, setOpenedCollapses] = useState(["1"]);
