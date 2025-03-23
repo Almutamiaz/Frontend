@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import ForgotPasswordForm from "../components/ForgotPasswordForm";
 import { useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button, Form } from "antd";
 import AntdFormItem from "@/components/AntdFormItem";
 import axiosInstance from "../../../../../utils/axios";
@@ -19,7 +19,7 @@ const SignUpVerificationCode = ({ phoneNum }) => {
   const [loading, setLoading] = useState(null);
   const [resendLoading, setResendLoading] = useState(false);
   const notificationApi = useAppNotification();
-
+  const router = useRouter();
   const fetchCSRF = async () => {
     try {
       const response = await axios.get("/backend/sanctum/csrf-cookie", {
@@ -44,6 +44,18 @@ const SignUpVerificationCode = ({ phoneNum }) => {
 
     try {
       const response = await axiosInstance.post("/auth/check-code", body);
+      if (response.data.code === 200) {
+        notificationApi.success({
+          message: response?.data?.message,
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            fontFamily: "var(--fontFamily)",
+          },
+        });
+        setUser(response?.data?.data);
+        router.push(`/${locale}`);
+      }
     } catch (error) {
       notificationApi.error({
         message: error.response?.data?.message,
