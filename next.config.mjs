@@ -6,12 +6,12 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ["dev.hakeem.com.sa"],
+    domains: ["api-dev.hakeem.com.sa"],
   },
   rewrites: () => [
     {
       source: "/backend/:path*",
-      destination: "https://dev.hakeem.com.sa/:path*",
+      destination: "https://api-dev.hakeem.com.sa/:path*",
     },
   ],
 };
