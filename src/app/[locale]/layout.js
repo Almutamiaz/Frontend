@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "./globals.css";
@@ -16,8 +16,8 @@ export const metadata = {
   title: "حكيم للرعاية الطبية  | حكيم للرعاية الطبية",
   description: "Hakeem healthcare",
 };
-export default async function LocaleLayout({ children, params }) {
-  const { locale } = await params;
+export default async function LocaleLayout({ children }) {
+  const locale = await getLocale();
 
   if (!routing.locales.includes(locale)) {
     notFound();

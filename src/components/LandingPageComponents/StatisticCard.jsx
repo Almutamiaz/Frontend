@@ -4,7 +4,7 @@ const StatisticCard = ({ num, title }) => {
       <span className="text-[40px] font-extrabold leading-[52px] text-[var(--Gray-800)]">
         {num}+
       </span>
-      <span className="text-base font-normal leading-6 text-[var(--Gray-800)]">
+      <span className="text-base font-normal leading-6 text-[var(--Gray-800)] capitalize">
         {title}
       </span>
     </div>

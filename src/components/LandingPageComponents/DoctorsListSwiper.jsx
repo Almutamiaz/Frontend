@@ -5,8 +5,9 @@ import { Autoplay, FreeMode, Pagination } from "swiper/modules";
 import "swiper/css";
 import DoctorCard from "./DoctorCard";
 import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
+import TopRatedDoctors from "../LandingPageSections/TopRatedDoctorsSection";
 
-const DoctorsListSwiper = () => {
+const DoctorsListSwiper = ({ doctors }) => {
   return (
     <div className="py-3 flex gap-2 flex-nowrap overflow-x-auto w-full testr1">
       <Swiper
@@ -25,12 +26,13 @@ const DoctorsListSwiper = () => {
         className="mySwiper2"
         key="re1232131er3321"
       >
-        {[...dummyData, ...dummyData].map((item) => (
+        {[...doctors,...doctors].map((doctor) => (
           <SwiperSlide key={Math.random()} className="max-w-[162px]">
             <DoctorCard
-              img={DummyDoctorImage}
-              name={"DR. Sami yasser"}
-              rate={"4.9"}
+              key={doctor?.id}
+              img={doctor?.photo}
+              name={doctor?.first_name}
+              rate={doctor?.rating}
             />
           </SwiperSlide>
         ))}

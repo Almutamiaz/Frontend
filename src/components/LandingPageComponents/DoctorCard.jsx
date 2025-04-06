@@ -8,6 +8,9 @@ const DoctorCard = ({ img, name, rate }) => {
         src={img}
         alt="Doctor Image"
         className="w-[124px] h-[124px] object-cover rounded-[50%] border-[0.5px] border-[var(--primary-color)] shadow-[0px_3px_12px_0px_#6060604D]"
+        width={124}
+        height={124}
+        sizes="100vw"
       />
       <div className="flex flex-col gap-2 items-center">
         <span className="text-sm font-semibold leading-[21px] text-[var(--Black)]">

@@ -38,7 +38,7 @@ const Header = () => {
 
   useEffect(() => {
     user?.id ? setLoading(false) : fetchUserData();
-    alert("test 123");
+    // alert("test 123");
   }, []);
   return (
     <div

@@ -37,11 +37,21 @@ import LocationIcon from "@/assets/icons/LocationIcon";
 import FiltersDrawer from "@/components/FiltersDrawer";
 import HeroSectionInput from "@/components/LandingPageComponents/HeroSectionInput";
 import { redirect } from "next/navigation";
+import ServicesSection from "@/components/LandingPageSections/ServicesSection";
+import { Row } from "antd";
+import TopRatedDoctors from "@/components/LandingPageSections/TopRatedDoctorsSection";
+import ServiceCategorySection from "@/components/LandingPageSections/ServiceCategorySection";
+import TopMedicalCentresSection, {
+  TopMedicalCentres,
+} from "@/components/LandingPageSections/TopMedicalCentresSection";
+import EmpoweringHealthcareSimplifyingAccessSection from "@/components/LandingPageSections/EmpoweringHealthcareSimplifyingAccessSection";
+import ArticlesSection from "@/components/LandingPageSections/ArticlesSection";
 
 export default function HomePage() {
   const t = useTranslations();
   return (
     <div className="flex flex-col gap-[60px]">
+      {/* <PostsPage /> */}
       {/* HERO SECTION */}
       <div className="HeroSectionParent h-[660px] bg-[#593BB4] rounded-b-[20px] flex flex-col justify-end">
         <div className="h-[calc(100%-108px)] w-[100%] mx-auto overflow-hidden relative flex items-center justify-center">
@@ -95,30 +105,9 @@ export default function HomePage() {
           responsiveFontSizes
           DesCenter
         />
-        <div className="flex gap-4 flex-wrap justify-center">
-          <ServiceCard
-            title={t("bookAppointment")}
-            description={t("bookAppointmentDescription")}
-            bgColor={"#A4E1FE"}
-            icon={BookAppointmentImg}
-          />
-          <ServiceCard
-            title={t("doctorHomeVisits")}
-            description={t("doctorHomeVisitsDescription")}
-            bgColor={
-              "linear-gradient(269.76deg, #FC9A69 51.84%, #F99267 99.73%, #FCA16C 99.73%)"
-            }
-            icon={DoctorHomeVisits}
-          />
-          <ServiceCard
-            title={t("onlineConsultations")}
-            description={t("onlineConsultationsDescription")}
-            bgColor={
-              "linear-gradient(270.21deg, #F4A7B1 0.26%, #DB7E89 99.61%)"
-            }
-            icon={OnlineConsolations}
-          />
-        </div>
+        <Row gutter={[16, 16]} className="w-full">
+          <ServicesSection />
+        </Row>
       </div>
       {/* TOP RATED DOCTORS SECTION */}
       <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden">
@@ -147,7 +136,8 @@ export default function HomePage() {
             />
           ))}
         </div> */}
-        <DoctorsListSwiper key={2} slideWidth={"162px"} />
+        <TopRatedDoctors />
+        {/* <DoctorsListSwiper key={2} slideWidth={"162px"} /> */}
       </div>
       {/* SERVICES CATEGORY SECTION */}
       <div className="container flex flex-col gap-8 items-center">
@@ -158,7 +148,8 @@ export default function HomePage() {
           responsiveFontSizes
           DesCenter
         />
-        <div className="flex flex-col gap-4 w-full">
+        <ServiceCategorySection />
+        {/* <div className="flex flex-col gap-4 w-full">
           <div className="flex gap-4 flex-wrap">
             <ServiceCategoryCard flex={1} />
             <div className="flex gap-4 min-w-[624px] flex-1 flex-wrap max-[800px]:min-w-full">
@@ -170,7 +161,7 @@ export default function HomePage() {
             <ServiceCategoryCard flex={1} />
             <ServiceCategoryCard flex={2} />
           </div>
-        </div>
+        </div> */}
       </div>
       {/* TOP MEDICAL CENTRES SECTION */}
       <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden">
@@ -189,7 +180,8 @@ export default function HomePage() {
           DesCenter
           responsiveFontSizes
         />
-        <MedicalCentresSwiper key={5} />
+        {/* <MedicalCentresSwiper key={5} /> */}
+        <TopMedicalCentresSection />
       </div>
       {/* HAKEEM CARDS SECTION */}
       <div className="container flex gap-5 flex-wrap">
@@ -227,14 +219,15 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex gap-8 items-center flex-wrap justify-center">
-            {statsData.map((item, i) => (
+            <EmpoweringHealthcareSimplifyingAccessSection />
+            {/* {statsData.map((item, i) => (
               <>
                 <StatisticCard num={item.value} title={item.title} />
                 {i + 1 != statsData.length && (
                   <div className="rounded-[4px] w-[2px] h-[84px] bg-[#023C5D] max-[660px]:hidden"></div>
                 )}
               </>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
@@ -251,7 +244,9 @@ export default function HomePage() {
           responsiveFontSizes
         />
         <div className="flex gap-2 w-full flex-wrap">
-          <ArticleCard
+          <ArticlesSection />
+
+          {/* <ArticleCard
             title={t("milkTypeQuestion")}
             drName={"Dr Maher Mohamed"}
           />
@@ -262,7 +257,7 @@ export default function HomePage() {
           <ArticleCard
             title={t("milkTypeQuestion")}
             drName={"Dr Maher Mohamed"}
-          />
+          /> */}
         </div>
         <Button
           className="antdButtonHover rtl:[&>svg]:!rotate-[-135deg]"
@@ -448,7 +443,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
       <FiltersDrawer />
     </div>
   );
