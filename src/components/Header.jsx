@@ -38,7 +38,6 @@ const Header = () => {
 
   useEffect(() => {
     user?.id ? setLoading(false) : fetchUserData();
-    // alert("test 123");
   }, []);
   return (
     <div
@@ -64,7 +63,8 @@ const Header = () => {
         </ClientLink>
         <ClientLink href={"Explore"}> {t("explore")}</ClientLink>
         <Link href={"#"}> {t("services")}</Link>
-        <Link href={"#"}> {t("aboutUs")}</Link>
+        {/* <Link href={"#"}> {t("aboutUs")}</Link> */}
+        <ClientLink href={"AboutUs"}> {t("aboutUs")}</ClientLink>
         <Link href={"#"}> {t("contactUs")}</Link>
       </div>
       <div className="flex gap-6 items-center max-[1200px]:hidden">

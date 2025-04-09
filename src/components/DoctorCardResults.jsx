@@ -5,7 +5,6 @@ import RateIcon from "@/assets/icons/RateIcon";
 import WalletIcon from "@/assets/icons/WalletIcon";
 import { Button } from "antd";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import ClientLink from "./ClientLink";
 
 const DoctorCardResults = ({ name, specialization, city }) => {

@@ -20,6 +20,7 @@ const AuthWrapper = ({ children }) => {
       } catch (error) {
         setUser(null);
         console.error("Error:", error.response?.data || error.message);
+        setLoading(false);
       } finally {
         // setLoading(false);
       }

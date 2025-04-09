@@ -84,6 +84,15 @@
     --Gray-200: #e1e1e2;
     --Gray-800: #27272a;
 
+    /* Black */
+    --Black-100: #1c1c1c;
+    --Black-300: #696969;
+    --Black-400: #4C4C4C;
+    --Black-900: #0d0d0d;
+
+    /* Purple */
+    --purple-900: #290064;
+
     /* Other Vars */
     --color1: #280c69;
     --color2: #35236a;

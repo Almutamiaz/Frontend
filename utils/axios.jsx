@@ -18,7 +18,7 @@ const segments = pathName.split("/").filter((segment) => segment.length > 0);
 const locale =
   segments[0] === "ar" || segments[0] === "en" ? segments[0] : "ar";
 
-console.log(locale); // Outputs "ar" for http://localhost:3000/ar/Account/SignUp
+// console.log(locale); // Outputs "ar" for http://localhost:3000/ar/Account/SignUp
 
 const axiosInstance = axios.create({
   baseURL: "/backend/api",

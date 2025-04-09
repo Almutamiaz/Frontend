@@ -156,6 +156,12 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.AboutUsText {
+  background: linear-gradient(180deg, #000000 0%, #300C71 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .ant-input {
   font-family: var(--fontFamily);

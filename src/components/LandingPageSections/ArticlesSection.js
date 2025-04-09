@@ -13,7 +13,7 @@ const ArticlesSection = async () => {
   });
 
   const { data: articles } = await res.json();
-  console.log(articles);
+  // console.log(articles);
   return (
     <>
       {articles?.slice(0, 3).map((article) => (
