@@ -36,18 +36,6 @@ const Page = () => {
           </div>
           <div className="flex gap-1">
             <Tag
-              active={activeTab === 1}
-              key={1}
-              text={t("searchOnOffer")}
-              onClick={() => setActiveTab(1)}
-              classNameProp={
-                activeTab === 1 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
-              }
-              withoutBorder
-              bgColorProp="#F4F4F4"
-              textColorProp="#2F2B3DE5"
-            />
-            <Tag
               active={activeTab === 2}
               key={2}
               text={t("allOffers")}

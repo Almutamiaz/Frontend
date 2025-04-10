@@ -225,6 +225,18 @@
   "trustAndIntegrityDescription": "We build lasting relationships through honesty, transparency, and ethical medical practices.",
   "ourPriority": "At Hakeem, your health is our priority.",
   "ourMissionStatement": "We are a trusted healthcare provider dedicated to delivering high-quality medical services with compassion, integrity, and care. Our mission is to support individuals and families across the Kingdom by providing accessible, patient-centered care that promotes wellness and peace of mind.",
+  "customerSupportMessage": "We're here to assist you with any inquiries, feedback, or assistance you may need. Whether you have questions about products, orders, or general inquiries, our dedicated customer support team is ready to help.",
+  "callOurTeam": "Call our team directly. We will provide information, answer technical questions, or schedule an appointment.",
+  "emailLabel": "E-mail",
+  "useEmailInfo": "Use email to provide information about the Product. We will respond as soon as possible, providing comprehensive support.",
+  "dropUsMessage": "Drop us a message",
+  "weAreHereToAssist": "We're always here to assist you at Hakeem.",
+  "supportTeamMessage": "Our customer support team is dedicated to addressing your inquiries.",
+  "sendMessage": "Send Message",
+  "message1": "Message",
+  "pleaseEnterValidEmail": "Please enter a valid email address",
+  "pleaseEnterYourMessage": "Please enter your message",
+  "pleaseEnterYourFullName": "Please enter your full name",
 
   "hakeem": "Hakeem healthcare"
 }

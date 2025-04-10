@@ -62,10 +62,12 @@ const Header = () => {
           {t("home")}
         </ClientLink>
         <ClientLink href={"Explore"}> {t("explore")}</ClientLink>
-        <Link href={"#"}> {t("services")}</Link>
+        <ClientLink href={"Services"}> {t("services")}</ClientLink>
+        {/* <Link href={"#"}> {t("services")}</Link> */}
         {/* <Link href={"#"}> {t("aboutUs")}</Link> */}
         <ClientLink href={"AboutUs"}> {t("aboutUs")}</ClientLink>
-        <Link href={"#"}> {t("contactUs")}</Link>
+        {/* <Link href={"#"}> {t("contactUs")}</Link> */}
+        <ClientLink href={"ContactUs"}> {t("contactUs")}</ClientLink>
       </div>
       <div className="flex gap-6 items-center max-[1200px]:hidden">
         <span className="text-base font-normal leading-[19.2px] text-[var(--neutral-100)]">
