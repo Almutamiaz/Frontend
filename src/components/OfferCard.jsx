@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
-import Logo from "./Logo";
 import HakeemHealthCareLogo from "@/assets/icons/HakeemHealthCareLogo";
 import { useTranslations } from "next-intl";
 import { Button, Col } from "antd";
@@ -34,7 +33,7 @@ const OfferCard = ({ offerName }) => {
               }}
             />
             {/* <div className="w-[105px] h-[40px] rounded-[100px] bg-[#FEFEFE66] absolute top-0 start-1/2 py-[5px] px-[10px]"> */}
-            <div className="w-[105px] h-[40px] rounded-[100px] bg-[#FEFEFE66] absolute top-[-25px] start-1/2 -translate-x-1/2 py-[5px] px-[10px] backdrop-blur-sm">
+            <div className="w-[105px] h-[40px] rounded-[100px] bg-[#FEFEFE66] absolute top-[-25px] start-1/2 -translate-x-1/2 py-[5px] px-[10px] backdrop-blur-sm rtl:translate-x-1/2">
               <HakeemHealthCareLogo
                 w={"100%"}
                 h={"100%"}
