@@ -7,7 +7,6 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(localStorage.getItem("token") || null);
-  const [doctors, setDoctors] = useState(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
