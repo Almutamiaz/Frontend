@@ -1,21 +1,59 @@
-"use client";
 import SettingsIcon from "@/assets/icons/SettingsIcon";
 import Footer from "@/components/Footer";
 import HeroSectionInput from "@/components/LandingPageComponents/HeroSectionInput";
 import OfferCard from "@/components/OfferCard";
 import SelectBox from "@/components/SelectBox";
 import Tag from "@/components/Tag";
+import SearchButton from "@/components/SearchButton";
+import { BASE_URL, BASE_URL_WithOutSite } from "@/constants";
 import { Button, Row } from "antd";
-import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import { getLocale, getTranslations } from "next-intl/server";
+import Link from "next/link";
+import React from "react";
 
-const Page = () => {
-  const t = useTranslations();
-  const [activeTab, setActiveTab] = useState(1);
+const Page = async ({ searchParams }) => {
+  const t = await getTranslations();
+  const locale = await getLocale();
+  // console.log(await searchParams);
 
+  // Fetch cities
+  const citiesRes = await fetch(`${BASE_URL_WithOutSite}/cities/194`, {
+    headers: {
+      "X-localization": locale,
+    },
+  });
+  const { data: cities } = await citiesRes.json();
+  // console.log(cities);
+
+  // Fetch categories
+  const categoriesRes = await fetch(`${BASE_URL}/offer/categories`, {
+    headers: {
+      "X-localization": locale,
+    },
+  });
+  const { data: categories } = await categoriesRes.json();
+
+  // Fetch offers with search parameters
+  const queryParams = new URLSearchParams({
+    search_category_id: searchParams?.category || "",
+    search_city_id: searchParams?.city || "",
+    insurance_id: searchParams?.insurance || "",
+    search_offer_name: searchParams?.search || "",
+    page: searchParams?.page || 1,
+  });
+
+  const offersRes = await fetch(`${BASE_URL}/offer?${queryParams.toString()}`, {
+    headers: {
+      "X-localization": locale,
+    },
+  });
+  const { data: offersData } = await offersRes.json();
+  const offers = offersData.data;
+
+  console.log(offers);
   return (
     <div className="bg-[#FAFAFA] min-h-screen flex flex-col gap-[60px]">
-      <div className="container overflow-visible mt-[170px] flex flex-col gap-6">
+      <div className="container overflow-visible mt-[170px] flex flex-col gap-6 flex-1">
         <div className="flex flex-col gap-4">
           <div className="flex inputStyles gap-4 flex-wrap">
             <HeroSectionInput
@@ -23,113 +61,66 @@ const Page = () => {
               // onChange={onChange}
               width="369px"
               placeholder={t("searchOnOffer")}
+              value={searchParams?.search}
             />
-            <SelectBox width={"273px"} placeholder={t("city")} />
+            <SelectBox
+              width={"273px"}
+              placeholder={t("city")}
+              options={cities.map((city) => ({
+                value: city.id,
+                label: city.title,
+              }))}
+              isServices
+              value={searchParams?.city}
+            />
             <div className="flex gap-2 ms-auto">
               <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center">
                 <SettingsIcon />
               </div>
-              <Button className="py-[18.5px] px-7 font-semibold text-base leading-[19.36px] text-[var(--neutral-100)]">
-                {t("search")}
-              </Button>
+              <SearchButton />
             </div>
           </div>
           <div className="flex gap-1">
             <Tag
-              active={activeTab === 2}
-              key={2}
+              active={!searchParams?.category}
+              key="all"
               text={t("allOffers")}
-              onClick={() => setActiveTab(2)}
+              href={`/${locale}/Services`}
               classNameProp={
-                activeTab === 2 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
+                !searchParams?.category ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
               }
               withoutBorder
               bgColorProp="#F4F4F4"
               textColorProp="#2F2B3DE5"
+              categoryId="all"
             />
-            <Tag
-              active={activeTab === 3}
-              key={3}
-              text={t("skin")}
-              onClick={() => setActiveTab(3)}
-              classNameProp={
-                activeTab === 3 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
-              }
-              withoutBorder
-              bgColorProp="#F4F4F4"
-              textColorProp="#2F2B3DE5"
-            />
-            <Tag
-              active={activeTab === 4}
-              key={4}
-              text={t("laser")}
-              onClick={() => setActiveTab(4)}
-              classNameProp={
-                activeTab === 4 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
-              }
-              withoutBorder
-              bgColorProp="#F4F4F4"
-              textColorProp="#2F2B3DE5"
-            />
-            <Tag
-              active={activeTab === 5}
-              key={5}
-              text={t("laboratories")}
-              onClick={() => setActiveTab(5)}
-              classNameProp={
-                activeTab === 5 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
-              }
-              withoutBorder
-              bgColorProp="#F4F4F4"
-              textColorProp="#2F2B3DE5"
-            />
-            <Tag
-              active={activeTab === 6}
-              key={6}
-              text={t("dental")}
-              onClick={() => setActiveTab(6)}
-              classNameProp={
-                activeTab === 6 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
-              }
-              withoutBorder
-              bgColorProp="#F4F4F4"
-              textColorProp="#2F2B3DE5"
-            />
-            <Tag
-              active={activeTab === 7}
-              key={7}
-              text={t("cosmetic")}
-              onClick={() => setActiveTab(7)}
-              classNameProp={
-                activeTab === 7 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
-              }
-              withoutBorder
-              bgColorProp="#F4F4F4"
-              textColorProp="#2F2B3DE5"
-            />
-            <Tag
-              active={activeTab === 8}
-              key={8}
-              text={t("maternityAndChildCare")}
-              onClick={() => setActiveTab(8)}
-              classNameProp={
-                activeTab === 8 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
-              }
-              withoutBorder
-              bgColorProp="#F4F4F4"
-              textColorProp="#2F2B3DE5"
-            />
+            {categories.map((category) => (
+              <Tag
+                active={searchParams?.category === category.id.toString()}
+                key={category.id}
+                text={category.title}
+                href={`/${locale}/Services`}
+                classNameProp={
+                  searchParams?.category === category.id.toString()
+                    ? "shadow-[0_2px_6px_0_#7367F04D]"
+                    : ""
+                }
+                withoutBorder
+                bgColorProp="#F4F4F4"
+                textColorProp="#2F2B3DE5"
+                categoryId={category.id.toString()}
+              />
+            ))}
           </div>
         </div>
         <div className="flex flex-col gap-4">
           <span className="font-semibold text-xl leading-[24.2px] text-[var(--primary-700)]">
-            {t("results")} (380)
+            {t("results")} ({offers?.length || 0})
           </span>
           <Row gutter={[16, 16]} className="w-full">
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
-            <OfferCard />
+            {offers?.map((offer) => (
+              <OfferCard key={offer.id} offer={offer} />
+            ))}
           </Row>
         </div>
       </div>

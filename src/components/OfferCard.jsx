@@ -5,8 +5,9 @@ import HakeemHealthCareLogo from "@/assets/icons/HakeemHealthCareLogo";
 import { useTranslations } from "next-intl";
 import { Button, Col } from "antd";
 
-const OfferCard = ({ offerName }) => {
+const OfferCard = ({ offer }) => {
   const t = useTranslations();
+  // console.log(offer);
   return (
     <Col
       xs={24}
@@ -23,13 +24,15 @@ const OfferCard = ({ offerName }) => {
         <div className="h-[300px] px-[12px] pb-[12px]">
           <div className="border border-[var(--primary-color)] h-full rounded-[4px] relative">
             <Image
-              src={DummyDoctorImage}
+              src={offer?.photo}
               width={0}
               height={0}
+              sizes="100vw"
               alt="Offer Img"
               style={{
                 height: "100%",
                 width: "100%",
+                objectFit: "cover",
               }}
             />
             {/* <div className="w-[105px] h-[40px] rounded-[100px] bg-[#FEFEFE66] absolute top-0 start-1/2 py-[5px] px-[10px]"> */}
@@ -46,15 +49,17 @@ const OfferCard = ({ offerName }) => {
           <div className="flex justify-between">
             <div className="flex flex-col">
               <span className="font-bold text-xl leading-[150%] tracking-[0px] text-[var(--color1)]">
-                All-in-one laser
+                {offer?.title}
               </span>
               <div className="flex gap-2">
-                <span className="font-normal text-base leading-[150%] tracking-[0px] text-[var(--Black-300)] relative">
-                  SR 500
-                  <div className="h-[2px] w-full bg-[var(--red-200)] top-[50%] absolute start-0 rotate-[-10deg]"></div>
-                </span>
+                {offer?.have_discount == 1 && (
+                  <span className="font-normal text-base leading-[150%] tracking-[0px] text-[var(--Black-300)] relative">
+                    {offer?.price}
+                    <div className="h-[2px] w-full bg-[var(--red-200)] top-[50%] absolute start-0 rotate-[-10deg]"></div>
+                  </span>
+                )}
                 <span className="font-bold text-base leading-[150%] tracking-[0px] text-[var(--Black-900)]">
-                  SR 250
+                  {offer?.price_after}
                 </span>
               </div>
             </div>
@@ -63,14 +68,14 @@ const OfferCard = ({ offerName }) => {
                 {t("offerCode")}
               </span>
               <span className="font-extrabold text-xs leading-[150%] tracking-[0px] text-[var(--purple-900)]">
-                12908
+                {offer?.uuid}
               </span>
             </div>
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex gap-3 items-center">
               <Image
-                src={DummyDoctorImage}
+                src={offer?.hospital?.photo}
                 alt="Hospital Img"
                 width={0}
                 height={0}
@@ -78,10 +83,10 @@ const OfferCard = ({ offerName }) => {
               />
               <div className="flex flex-col">
                 <span className="font-semibold text-sm leading-[150%] tracking-[0px] text-[var(--color1)]">
-                  Bellea Clinic
+                  {offer?.hospital?.first_name}
                 </span>
                 <span className="font-normal text-xs leading-[150%] tracking-[0px] text-[var(--color1)]">
-                  Dammam, Elzahra st.
+                  {offer?.hospital?.location?.location}
                 </span>
               </div>
             </div>

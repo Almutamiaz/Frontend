@@ -1,16 +1,20 @@
 "use client";
 import DownArrow from "@/assets/icons/DownArrow";
 import { Select } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SelectBox = ({
   width = "100%",
   height = "56px",
   placeholder,
   classNameProp = "",
+  options = [],
+  isServices,
+  value,
+  // onChange,
 }) => {
   const [dropdownOpened, setDropdownOpened] = useState(false);
-
+  const [newValue, setNewValue] = useState(value);
   return (
     <Select
       // defaultValue="lucy"
@@ -22,16 +26,8 @@ const SelectBox = ({
       // allowClear
       showSearch
       // onSearch={(value) => console.log(value)}
-      options={[
-        {
-          value: "lucy",
-          label: "Lucy",
-        },
-        {
-          value: "mucy",
-          label: "Mucy",
-        },
-      ]}
+      options={options}
+      value={+newValue || null}
       optionFilterProp="label"
       placeholder={placeholder}
       suffixIcon={
@@ -47,6 +43,15 @@ const SelectBox = ({
       }
       onDropdownVisibleChange={(open) => {
         setDropdownOpened(open);
+      }}
+      onChange={(e) => {
+        if (isServices) {
+          console.log(e)
+          setNewValue(e);
+          const url = new URL(window.location.href);
+          url.searchParams.set("city", e);
+          window.history.pushState({}, "", url.toString());
+        }
       }}
     />
   );

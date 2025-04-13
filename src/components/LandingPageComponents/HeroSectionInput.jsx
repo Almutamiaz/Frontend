@@ -2,8 +2,8 @@
 import SearchIcon from "@/assets/icons/SearchIcon";
 import { Input } from "antd";
 import { useTranslations } from "next-intl";
-import { redirect, usePathname } from "next/navigation";
-import React from "react";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const HeroSectionInput = ({
   suffix,
@@ -12,9 +12,26 @@ const HeroSectionInput = ({
   onChange,
   width,
   placeholder,
+  isServices,
+  value,
 }) => {
   const t = useTranslations();
   const pathname = usePathname();
+  const router = useRouter();
+  const { locale } = useParams();
+  const [newValue, setNewValue] = useState(value);
+
+  const handleSearch = (e) => {
+    if (onChange) {
+      onChange(e);
+    } else {
+      // Default behavior: update URL with search query while preserving locale
+      setNewValue(e.target.value);
+      const url = new URL(window.location.href);
+      url.searchParams.set("search", e.target.value);
+      window.history.pushState({}, "", url.toString());
+    }
+  };
   return (
     <Input
       style={{
@@ -24,13 +41,14 @@ const HeroSectionInput = ({
         // fontFamily: "var(--fontFamily)",
       }}
       placeholder={placeholder || t("searchPlaceholder")}
+      value={newValue}
       prefix={<SearchIcon />}
       onClick={
         ["/en", "/ar"].includes(pathname)
-          ? () => redirect(`/en/Explore`)
+          ? router.push(`/${locale}/Explore`)
           : onClick
       }
-      onChange={onChange}
+      onChange={handleSearch}
       suffix={suffix || null}
     />
   );
