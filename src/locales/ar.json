@@ -237,6 +237,8 @@
   "pleaseEnterValidEmail": "يرجى إدخال عنوان بريد إلكتروني صالح",
   "pleaseEnterYourMessage": "يرجى إدخال رسالتك",
   "pleaseEnterYourFullName": "يرجى إدخال اسمك الكامل",
+  "offerLinkCopied": "تم نسخ رابط العرض إلى الحافظة بنجاح!",
+  "selectDoctor": "اختر طبيبًا.",
 
   "hakeem": "حكيم للرعاية الطبية"
 }

@@ -6,9 +6,8 @@ import SelectBox from "@/components/SelectBox";
 import Tag from "@/components/Tag";
 import SearchButton from "@/components/SearchButton";
 import { BASE_URL, BASE_URL_WithOutSite } from "@/constants";
-import { Button, Row } from "antd";
+import { Row } from "antd";
 import { getLocale, getTranslations } from "next-intl/server";
-import Link from "next/link";
 import React from "react";
 
 const Page = async ({ searchParams }) => {
@@ -49,8 +48,6 @@ const Page = async ({ searchParams }) => {
   });
   const { data: offersData } = await offersRes.json();
   const offers = offersData.data;
-
-  console.log(offers);
   return (
     <div className="bg-[#FAFAFA] min-h-screen flex flex-col gap-[60px]">
       <div className="container overflow-visible mt-[170px] flex flex-col gap-6 flex-1">

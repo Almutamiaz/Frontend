@@ -21,7 +21,7 @@ const locale =
 // console.log(locale); // Outputs "ar" for http://localhost:3000/ar/Account/SignUp
 
 const axiosInstance = axios.create({
-  baseURL: "/backend/api",
+  baseURL: "/backend/api/site",
   withCredentials: true,
   headers: {
     Accept: "application/json",

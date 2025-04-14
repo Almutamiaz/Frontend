@@ -11,7 +11,7 @@ const SelectBox = ({
   options = [],
   isServices,
   value,
-  // onChange,
+  onChange,
 }) => {
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [newValue, setNewValue] = useState(value);
@@ -44,15 +44,19 @@ const SelectBox = ({
       onDropdownVisibleChange={(open) => {
         setDropdownOpened(open);
       }}
-      onChange={(e) => {
-        if (isServices) {
-          console.log(e)
-          setNewValue(e);
-          const url = new URL(window.location.href);
-          url.searchParams.set("city", e);
-          window.history.pushState({}, "", url.toString());
-        }
-      }}
+      onChange={
+        onChange
+          ? onChange
+          : (e) => {
+              if (isServices) {
+                console.log(e);
+                setNewValue(e);
+                const url = new URL(window.location.href);
+                url.searchParams.set("city", e);
+                window.history.pushState({}, "", url.toString());
+              }
+            }
+      }
     />
   );
 };

@@ -1,13 +1,15 @@
 import Image from "next/image";
 import React from "react";
-import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
 import HakeemHealthCareLogo from "@/assets/icons/HakeemHealthCareLogo";
-import { useTranslations } from "next-intl";
 import { Button, Col } from "antd";
+import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import ShareButton from "./ShareButton";
 
-const OfferCard = ({ offer }) => {
-  const t = useTranslations();
-  // console.log(offer);
+const OfferCard = async ({ offer }) => {
+  const t = await getTranslations();
+  const locale = await getLocale();
+
   return (
     <Col
       xs={24}
@@ -91,11 +93,11 @@ const OfferCard = ({ offer }) => {
               </div>
             </div>
             <div className="flex gap-2">
-              <Button className="flex-1 font-medium text-sm leading-[22px] tracking-normal text-[var(--neutral-700)] bg-[var(--neutral-100)] border border-[var(--neutral-700)]">
-                {t("share")}
-              </Button>
+              <ShareButton id={offer?.id} />
               <Button className="flex-[2] font-medium text-sm leading-[22px] tracking-normal text-center align-middle">
-                {t("bookNow")}
+                <Link href={`/${locale}/Services/ServiceDetails/${offer?.id}`}>
+                  {t("bookNow")}
+                </Link>
               </Button>
             </div>
           </div>

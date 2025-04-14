@@ -21,7 +21,7 @@ const BreadCrumb = () => {
     { title: <Link href={`/${locale}`}>{t("home")}</Link> },
     ...pathSegments.map((segment, index) => {
       const isLast = index === pathSegments.length - 1; // Check if it's the last item
-      const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
+      const href = `/${locale}/${pathSegments.slice(0, index + 1).join("/")}`;
       return {
         title: isLast ? (
           t(decodeURIComponent(segment).toLocaleLowerCase())
