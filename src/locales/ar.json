@@ -239,6 +239,8 @@
   "pleaseEnterYourFullName": "يرجى إدخال اسمك الكامل",
   "offerLinkCopied": "تم نسخ رابط العرض إلى الحافظة بنجاح!",
   "selectDoctor": "اختر طبيبًا.",
+  "hospitals": "المستشفيات",
+  "noResultsFound": "لم يتم العثور على نتائج",
 
   "hakeem": "حكيم للرعاية الطبية"
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import HeroSectionInput from "@/components/LandingPageComponents/HeroSectionInput";
 import Tag from "@/components/Tag";
@@ -12,15 +12,113 @@ import DoctorCardSearchSuggestion from "@/components/DoctorCardSearchSuggestion"
 import SelectBox from "@/components/SelectBox";
 import { Button } from "antd";
 import DoctorCardResults from "@/components/DoctorCardResults";
+import axiosInstance from "../../../../utils/axios";
+import { useAppNotification } from "@/Context/NotificationProvider";
+import Image from "next/image";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 const Page = () => {
   const t = useTranslations();
   const [activeOption, setActiveOption] = useState(1);
   const [startTyping, setStartTyping] = useState(false);
   const [viewResults, setViewResults] = useState(false);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchTearm, setSearchTearm] = useState("");
+  const {locale} = useParams();
+  console.log(locale)
+  const [searchResults, setSearchResults] = useState({
+    doctors: [],
+    hospitals: [],
+    offers: [],
+  });
+  const [searchLoading, setSearchLoading] = useState(false);
+  const notificationApi = useAppNotification();
+  const debounceTimeout = useRef(null);
+
+  const fetchServices = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get("/main/services");
+      if (response.data.code === 200) {
+        setServices(response.data.data);
+        setActiveOption(response.data.data[0].id);
+      }
+    } catch (error) {
+      notificationApi.error({
+        message: error.response?.data?.message || "Failed to fetch services",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          fontFamily: "var(--fontFamily)",
+        },
+      });
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchSearchResults = async (
+    searchTerm = searchTearm,
+    serviceId = activeOption
+  ) => {
+    setSearchLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/home/search?search=${searchTerm}&main_service_id=${serviceId}`
+      );
+      if (response.data.code === 200) {
+        console.log(response.data.data.doctors.data);
+        setSearchResults({
+          doctors: response.data.data.doctors.data?.slice(0, 4) || [],
+          hospitals: response.data.data.hospitals.data?.slice(0, 4) || [],
+          offers: response.data.data.offers.data?.slice(0, 4) || [],
+        });
+      }
+    } catch (error) {
+      notificationApi.error({
+        message:
+          error.response?.data?.message || "Failed to fetch search results",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          fontFamily: "var(--fontFamily)",
+        },
+      });
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+      setSearchLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
 
   const onChange = (e) => {
-    setStartTyping(Boolean(e.target.value.length));
+    const value = e.target.value;
+    setSearchTearm(value);
+    value.length > 0 && setSearchLoading(true);
+    // Clear existing timeout
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    // Set new timeout
+    debounceTimeout.current = setTimeout(() => {
+      if (value.length > 0) {
+        fetchSearchResults(value);
+      } else {
+        setSearchResults({
+          doctors: [],
+          hospitals: [],
+          offers: [],
+        });
+      }
+    }, 500); // 500ms delay
   };
 
   return !viewResults ? (
@@ -53,45 +151,36 @@ const Page = () => {
             onChange={onChange}
           />
         </div>
-        <div className="flex mt-[11px] gap-2">
-          {/* // active ? "var(--primary-300)" : "var(--neutral-200)" */}
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="flex mt-[11px] gap-2">
+            {services.map((service) => (
+              <Tag
+                active={activeOption === service.id}
+                key={service.id}
+                text={service.title}
+                icon={
+                  <div className={`w-6 h-6 relative transform scale-125`}>
+                    <Image
+                      src={service.photo}
+                      alt={service.title}
+                      fill
+                      className="object-cover rounded-full"
+                    />
+                  </div>
+                }
+                onClick={() => {
+                  setActiveOption(service.id);
+                  searchTearm != "" &&
+                    fetchSearchResults(searchTearm, service.id);
+                }}
+              />
+            ))}
+          </div>
+        )}
 
-          <Tag
-            active={activeOption === 1}
-            key={1}
-            text="Book Appointment"
-            icon={
-              <BookAppointmentIcon
-                color={activeOption === 1 ? false : "var(--neutral-900)"}
-              />
-            }
-            onClick={() => setActiveOption(1)}
-          />
-          <Tag
-            active={activeOption === 2}
-            key={2}
-            text="Home visits"
-            icon={
-              <HomeVisitsIcon
-                color={activeOption === 2 ? "var(--neutral-100)" : false}
-              />
-            }
-            onClick={() => setActiveOption(2)}
-          />
-          <Tag
-            active={activeOption === 3}
-            key={3}
-            text="Video Consultation"
-            icon={
-              <VideoConsultationIcon
-                color={activeOption === 3 ? "var(--neutral-100)" : false}
-              />
-            }
-            onClick={() => setActiveOption(3)}
-          />
-        </div>
-
-        {!startTyping ? (
+        {searchTearm == "" ? (
           <div className="container flex flex-col gap-4 items-center">
             <div className="flex gap-1 items-center">
               <PulseIcon color={"var(--titleColor)"} />
@@ -112,41 +201,102 @@ const Page = () => {
           </div>
         ) : (
           <div className="mt-[7px] flex flex-col gap-4 w-full max-w-[657px]">
-            <div className="flex flex-col gap-4">
-              <div className="flex justify-between">
-                <span className="text-[16px] leading-6 font-bold text-[var(--neutral-1000)]">
-                  {t("doctors")}
-                </span>
-                <span
-                  className="font-normal text-sm leading-[21px] text-[var(--neutral-700)] cursor-pointer"
-                  onClick={() => setViewResults(true)}
-                >
-                  {t("viewMore")}
-                </span>
-              </div>
-              <div className="flex flex-col gap-3">
-                {doctors.map((doc) => (
-                  <DoctorCardSearchSuggestion
-                    key={doc.name}
-                    name={doc.name}
-                    specialization={`${doc.specialty} | ${doc.hospital}`}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="flex justify-between">
-                <span className="text-[16px] leading-6 font-bold text-[var(--neutral-1000)]">
-                  {t("Specialists")}
-                </span>
-                <span className="font-normal text-sm leading-[21px] text-[var(--neutral-700)]">
-                  {t("viewMore")}
-                </span>
-              </div>
-              {/* <div className="flex flex-col gap-3">
-                <DoctorCardSearchSuggestion />
-              </div> */}
-            </div>
+            {searchLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <>
+                {searchResults.doctors.length > 0 && (
+                  <div className="flex flex-col gap-4">
+                    <div className="flex justify-between">
+                      <span className="text-[16px] leading-6 font-bold text-[var(--neutral-1000)]">
+                        {t("doctors")}
+                      </span>
+                      <Link href={`/${locale}/Services`}>
+                        <span
+                          className="font-normal text-sm leading-[21px] text-[var(--neutral-700)] cursor-pointer"
+                          onClick={() => setViewResults(true)}
+                        >
+                          {t("viewMore")}
+                        </span>
+                      </Link>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      {searchResults.doctors.map((doc) => (
+                        <DoctorCardSearchSuggestion
+                          key={doc.id}
+                          name={doc.first_name}
+                          specialization={`${doc.speciality} | ${doc.hospital.first_name}`}
+                          img={doc.photo}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {searchResults.hospitals.length > 0 && (
+                  <div className="flex flex-col gap-4">
+                    <div className="flex justify-between">
+                      <span className="text-[16px] leading-6 font-bold text-[var(--neutral-1000)]">
+                        {t("hospitals")}
+                      </span>
+                      <Link href={`/${locale}/Services`}>
+                        <span
+                          className="font-normal text-sm leading-[21px] text-[var(--neutral-700)] cursor-pointer"
+                          onClick={() => setViewResults(true)}
+                        >
+                          {t("viewMore")}
+                        </span>
+                      </Link>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      {searchResults.hospitals.map((hospital) => (
+                        <DoctorCardSearchSuggestion
+                          key={hospital.id}
+                          name={hospital.name}
+                          specialization={hospital.city.title}
+                          img={hospital.photo}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {searchResults.offers.length > 0 && (
+                  <div className="flex flex-col gap-4">
+                    <div className="flex justify-between">
+                      <span className="text-[16px] leading-6 font-bold text-[var(--neutral-1000)]">
+                        {t("offers")}
+                      </span>
+                      <Link href={`/${locale}/Services`}>
+                        <span
+                          className="font-normal text-sm leading-[21px] text-[var(--neutral-700)] cursor-pointer"
+                          onClick={() => setViewResults(true)}
+                        >
+                          {t("viewMore")}
+                        </span>
+                      </Link>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      {searchResults.offers.map((offer) => (
+                        <DoctorCardSearchSuggestion
+                          key={offer.id}
+                          name={offer.title}
+                          specialization={offer.description}
+                          img={offer.photo}
+                          href={`/${locale}/Services/ServiceDetails/${offer.id}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {!searchLoading &&
+                  searchResults.doctors.length === 0 &&
+                  searchResults.hospitals.length === 0 &&
+                  searchResults.offers.length === 0 && (
+                    <div className="text-center text-[var(--neutral-700)]">
+                      {t("noResultsFound")}
+                    </div>
+                  )}
+              </>
+            )}
           </div>
         )}
       </div>
@@ -176,7 +326,7 @@ const Page = () => {
           {t("results")} (380)
         </span>
         <div className="flex gap-[18px] flex-wrap">
-          {doctors.map((doc) => (
+          {searchResults.doctors.map((doc) => (
             <DoctorCardResults
               key={doc.name}
               name={doc.name}

@@ -17,7 +17,6 @@ import SelectBox from "@/components/SelectBox";
 import BookNowSection from "../../BookNowSection";
 const Page = async ({ params }) => {
   const { offerID } = await params;
-  console.log(offerID);
   const t = await getTranslations();
   const locale = await getLocale();
 
@@ -31,7 +30,6 @@ const Page = async ({ params }) => {
     }
   );
   const { data: Offer } = await offerDetailsRes.json();
-  console.log(Offer);
   const offersRes = await fetch(`${BASE_URL}/offer`, {
     headers: {
       "X-localization": locale,

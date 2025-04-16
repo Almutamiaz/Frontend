@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
 import { useTranslations } from "next-intl";
 
-const DoctorCardSearchSuggestion = ({ img, name, specialization }) => {
+const DoctorCardSearchSuggestion = ({ img, name, specialization, href = "" }) => {
   const t = useTranslations();
 
   return (
@@ -10,8 +11,11 @@ const DoctorCardSearchSuggestion = ({ img, name, specialization }) => {
       <div className="w-[44px] h-[44px] overflow-hidden">
         <Image
           className="w-full h-full rounded-[50%] object-cover"
-          src={DummyDoctorImage}
+          src={img}
           alt="Doctor Image"
+          width={44}
+          height={44}
+          sizes="100vw"
         />
       </div>
       <div className="flex flex-col">
@@ -22,9 +26,11 @@ const DoctorCardSearchSuggestion = ({ img, name, specialization }) => {
           {specialization}
         </span>
       </div>
-      <div className="px-4 py-[10px] bg-[var(--neutral-200)] text-[var(--neutral-1000)] rounded-[87px] font-normal text-sm leading-[16.94px] h-[37px] ms-auto">
-        {t("view")}
-      </div>
+      <Link href={href} className="ms-auto">
+        <div className="px-4 py-[10px] bg-[var(--neutral-200)] text-[var(--neutral-1000)] rounded-[87px] font-normal text-sm leading-[16.94px] h-[37px]">
+          {t("view")}
+        </div>
+      </Link>
     </div>
   );
 };
