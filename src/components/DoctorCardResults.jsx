@@ -7,7 +7,7 @@ import { Button } from "antd";
 import { useTranslations } from "next-intl";
 import ClientLink from "./ClientLink";
 
-const DoctorCardResults = ({ name, specialization, city }) => {
+const DoctorCardResults = ({ name, specialization, city, rate, img }) => {
   const t = useTranslations();
 
   return (
@@ -17,8 +17,10 @@ const DoctorCardResults = ({ name, specialization, city }) => {
         <div className="w-20 h-20 rounded-[50%]">
           <Image
             className="w-full h-full rounded-[50%] object-cover"
-            src={DummyDoctorImage}
-            alt="Doctor Image"
+            src={img}
+            alt={name}
+            width={80}
+            height={80}
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -39,7 +41,7 @@ const DoctorCardResults = ({ name, specialization, city }) => {
           <div className="flex gap-[6px] items-center">
             <RateIcon color="var(--secondary-300)" />
             <span className="font-medium text-xs leading-[18px] text-[var(--primary-800)] mt-[3px]">
-              4.7
+              {rate}
             </span>
           </div>
           <span className="text-[#979797]">|</span>
@@ -51,7 +53,9 @@ const DoctorCardResults = ({ name, specialization, city }) => {
           </div>
         </div>
         <Button className="h-[48px] w-[223px] font-medium text-sm leading-[22px] text-[var(--neutral-700)] bg-[var(--neutral-100)] border border-[var(--neutral-700)]">
-          <ClientLink href={"Explore/DoctorList"}>{t("viewProfile")}</ClientLink>
+          <ClientLink href={"Explore/DoctorList"}>
+            {t("viewProfile")}
+          </ClientLink>
         </Button>
       </div>
     </div>

@@ -27,8 +27,8 @@ const Page = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTearm, setSearchTearm] = useState("");
-  const {locale} = useParams();
-  console.log(locale)
+  const { locale } = useParams();
+  console.log(locale);
   const [searchResults, setSearchResults] = useState({
     doctors: [],
     hospitals: [],
@@ -227,6 +227,7 @@ const Page = () => {
                           name={doc.first_name}
                           specialization={`${doc.speciality} | ${doc.hospital.first_name}`}
                           img={doc.photo}
+                          href={`/${locale}/Doctors/${doc.id}`}
                         />
                       ))}
                     </div>
@@ -254,6 +255,7 @@ const Page = () => {
                           name={hospital.name}
                           specialization={hospital.city.title}
                           img={hospital.photo}
+                          href={`/${locale}/Hospital/${hospital.id}`}
                         />
                       ))}
                     </div>

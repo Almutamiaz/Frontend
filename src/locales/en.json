@@ -241,6 +241,8 @@
   "selectDoctor": "Select a Doctor",
   "hospitals": "Hospitals",
   "noResultsFound": "No results found",
+  "noReviewsFound": "No Reviews Found",
+  "selectSpecialty": "Select Specialty",
 
   "hakeem": "Hakeem healthcare"
 }

@@ -6,11 +6,9 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../../utils/axios";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
-const BookNowSection = ({ Offer }) => {
+const BookNowSection = ({ Offer, Doctor }) => {
   const t = useTranslations();
-  const [selectedDoctor, setSelectedDoctor] = useState(
-    Offer?.providers.length == 1 ? Offer?.providers[0]?.id : null
-  );
+  const [selectedSpecialty, setSelectedSpecialty] = useState(null);
   const [availableDays, setSvailableDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState();
   const [selectedTime, setSelectedTime] = useState();
@@ -18,6 +16,10 @@ const BookNowSection = ({ Offer }) => {
   const [loading, setLoading] = useState(
     Offer?.providers.length == 1 ? true : false
   );
+  const [specialistsLoading, setSpecialistsLoading] = useState(true);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [specialists, setSpecialists] = useState([]);
+
   const getAvailableDays = async () => {
     setLoading(true);
     try {
@@ -36,33 +38,55 @@ const BookNowSection = ({ Offer }) => {
     }
   };
 
+  const getAvailableSpecialists = async () => {
+    setSpecialistsLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/hospital/specializations/main-service?mainServicesId=13&page=${pageNumber}&search=&hospitalId=${Doctor?.setting?.hospital?.id}`
+      );
+      if (response.data.code === 200) {
+        setSpecialists(response?.data?.data?.data);
+        // setSvailableDays(response?.data?.data?.schedule);
+        // setSelectedDay(response?.data?.data?.schedule[0].date);
+        // setAvailableTimeSlots(response?.data?.data?.schedule[0]?.hours);
+      }
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+      setSpecialistsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAvailableSpecialists();
+  }, []);
+
   useEffect(() => {
     getAvailableDays();
-  }, [selectedDoctor]);
+  }, [selectedSpecialty]);
   return (
     <>
-      {Offer.have_doctors == 1 && (
+      {true && (
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <span className="text-[var(--color1)] font-bold text-xl leading-[24.2px] tracking-[0px]">
-              {t("selectDoctor")}
+              {t("selectSpecialty")}
             </span>
             <SelectBox
-              // options={Offer?.providers}
-              value={selectedDoctor}
-              options={Offer?.providers.map((provider) => ({
-                value: provider.id,
-                label: provider.first_name,
+              value={selectedSpecialty}
+              options={specialists?.map((specialty) => ({
+                value: specialty.id,
+                label: specialty.title,
               }))}
-              placeholder={t("selectDoctor")}
+              placeholder={t("selectSpecialty")}
               onChange={(e) => {
-                setSelectedDoctor(e);
+                setSelectedSpecialty(e);
               }}
             />
           </div>
         </div>
       )}
-      {(Offer.have_doctors == 0 || selectedDoctor) &&
+      {Offer?.have_doctors == 0 &&
         (loading ? (
           <div className="w-full flex justify-center items-center">
             <LoadingSpinner />

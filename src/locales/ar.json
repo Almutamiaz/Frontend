@@ -241,6 +241,8 @@
   "selectDoctor": "اختر طبيبًا.",
   "hospitals": "المستشفيات",
   "noResultsFound": "لم يتم العثور على نتائج",
+  "noReviewsFound": "لم يتم العثور على مراجعات",
+  "selectSpecialty": "اختر التخصص",
 
   "hakeem": "حكيم للرعاية الطبية"
 }

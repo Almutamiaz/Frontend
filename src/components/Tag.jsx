@@ -16,6 +16,7 @@ const Tag = ({
   activeTextColorProp,
   href,
   categoryId,
+  tabId,
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -28,7 +29,7 @@ const Tag = ({
 
     if (href) {
       const params = new URLSearchParams(searchParams.toString());
-      
+
       if (categoryId) {
         if (categoryId === "all") {
           params.delete("category");
@@ -37,9 +38,13 @@ const Tag = ({
         }
       }
 
+      if (tabId) {
+        params.set("tab", tabId);
+      }
+
       // Remove page parameter when changing category
       params.delete("page");
-      
+
       const newUrl = `${href.split("?")[0]}?${params.toString()}`;
       router.push(newUrl);
     }
