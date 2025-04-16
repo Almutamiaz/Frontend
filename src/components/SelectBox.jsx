@@ -1,6 +1,6 @@
 "use client";
 import DownArrow from "@/assets/icons/DownArrow";
-import { Select } from "antd";
+import { Select, Spin } from "antd";
 import { useEffect, useState } from "react";
 
 const SelectBox = ({
@@ -12,9 +12,30 @@ const SelectBox = ({
   isServices,
   value,
   onChange,
+  onScrollEnd,
+  loading,
 }) => {
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [newValue, setNewValue] = useState(value);
+  const handlePopupScroll = (event) => {
+    const target = event.target;
+    if (
+      target.scrollTop + target.offsetHeight >= target.scrollHeight - 5 &&
+      !loading
+    ) {
+      onScrollEnd?.();
+    }
+  };
+
+  // const handlePopupScroll = (e) => {
+  //   const { scrollTop, scrollHeight, clientHeight } = e.target;
+
+  //   // Check if we've reached the bottom (you can adjust a small threshold if needed)
+  //   if (scrollTop + clientHeight >= scrollHeight) {
+  //     console.log("Reached the bottom of the dropdown!");
+  //     // Trigger additional actions here (e.g., load more options)
+  //   }
+  // };
   return (
     <Select
       // defaultValue="lucy"
@@ -27,7 +48,7 @@ const SelectBox = ({
       showSearch
       // onSearch={(value) => console.log(value)}
       options={options}
-      value={+newValue || null}
+      value={onChange ? value : +newValue || null}
       optionFilterProp="label"
       placeholder={placeholder}
       suffixIcon={
@@ -44,6 +65,17 @@ const SelectBox = ({
       onDropdownVisibleChange={(open) => {
         setDropdownOpened(open);
       }}
+      onPopupScroll={handlePopupScroll}
+      dropdownRender={(menu) => (
+        <>
+          {menu}
+          {loading && (
+            <div style={{ padding: '8px', textAlign: 'center' }}>
+              <Spin size="small" />
+            </div>
+          )}
+        </>
+      )}
       onChange={
         onChange
           ? onChange

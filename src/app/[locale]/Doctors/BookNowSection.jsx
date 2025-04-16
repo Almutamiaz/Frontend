@@ -19,6 +19,8 @@ const BookNowSection = ({ Offer, Doctor }) => {
   const [specialistsLoading, setSpecialistsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
   const [specialists, setSpecialists] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const getAvailableDays = async () => {
     setLoading(true);
@@ -39,31 +41,36 @@ const BookNowSection = ({ Offer, Doctor }) => {
   };
 
   const getAvailableSpecialists = async () => {
-    setSpecialistsLoading(true);
+    if (!hasMore || isLoadingMore) return;
+
+    setIsLoadingMore(true);
     try {
       const response = await axiosInstance.get(
         `/hospital/specializations/main-service?mainServicesId=13&page=${pageNumber}&search=&hospitalId=${Doctor?.setting?.hospital?.id}`
       );
       if (response.data.code === 200) {
-        setSpecialists(response?.data?.data?.data);
-        // setSvailableDays(response?.data?.data?.schedule);
-        // setSelectedDay(response?.data?.data?.schedule[0].date);
-        // setAvailableTimeSlots(response?.data?.data?.schedule[0]?.hours);
+        const newSpecialists = response?.data?.data?.data;
+        setSpecialists((prev) => [...prev, ...newSpecialists]);
+        setHasMore(response?.data?.data?.last_page > pageNumber);
       }
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
     } finally {
-      setSpecialistsLoading(false);
+      setIsLoadingMore(false);
     }
   };
-
+  const handleScrollEnd = () => {
+    if (!isLoadingMore && hasMore) {
+      setPageNumber((prev) => prev + 1);
+    }
+  };
   useEffect(() => {
     getAvailableSpecialists();
-  }, []);
+  }, [pageNumber]);
 
-  useEffect(() => {
-    getAvailableDays();
-  }, [selectedSpecialty]);
+  // useEffect(() => {
+  //   getAvailableDays();
+  // }, [selectedSpecialty]);
   return (
     <>
       {true && (
@@ -81,7 +88,10 @@ const BookNowSection = ({ Offer, Doctor }) => {
               placeholder={t("selectSpecialty")}
               onChange={(e) => {
                 setSelectedSpecialty(e);
+                console.log(e);
               }}
+              onScrollEnd={handleScrollEnd}
+              loading={isLoadingMore}
             />
           </div>
         </div>
