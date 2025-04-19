@@ -243,6 +243,9 @@
   "noResultsFound": "No results found",
   "noReviewsFound": "No Reviews Found",
   "selectSpecialty": "Select Specialty",
+  "insurances": "Insurances",
+  "noAvailableTimes": "No available times at the moment.",
+  "recentlyAdded": "Recently added",
 
   "hakeem": "Hakeem healthcare"
 }

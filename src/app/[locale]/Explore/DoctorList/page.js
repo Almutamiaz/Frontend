@@ -20,7 +20,7 @@ import AntdFormItem from "@/components/AntdFormItem";
 const { TextArea } = Input;
 const Page = () => {
   const t = useTranslations();
-  const [bookNow, setBookNow] = useState(false);
+  const [bookNow, setBookNow] = useState(true);
   const [goToCheckOut, setGoToCheckOut] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [insuranceCompanyEnabled, setInsuranceCompanyEnabled] = useState(false);

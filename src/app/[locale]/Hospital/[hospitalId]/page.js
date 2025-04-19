@@ -11,6 +11,8 @@ import DoctorCardResults from "@/components/DoctorCardResults";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import StarIcon2 from "@/assets/icons/StarIcon2";
 import { BASE_URL } from "@/constants";
+import HospitalSpecialties from "@/components/HospitalSpecialties";
+import HospitalReviews from "@/components/HospitalReviews";
 
 const Page = async ({ params, searchParams }) => {
   const t = await getTranslations();
@@ -37,6 +39,30 @@ const Page = async ({ params, searchParams }) => {
   // const { data: doctorsData } = await doctorsRes.json();
   // const doctors = doctorsData.data || [];
 
+  // FETCH HOSPITAL INSURANCE
+  const hospitalInsurancesRes = await fetch(
+    `${BASE_URL}/hospital/insurance/company?hospital_id=${hospitalId}`,
+    {
+      headers: {
+        "X-localization": locale,
+      },
+    }
+  );
+  const { data: hospitalInsurances } = await hospitalInsurancesRes.json();
+  // console.log(hospitalInsurances);
+
+  // FETCH HOSPITAL REVIEWS
+  const hospitalReviewsRes = await fetch(
+    `${BASE_URL}/hospital/rate?hospital_id=${hospitalId}`,
+    {
+      headers: {
+        "X-localization": locale,
+      },
+    }
+  );
+  const { data: hospitalReviews } = await hospitalReviewsRes.json();
+  console.log(hospitalReviews);
+
   return (
     <div className="bg-[#FAFAFA] min-h-screen">
       <div className="container overflow-visible mt-[170px] flex flex-col gap-4">
@@ -53,7 +79,7 @@ const Page = async ({ params, searchParams }) => {
           </div>
           <div className="flex flex-col gap-3 w-full">
             <div className="flex flex-col gap-3">
-              <div className="flex justify-between">
+              <div className="flex justify-between flex-wrap">
                 <span className="font-semibold text-2xl leading-9 tracking-[0px] text-[var(--Black)]">
                   {hospitalData?.first_name}
                 </span>
@@ -67,7 +93,7 @@ const Page = async ({ params, searchParams }) => {
                   </span>
                 </div>
               </div>
-              <div className="flex gap-[20px] items-center">
+              <div className="flex gap-[20px] items-center flex-wrap">
                 <div className="flex flex-col">
                   <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--DescriptionsColor)]">
                     {t("noViews")}
@@ -100,11 +126,11 @@ const Page = async ({ params, searchParams }) => {
         </div>
 
         {/* tags section */}
-        <div className="flex gap-1">
+        <div className="flex gap-2 flex-wrap">
           <Tag
             active={activeTab == 1}
             key={1}
-            text={t("doctor")}
+            text={t("doctors")}
             href={`?tab=1`}
             classNameProp={
               activeTab == 1 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
@@ -143,7 +169,7 @@ const Page = async ({ params, searchParams }) => {
           <Tag
             active={activeTab == 4}
             key={4}
-            text={t("insurance")}
+            text={t("insurances")}
             href={`?tab=4`}
             classNameProp={
               activeTab == 4 ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
@@ -185,6 +211,7 @@ const Page = async ({ params, searchParams }) => {
                     city={doc?.city?.title}
                     rate={doc.rating}
                     img={doc.photo}
+                    price={doc.setting.in_hospital_price}
                   />
                 ))}
               </div>
@@ -207,40 +234,14 @@ const Page = async ({ params, searchParams }) => {
               <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--color1)]">
                 {t("branches")}
               </span>
-              {hospitalData?.branches?.map((branch, index) => (
-                <div key={index} className="flex gap-3 items-center">
-                  <LocationIcon color="var(--color1)" w={12} h={17} />
-                  <span className="font-[Inter] font-medium text-base leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
-                    {branch.address}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col gap-3 py-6">
-              <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--color1)]">
-                {t("specialists")}
-              </span>
-              <div className="flex gap-4 pt-4">
-                {hospitalData?.specialties?.map((specialty, i) => (
-                  <div
-                    className="flex flex-col w-[272px] h-[180px] rounded-xl items-center justify-center gap-7 bg-[#F4F4F4]"
-                    key={i}
-                  >
-                    <div className="w-full h-[89px] overflow-hidden">
-                      <Image
-                        src={specialty.image || DummyChildImage}
-                        alt="specialist Image"
-                        width={272}
-                        height={89}
-                      />
-                    </div>
-                    <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--darkColor)]">
-                      {specialty.name}
-                    </span>
-                  </div>
-                ))}
+              <div className="flex gap-3 items-center">
+                <LocationIcon color="var(--color1)" w={12} h={17} />
+                <span className="font-[Inter] font-medium text-base leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
+                  {hospitalData?.hospital_location?.location}
+                </span>
               </div>
             </div>
+            <HospitalSpecialties hospitalId={hospitalId} />
           </div>
         )}
 
@@ -255,7 +256,8 @@ const Page = async ({ params, searchParams }) => {
                 {t("seeMore")}
               </span>
             </div>
-            <div className="flex gap-[8px] items-center">
+            <HospitalReviews />
+            {/* <div className="flex gap-[8px] items-center">
               <RateIcon color="var(--secondary-300)" />
               <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--primary-800)] mt-[3px]">
                 {hospitalData?.rating || 4.7}
@@ -263,8 +265,8 @@ const Page = async ({ params, searchParams }) => {
                   ({hospitalData?.total_reviews || 200} {t("rating")})
                 </span>
               </span>
-            </div>
-            <div className="mt-1 flex gap-4">
+            </div> */}
+            {/* <div className="mt-1 flex gap-4">
               {hospitalData?.reviews?.map((review, i) => (
                 <div
                   key={i}
@@ -283,7 +285,7 @@ const Page = async ({ params, searchParams }) => {
                   </span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         )}
 
@@ -293,22 +295,26 @@ const Page = async ({ params, searchParams }) => {
             <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--color1)]">
               {t("insurance")}
             </span>
-            {hospitalData?.insurance_companies?.map((insurance, i) => (
+            {hospitalInsurances?.map((insurance, i) => (
               <div
-                key={i}
-                className="flex gap-3 items-center border-b border-b-[#E7E7E7] pb-3"
+                key={insurance?.id}
+                className={`flex gap-3 items-center pb-3 ${
+                  i !== hospitalInsurances.length - 1
+                    ? "border-b border-b-[#E7E7E7]"
+                    : ""
+                }`}
               >
                 <div className="w-[52px] h-[52px] rounded-[8px] shadow-[0_3px_8px_0_#D2D2D240] overflow-hidden">
                   <Image
                     className="w-full h-full rounded-[8px] object-cover shadow-[0_3px_8px_0_#D2D2D240]"
-                    src={insurance.logo || DummyDoctorImage}
-                    alt="Insurance Logo"
+                    src={insurance?.photo}
+                    alt={insurance?.title}
                     width={52}
                     height={52}
                   />
                 </div>
                 <div className="font-semibold text-base leading-6 tracking-[0px] text-[#101010]">
-                  {insurance.name}
+                  {insurance?.title}
                 </div>
               </div>
             ))}

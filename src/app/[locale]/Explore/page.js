@@ -16,17 +16,19 @@ import axiosInstance from "../../../../utils/axios";
 import { useAppNotification } from "@/Context/NotificationProvider";
 import Image from "next/image";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const Page = () => {
   const t = useTranslations();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [activeOption, setActiveOption] = useState(1);
   const [startTyping, setStartTyping] = useState(false);
-  const [viewResults, setViewResults] = useState(false);
+  const [viewResults, setViewResults] = useState(!false);
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchTearm, setSearchTearm] = useState("");
+  const [searchTearm, setSearchTearm] = useState(searchParams.get("q") || "");
   const { locale } = useParams();
   console.log(locale);
   const [searchResults, setSearchResults] = useState({
@@ -98,10 +100,20 @@ const Page = () => {
     fetchServices();
   }, []);
 
+  const params = new URLSearchParams(searchParams.toString());
   const onChange = (e) => {
     const value = e.target.value;
     setSearchTearm(value);
     value.length > 0 && setSearchLoading(true);
+
+    // Update URL search params
+    if (value) {
+      params.set("search", value);
+    } else {
+      params.delete("search");
+    }
+    router.push(`?${params.toString()}`);
+
     // Clear existing timeout
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
@@ -121,7 +133,7 @@ const Page = () => {
     }, 500); // 500ms delay
   };
 
-  return !viewResults ? (
+  return (
     <div className="flex flex-col">
       <div className="ExploreSection h-[384px] w-full flex flex-col justify-end">
         <div className="container h-[calc(100%-156px)] flex justify-center items-center">
@@ -211,7 +223,7 @@ const Page = () => {
                       <span className="text-[16px] leading-6 font-bold text-[var(--neutral-1000)]">
                         {t("doctors")}
                       </span>
-                      <Link href={`/${locale}/Services`}>
+                      <Link href={`/${locale}/Doctors?${params.toString()}`}>
                         <span
                           className="font-normal text-sm leading-[21px] text-[var(--neutral-700)] cursor-pointer"
                           onClick={() => setViewResults(true)}
@@ -301,42 +313,6 @@ const Page = () => {
             )}
           </div>
         )}
-      </div>
-    </div>
-  ) : (
-    <div className="container h-[calc(100%-156px)] mt-[156px] flex flex-col gap-6  pt-4">
-      <div className="flex inputStyles gap-4 flex-wrap">
-        <HeroSectionInput
-          height="56px"
-          onChange={onChange}
-          width="369px"
-          placeholder={t("searchOnDoctorsMedicalCenter")}
-        />
-        <SelectBox width={"273px"} placeholder={t("selectSpecialist")} />
-        <SelectBox width={"273px"} placeholder={t("city")} />
-        <div className="flex gap-2 ms-auto">
-          <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center">
-            <SettingsIcon />
-          </div>
-          <Button className="py-[18.5px] px-7 font-semibold text-base leading-[19.36px] text-[var(--neutral-100)]">
-            {t("search")}
-          </Button>
-        </div>
-      </div>
-      <div className="flex flex-col gap-4">
-        <span className="font-semibold text-xl leading-[24.2px] text-[var(--primary-700)]">
-          {t("results")} (380)
-        </span>
-        <div className="flex gap-[18px] flex-wrap">
-          {searchResults.doctors.map((doc) => (
-            <DoctorCardResults
-              key={doc.name}
-              name={doc.name}
-              specialization={`${doc.specialty} | ${doc.hospital}`}
-              city={"Jeddah - Al Ruwais"}
-            />
-          ))}
-        </div>
       </div>
     </div>
   );

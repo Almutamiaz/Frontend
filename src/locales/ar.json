@@ -243,6 +243,9 @@
   "noResultsFound": "لم يتم العثور على نتائج",
   "noReviewsFound": "لم يتم العثور على مراجعات",
   "selectSpecialty": "اختر التخصص",
+  "insurances": "شركات التأمين",
+  "noAvailableTimes": "لا توجد أوقات متاحة في الوقت الحالي.",
+  "recentlyAdded": "أضيف حديثاً",
 
   "hakeem": "حكيم للرعاية الطبية"
 }

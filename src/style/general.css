@@ -157,7 +157,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 .AboutUsText {
-  background: linear-gradient(180deg, #000000 0%, #300C71 100%);
+  background: linear-gradient(180deg, #000000 0%, #300c71 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -238,6 +238,10 @@ body {
   color: var(--neutral-600);
 }
 
+.ant-select-item-option-content {
+  font-family: var(--fontFamily) !important;
+}
+
 /* LANDINGPAGE RESPONSIVE DESIGN */
 @media screen and (max-width: 600px) {
   .HakeemHeader {
@@ -274,4 +278,9 @@ body {
     rgba(100, 65, 239, 0.1) 0%,
     rgba(100, 65, 239, 0.52) 100%
   );
+}
+
+
+.ant-typography-expand{
+  display: none !important;
 }

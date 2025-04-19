@@ -74,7 +74,7 @@ const Page = async ({ searchParams }) => {
               <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center">
                 <SettingsIcon />
               </div>
-              <SearchButton />
+              <SearchButton destination={`Services`} />
             </div>
           </div>
           <div className="flex gap-1">

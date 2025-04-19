@@ -11,7 +11,7 @@ const BookNowSection = ({ Offer }) => {
   const [selectedDoctor, setSelectedDoctor] = useState(
     Offer?.providers.length == 1 ? Offer?.providers[0]?.id : null
   );
-  const [availableDays, setSvailableDays] = useState([]);
+  const [availableDays, setAvailableDays] = useState([]);
   const [selectedDay, setSelectedDay] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
@@ -25,7 +25,7 @@ const BookNowSection = ({ Offer }) => {
         `/offer/schedule?offer_id=${Offer.id}&doctor_id=${selectedDoctor || ""}`
       );
       if (response.data.code === 200) {
-        setSvailableDays(response?.data?.data?.schedule);
+        setAvailableDays(response?.data?.data?.schedule);
         setSelectedDay(response?.data?.data?.schedule[0].date);
         setAvailableTimeSlots(response?.data?.data?.schedule[0]?.hours);
       }
@@ -129,53 +129,51 @@ const BookNowSection = ({ Offer }) => {
               </div>
             </div>
             <div className="h-[1px] w-full bg-[#E7E7E7]"></div>
-            {availableTimeSlots?.length > 0 && (
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-3">
-                  <span className="text-[var(--color1)] font-bold text-xl leading-[24.2px] tracking-[0px]">
-                    {t("availability")}
-                  </span>
-                  <span className="text-[var(--neutral-900)] font-medium text-sm leading-[22px] tracking-[0px]">
-                    {t("selectAvailableTimeForYou")}
-                  </span>
-                </div>
-                <div className="flex gap-4 flex-wrap">
-                  {availableTimeSlots?.map((time) => (
-                    <div
-                      className="rounded-[100px] flex min-w-[97px] h-10 items-center justify-center gap-3"
-                      key={time}
-                      style={{
-                        backgroundColor:
-                          selectedTime == time
-                            ? "#6441EF"
-                            : "var(--neutral-200)",
-                        transition: "all ease-in-out 0.3s",
-                      }}
-                      onClick={() => setSelectedTime(time)}
-                    >
-                      <ClockIcon
-                        color={
-                          !(selectedTime == time)
-                            ? "var(--neutral-900)"
-                            : "var(--neutral-100)"
-                        }
-                      />
-                      <span
-                        className="text-sm leading-6 tracking-[0px] text-center font-normal"
-                        style={{
-                          color:
-                            selectedTime == time
-                              ? "var(--neutral-100)"
-                              : "var(--primary-800)",
-                        }}
-                      >
-                        {time}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
+                <span className="text-[var(--color1)] font-bold text-xl leading-[24.2px] tracking-[0px]">
+                  {t("availability")}
+                </span>
+                <span className="text-[var(--neutral-900)] font-medium text-sm leading-[22px] tracking-[0px]">
+                  {availableTimeSlots?.length > 0
+                    ? t("selectAvailableTimeForYou")
+                    : t("noAvailableTimes")}
+                </span>
               </div>
-            )}
+              <div className="flex gap-4 flex-wrap">
+                {availableTimeSlots?.map((time) => (
+                  <div
+                    className="rounded-[100px] flex min-w-[97px] h-10 items-center justify-center gap-3"
+                    key={time}
+                    style={{
+                      backgroundColor:
+                        selectedTime == time ? "#6441EF" : "var(--neutral-200)",
+                      transition: "all ease-in-out 0.3s",
+                    }}
+                    onClick={() => setSelectedTime(time)}
+                  >
+                    <ClockIcon
+                      color={
+                        !(selectedTime == time)
+                          ? "var(--neutral-900)"
+                          : "var(--neutral-100)"
+                      }
+                    />
+                    <span
+                      className="text-sm leading-6 tracking-[0px] text-center font-normal"
+                      style={{
+                        color:
+                          selectedTime == time
+                            ? "var(--neutral-100)"
+                            : "var(--primary-800)",
+                      }}
+                    >
+                      {time}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </>
         ))}
     </>

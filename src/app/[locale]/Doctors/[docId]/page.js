@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
 import ApplePayImage from "@/assets/images/ApplePayImage.png";
@@ -20,6 +20,70 @@ import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/constants";
 import BookNowSection from "../BookNowSection";
 const { TextArea } = Input;
+
+export async function generateMetadata({ params }) {
+  const { locale, docId } = params;
+  const t = await getTranslations();
+  const doctorRes = await fetch(
+    `${BASE_URL}/view/doctor/profile?userId=${docId}`,
+    {
+      headers: {
+        "X-localization": locale,
+      },
+    }
+  );
+  const { data: Doctor } = await doctorRes.json();
+
+  const title = `${t("doctor")} ${Doctor?.first_name} ${Doctor?.last_name} - ${
+    Doctor?.setting?.speciality
+  } `;
+  const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
+    Doctor?.last_name
+  }, ${Doctor?.setting?.speciality} specialist at ${
+    Doctor?.setting?.hospital?.first_name
+  }. ${Doctor?.experiences?.[0]?.description?.slice(0, 150) || ""}`;
+
+  return {
+    title: title,
+    description: description,
+    // openGraph: {
+    //   title: title,
+    //   description: description,
+    //   type: "profile",
+    //   images: [
+    //     {
+    //       url: Doctor?.photo,
+    //       width: 800,
+    //       height: 600,
+    //       alt: `${Doctor?.first_name} ${Doctor?.last_name} profile picture`,
+    //     },
+    //   ],
+    //   profile: {
+    //     firstName: Doctor?.first_name,
+    //     lastName: Doctor?.last_name,
+    //     username: `${Doctor?.first_name}${Doctor?.last_name}`,
+    //   },
+    // },
+    // twitter: {
+    //   card: "summary_large_image",
+    //   title: title,
+    //   description: description,
+    //   images: [Doctor?.photo],
+    // },
+    // alternates: {
+    //   canonical: `/Doctors/${docId}`,
+    // },
+    // robots: {
+    //   index: true,
+    //   follow: true,
+    //   googleBot: {
+    //     index: true,
+    //     follow: true,
+    //   },
+    // },
+  };
+}
+
 const Page = async ({ params }) => {
   const { locale, docId } = await params;
   const t = await getTranslations();
