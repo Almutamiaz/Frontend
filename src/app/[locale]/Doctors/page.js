@@ -50,7 +50,7 @@ const Page = async ({ params, searchParams }) => {
           value={searchParams?.search}
         />
 
-        {/* <SelectBox width={"273px"} placeholder={t("selectSpecialist")} /> */}
+        {/* <SelectBox width={"273px"} placeholder={t("hospitals")} /> */}
         <SelectBox
           width={"273px"}
           placeholder={t("city")}

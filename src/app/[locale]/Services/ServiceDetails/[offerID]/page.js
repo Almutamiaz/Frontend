@@ -15,6 +15,30 @@ import { BASE_URL } from "@/constants";
 import Link from "next/link";
 import SelectBox from "@/components/SelectBox";
 import BookNowSection from "../../BookNowSection";
+
+export async function generateMetadata({ params }) {
+  const { offerID, locale } = await params;
+  const t = await getTranslations();
+  // Fetch Service Details
+  const offerDetailsRes = await fetch(
+    `${BASE_URL}/offer/details?offer_id=${offerID}`,
+    {
+      headers: {
+        "X-localization": locale,
+      },
+    }
+  );
+  const { data: Offer } = await offerDetailsRes.json();
+
+  const title = `${Offer?.title} - ${Offer?.description}`;
+  const description = `${Offer?.description}`;
+
+  return {
+    title: title,
+    description: description,
+  };
+}
+
 const Page = async ({ params }) => {
   const { offerID } = await params;
   const t = await getTranslations();
@@ -48,7 +72,7 @@ const Page = async ({ params }) => {
   // The second part contains the rest of the elements.
   const rest = filtered.slice(2);
 
-  console.log(filtered, firstTwo, rest);
+  console.log("Hakeem");
 
   return (
     <div className="bg-[#FAFAFA] min-h-[988px] pb-10 flex flex-col gap-[34px]">

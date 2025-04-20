@@ -19,7 +19,6 @@ import AntdFormItem from "@/components/AntdFormItem";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/constants";
 import BookNowSection from "../BookNowSection";
-const { TextArea } = Input;
 
 export async function generateMetadata({ params }) {
   const { locale, docId } = params;

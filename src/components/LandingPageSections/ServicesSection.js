@@ -14,7 +14,7 @@ const ServicesSection = async () => {
   });
 
   const { data: services } = await res.json();
-
+  console.log(services)
   return (
     <>
       {services.map((service) => (

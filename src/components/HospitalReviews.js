@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Col, Pagination, Row, Spin, Rate } from "antd";
 import axiosInstance from "../../utils/axios";
+import StarIcon2 from "@/assets/icons/StarIcon2";
 
 const HospitalReviews = ({ hospitalId }) => {
   const [reviews, setReviews] = useState([]);
@@ -14,9 +15,9 @@ const HospitalReviews = ({ hospitalId }) => {
     try {
       setLoading(true);
       const response = await axiosInstance.get(
-        `/hospital/rate?page=${page}&hospitalId=${2}`
+        `/hospital/rate?hospital_id=${hospitalId}&page=${page}`
       );
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setReviews(response.data.data.data);
       setTotalItems(response.data.data.total);
       setItemsPerPage(response.data.data.per_page);
@@ -29,51 +30,46 @@ const HospitalReviews = ({ hospitalId }) => {
 
   useEffect(() => {
     fetchReviews(currentPage);
-  }, [currentPage, hospitalId]);
+  }, [currentPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   return (
-    <div className="flex flex-col gap-3 py-6">
-      <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--color1)]">
-        Reviews
-      </span>
+    <div className="flex flex-col gap-3">
       <Spin spinning={loading} size="large">
-        <div className="flex gap-4 pt-4 flex-wrap">
-          <Row gutter={[16, 16]} className="w-full">
-            {reviews?.map((review) => (
-              <Col key={review.id} xs={24} sm={12} md={8} xl={6} xxl={4}>
-                <div className="flex flex-col w-full p-4 rounded-xl gap-3 bg-[#F4F4F4]">
-                  <div className="flex items-center gap-2">
-                    <Rate disabled defaultValue={review.order_average_rate} />
-                    <span className="text-sm text-gray-500">
-                      {review.order_average_rate}
-                    </span>
-                  </div>
-                  <p className="text-base text-[var(--darkColor)]">
-                    {review.comment}
-                  </p>
-                  <span className="text-sm text-gray-500">
-                    {review.created_at}
-                  </span>
+        <Row gutter={[16, 16]} className="mt-1">
+          {reviews?.map((review, i) => (
+            <Col key={review.id} xs={24} sm={12} md={8} xl={6}>
+              <div className="p-5 flex flex-col gap-3 bg-[#F4F4F4] rounded-[12px] mt-1">
+                <div className="flex gap-[6px]">
+                  {[...Array(Math.round(review.order_average_rate))].map(
+                    (_, i) => (
+                      <StarIcon2 key={i} color="var(--secondary-200)" />
+                    )
+                  )}
                 </div>
-              </Col>
-            ))}
-          </Row>
-        </div>
+                <span className="font-[Almarai] text-[var(--neutral-900)] font-bold text-sm leading-6 tracking-[0px]">
+                  {review.comment}
+                </span>
+                <span className="text-[var(--primary-800)] font-normal text-xs leading-6 tracking-[0px]">
+                  {review.created_at}
+                </span>
+              </div>
+            </Col>
+          ))}
+        </Row>
       </Spin>
-      <div className="flex justify-center mt-4">
-        <Pagination
-          current={currentPage}
-          total={totalItems}
-          pageSize={itemsPerPage}
-          onChange={handlePageChange}
-          showSizeChanger={false}
-          disabled={loading}
-        />
-      </div>
+
+      <Pagination
+        current={currentPage}
+        total={totalItems}
+        pageSize={itemsPerPage}
+        onChange={handlePageChange}
+        showSizeChanger={false}
+        disabled={loading}
+      />
     </div>
   );
 };

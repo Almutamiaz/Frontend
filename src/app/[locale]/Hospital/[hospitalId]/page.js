@@ -14,6 +14,28 @@ import { BASE_URL } from "@/constants";
 import HospitalSpecialties from "@/components/HospitalSpecialties";
 import HospitalReviews from "@/components/HospitalReviews";
 
+export async function generateMetadata({ params }) {
+  const { hospitalId, locale } = await params;
+  const t = await getTranslations();
+  const hospitalRes = await fetch(
+    `${BASE_URL}/view/hospital/profile?hospital_id=${hospitalId}`,
+    {
+      headers: {
+        "X-localization": locale,
+      },
+    }
+  );
+  const { data: hospitalData } = await hospitalRes.json();
+
+  const title = `${hospitalData?.first_name}`;
+  const description = `${hospitalData?.about_us}`;
+
+  return {
+    title: title,
+    description: description,
+  };
+}
+
 const Page = async ({ params, searchParams }) => {
   const t = await getTranslations();
   const { hospitalId, locale } = await params;
@@ -52,16 +74,16 @@ const Page = async ({ params, searchParams }) => {
   // console.log(hospitalInsurances);
 
   // FETCH HOSPITAL REVIEWS
-  const hospitalReviewsRes = await fetch(
-    `${BASE_URL}/hospital/rate?hospital_id=${hospitalId}`,
-    {
-      headers: {
-        "X-localization": locale,
-      },
-    }
-  );
-  const { data: hospitalReviews } = await hospitalReviewsRes.json();
-  console.log(hospitalReviews);
+  // const hospitalReviewsRes = await fetch(
+  //   `${BASE_URL}/hospital/rate?hospital_id=${hospitalId}`,
+  //   {
+  //     headers: {
+  //       "X-localization": locale,
+  //     },
+  //   }
+  // );
+  // const { data: hospitalReviews } = await hospitalReviewsRes.json();
+  // console.log(hospitalReviews);
 
   return (
     <div className="bg-[#FAFAFA] min-h-screen">
@@ -191,9 +213,9 @@ const Page = async ({ params, searchParams }) => {
                   placeholder={t("searchOnDoctorsName")}
                 />
               </div>
-              <div className="flex-1">
+              {/* <div className="flex-1">
                 <SelectBox placeholder={t("selectSpecialist")} />
-              </div>
+              </div> */}
               <div className="flex-1">
                 <SelectBox placeholder={t("branches")} />
               </div>
@@ -252,40 +274,20 @@ const Page = async ({ params, searchParams }) => {
               <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--darkColor)]">
                 {t("reviews")}
               </span>
-              <span className="font-normal text-sm leading-6 tracking-[0px] text-[var(--DescriptionsColor)]">
+              {/* <span className="font-normal text-sm leading-6 tracking-[0px] text-[var(--DescriptionsColor)]">
                 {t("seeMore")}
-              </span>
+              </span> */}
             </div>
-            <HospitalReviews />
-            {/* <div className="flex gap-[8px] items-center">
+            <div className="flex gap-[8px] items-center">
               <RateIcon color="var(--secondary-300)" />
               <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--primary-800)] mt-[3px]">
-                {hospitalData?.rating || 4.7}
+                {hospitalData?.rating}
                 <span className="ps-1 text-[var(--neutral-800)]">
-                  ({hospitalData?.total_reviews || 200} {t("rating")})
+                  ({hospitalData?.rating_count} {t("rating")})
                 </span>
               </span>
-            </div> */}
-            {/* <div className="mt-1 flex gap-4">
-              {hospitalData?.reviews?.map((review, i) => (
-                <div
-                  key={i}
-                  className="p-5 flex flex-col gap-3 bg-[#F4F4F4] rounded-[12px] mt-1"
-                >
-                  <div className="flex gap-[6px]">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <StarIcon2 key={i} color="var(--secondary-200)" />
-                    ))}
-                  </div>
-                  <span className="font-[Almarai] text-[var(--neutral-900)] font-bold text-sm leading-6 tracking-[0px]">
-                    {review.comment}
-                  </span>
-                  <span className="text-[var(--primary-800)] font-normal text-xs leading-6 tracking-[0px]">
-                    {review.date}
-                  </span>
-                </div>
-              ))}
-            </div> */}
+            </div>
+            <HospitalReviews hospitalId={hospitalId} />
           </div>
         )}
 
