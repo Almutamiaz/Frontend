@@ -26,10 +26,11 @@ const DoctorsListSwiper = ({ doctors }) => {
         className="mySwiper2"
         key="re1232131er3321"
       >
-        {[...doctors,...doctors].map((doctor) => (
+        {[...doctors, ...doctors].map((doctor) => (
           <SwiperSlide key={Math.random()} className="max-w-[162px]">
             <DoctorCard
               key={doctor?.id}
+              id={doctor?.id}
               img={doctor?.photo}
               name={doctor?.first_name}
               rate={doctor?.rating}

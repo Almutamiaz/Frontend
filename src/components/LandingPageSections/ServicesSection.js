@@ -14,7 +14,7 @@ const ServicesSection = async () => {
   });
 
   const { data: services } = await res.json();
-  console.log(services)
+  console.log(services);
   return (
     <>
       {services.map((service) => (
@@ -29,6 +29,7 @@ const ServicesSection = async () => {
             title={service?.title}
             description={service?.description}
             icon={service?.photo || ""}
+            id={service?.id}
           />
         </Col>
       ))}

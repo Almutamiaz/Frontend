@@ -50,7 +50,7 @@ const Page = async ({ params, searchParams }) => {
           value={searchParams?.search}
         />
 
-        {/* <SelectBox width={"273px"} placeholder={t("hospitals")} /> */}
+        <SelectBox width={"273px"} placeholder={t("Hospitals")} />
         <SelectBox
           width={"273px"}
           placeholder={t("city")}
@@ -61,6 +61,9 @@ const Page = async ({ params, searchParams }) => {
           isServices
           value={searchParams?.city}
         />
+        <SelectBox width={"273px"} placeholder={t("Main Services")} />
+        <SelectBox width={"273px"} placeholder={t("Clinic")} />
+
         <div className="flex gap-2 ms-auto">
           <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center">
             <SettingsIcon />

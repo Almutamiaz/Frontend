@@ -13,12 +13,12 @@ import StarIcon2 from "@/assets/icons/StarIcon2";
 import { BASE_URL } from "@/constants";
 import HospitalSpecialties from "@/components/HospitalSpecialties";
 import HospitalReviews from "@/components/HospitalReviews";
-
+ 
 export async function generateMetadata({ params }) {
   const { hospitalId, locale } = await params;
   const t = await getTranslations();
   const hospitalRes = await fetch(
-    `${BASE_URL}/view/hospital/profile?hospital_id=${hospitalId}`,
+    `${BASE_URL}/hospital/profile?hospital_id=${hospitalId}`,
     {
       headers: {
         "X-localization": locale,

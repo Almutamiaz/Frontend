@@ -23,14 +23,15 @@ const Page = () => {
   const t = useTranslations();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [activeOption, setActiveOption] = useState(1);
+  const [activeOption, setActiveOption] = useState(
+    +searchParams.get("service_id")
+  );
   const [startTyping, setStartTyping] = useState(false);
   const [viewResults, setViewResults] = useState(!false);
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTearm, setSearchTearm] = useState(searchParams.get("q") || "");
   const { locale } = useParams();
-  console.log(locale);
   const [searchResults, setSearchResults] = useState({
     doctors: [],
     hospitals: [],
@@ -46,7 +47,10 @@ const Page = () => {
       const response = await axiosInstance.get("/main/services");
       if (response.data.code === 200) {
         setServices(response.data.data);
-        setActiveOption(response.data.data[0].id);
+        if (!+searchParams.get("service_id")) {
+          setActiveOption(response.data.data[0].id);
+        }
+        await fetchSearchResults("", activeOption || response.data.data[0].id);
       }
     } catch (error) {
       notificationApi.error({
@@ -73,7 +77,6 @@ const Page = () => {
         `/home/search?search=${searchTerm}&main_service_id=${serviceId}`
       );
       if (response.data.code === 200) {
-        console.log(response.data.data.doctors.data);
         setSearchResults({
           doctors: response.data.data.doctors.data?.slice(0, 4) || [],
           hospitals: response.data.data.hospitals.data?.slice(0, 4) || [],
@@ -184,15 +187,20 @@ const Page = () => {
                 }
                 onClick={() => {
                   setActiveOption(service.id);
-                  searchTearm != "" &&
-                    fetchSearchResults(searchTearm, service.id);
+                  const params = new URLSearchParams(searchParams.toString());
+                  params.set("service_id", service.id);
+                  router.push(`?${params.toString()}`);
+                  fetchSearchResults(searchTearm, service.id);
                 }}
               />
             ))}
           </div>
         )}
 
-        {searchTearm == "" ? (
+        {searchTearm == "" &&
+        searchResults.doctors.length === 0 &&
+        searchResults.hospitals.length === 0 &&
+        searchResults.offers.length === 0 ? (
           <div className="container flex flex-col gap-4 items-center">
             <div className="flex gap-1 items-center">
               <PulseIcon color={"var(--titleColor)"} />
@@ -304,7 +312,8 @@ const Page = () => {
                 {!searchLoading &&
                   searchResults.doctors.length === 0 &&
                   searchResults.hospitals.length === 0 &&
-                  searchResults.offers.length === 0 && (
+                  searchResults.offers.length === 0 &&
+                  searchTearm.length != 0 && (
                     <div className="text-center text-[var(--neutral-700)]">
                       {t("noResultsFound")}
                     </div>
