@@ -246,7 +246,6 @@
   "insurances": "Insurances",
   "noAvailableTimes": "No available times at the moment.",
   "recentlyAdded": "Recently added",
-
   "easilyFindTopDoctors": "Easily find top doctors and medical services.",
   "allInOneHealth": "Everything you need for your health, all in one place",
   "hakeemAppDescription": "With the Hakeem app, we provide you with a full suite of healthcare services",
@@ -274,6 +273,11 @@
   "serviceCategories": "Service Categories",
   "mission": "Mission",
   "vision": "Vision",
+  "viewAllDoctors": "View All Doctors",
+  "comingSoon": "Coming Soon",
+  "smartPlatformDescription": "Hakeem is your smart platform for comprehensive healthcare.",
+  "connectAndOfferServices": "Connecting you with top doctors and medical centers in one click, We offer trusted, accessible medical services right at your fingertips.",
+  "hakeemApp": "Hakeem App",
 
   "hakeem": "Hakeem healthcare"
 }

@@ -280,7 +280,18 @@ body {
   );
 }
 
-
-.ant-typography-expand{
+.ant-typography-expand {
   display: none !important;
+}
+
+.ant-float-btn-content {
+  padding: 0px !important;
+}
+
+.ant-float-btn-icon {
+  width: 100% !important;
+}
+
+.ant-float-btn-icon svg {
+  transform: translate(1px, -1px);
 }

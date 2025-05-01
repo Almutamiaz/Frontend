@@ -77,7 +77,10 @@ const Footer = async () => {
                 <div className="flex justify-center items-center w-6 h-6">
                   <CallIcon />
                 </div>
-                <span className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]">
+                <span
+                  className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]"
+                  style={{ direction: "ltr" }}
+                >
                   +966533373079
                 </span>
               </div>

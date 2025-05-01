@@ -24,7 +24,10 @@ const Page = () => {
                 <span className="font-medium text-[32px] leading-[60px] tracking-[0px] text-[var(--neutral-1000)]">
                   {t("phoneNumber")}
                 </span>
-                <span className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)]">
+                <span
+                  className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] rtl:text-end"
+                  style={{ direction: "ltr" }}
+                >
                   +966533373079
                 </span>
               </div>

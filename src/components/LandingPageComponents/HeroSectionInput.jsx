@@ -1,9 +1,10 @@
 "use client";
 import SearchIcon from "@/assets/icons/SearchIcon";
-import { Input } from "antd";
+import { Grid, Input } from "antd";
 import { useTranslations } from "next-intl";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
+const { useBreakpoint } = Grid;
 
 const HeroSectionInput = ({
   suffix,
@@ -15,7 +16,10 @@ const HeroSectionInput = ({
   isServices,
   value,
   margin = "0px",
+  fullWidthInSm,
 }) => {
+  const screens = useBreakpoint();
+  const isLessThanSM = !screens.sm;
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
@@ -38,7 +42,7 @@ const HeroSectionInput = ({
       style={{
         height: height,
         borderRadius: "100px",
-        maxWidth: width || "auto",
+        maxWidth: isLessThanSM && fullWidthInSm ? "100%" : width || "auto",
         margin: margin,
         // fontFamily: "var(--fontFamily)",
       }}

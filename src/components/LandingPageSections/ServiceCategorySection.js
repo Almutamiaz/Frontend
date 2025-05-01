@@ -49,6 +49,36 @@ const ServiceCategorySection = async () => {
         </div>
       </div>
       <div className="flex gap-4 flex-wrap">
+        <div className="flex gap-4 min-w-[624px] flex-1 flex-wrap max-[800px]:min-w-full">
+          {services[3] && (
+            <ServiceCategoryCard
+              id={services[3]?.id}
+              flex={1}
+              minWidthMobile
+              title={services[3]?.title}
+              img={services[3]?.photo}
+            />
+          )}
+          {services[4] && (
+            <ServiceCategoryCard
+              id={services[4]?.id}
+              flex={1}
+              minWidthMobile
+              title={services[4]?.title}
+              img={services[4]?.photo}
+            />
+          )}
+        </div>
+        {services[5] && (
+          <ServiceCategoryCard
+            id={services[5]?.id}
+            flex={1}
+            title={services[5]?.title}
+            img={services[5]?.photo}
+          />
+        )}
+      </div>
+      {/* <div className="flex gap-4 flex-wrap">
         {services[3] && (
           <ServiceCategoryCard
             id={services[3]?.id}
@@ -97,7 +127,7 @@ const ServiceCategorySection = async () => {
             )}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

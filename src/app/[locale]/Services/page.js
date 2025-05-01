@@ -59,9 +59,11 @@ const Page = async ({ searchParams }) => {
               width="369px"
               placeholder={t("searchOnOffer")}
               value={searchParams?.search}
+              fullWidthInSm
             />
             <SelectBox
               width={"273px"}
+              fullWidthInSm
               placeholder={t("city")}
               options={cities.map((city) => ({
                 value: city.id,
@@ -77,7 +79,7 @@ const Page = async ({ searchParams }) => {
               <SearchButton destination={`Services`} />
             </div>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 flex-wrap gap-y-2">
             <Tag
               active={!searchParams?.category}
               key="all"

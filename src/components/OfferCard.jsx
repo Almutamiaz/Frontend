@@ -14,11 +14,12 @@ const OfferCard = async ({ offer }) => {
     <Col
       xs={24}
       sm={12}
-      md={8} // 24 / 8 = 3 cards per row on md
-      xl={6} // 24 / 6 = 4 cards per row on lg
+      md={12}
+      lg={8} // 24 / 8 = 3 cards per row on md
+      xxl={6} // 24 / 6 = 4 cards per row on lg
     >
       <div
-        className="h-[548px] w-[369px] rounded-[12px] shadow-[0_3px_8px_0_#D2D2D240] border border-[#FCFCFC] flex flex-col overflow-hidden relative py-[22px] gap-3"
+        className="h-[548px] w-full rounded-[12px] shadow-[0_3px_8px_0_#D2D2D240] border border-[#FCFCFC] flex flex-col overflow-hidden relative py-[22px] gap-3"
         style={{
           fontFamily: "var(--fontFamily)",
         }}

@@ -1,8 +1,8 @@
 "use client";
 import DownArrow from "@/assets/icons/DownArrow";
-import { Select, Spin } from "antd";
+import { Grid, Select, Spin } from "antd";
 import { useEffect, useState } from "react";
-
+const { useBreakpoint } = Grid;
 const SelectBox = ({
   width = "100%",
   height = "56px",
@@ -14,7 +14,10 @@ const SelectBox = ({
   onChange,
   onScrollEnd,
   loading,
+  fullWidthInSm,
 }) => {
+  const screens = useBreakpoint();
+  const isLessThanSM = !screens.sm;
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [newValue, setNewValue] = useState(value);
   const handlePopupScroll = (event) => {
@@ -41,7 +44,7 @@ const SelectBox = ({
       // defaultValue="lucy"
       className={classNameProp}
       style={{
-        width: width,
+        width: isLessThanSM && fullWidthInSm ? "100%" : width,
         height: height,
       }}
       // allowClear
@@ -70,7 +73,7 @@ const SelectBox = ({
         <>
           {menu}
           {loading && (
-            <div style={{ padding: '8px', textAlign: 'center' }}>
+            <div style={{ padding: "8px", textAlign: "center" }}>
               <Spin size="small" />
             </div>
           )}

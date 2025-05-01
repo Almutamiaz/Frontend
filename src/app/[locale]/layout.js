@@ -12,6 +12,7 @@ import Header from "@/components/Header";
 import BreadCrumb from "@/components/BreadCrumb";
 import { UserProvider } from "@/Context/UserContext";
 import NotificationProvider from "@/Context/NotificationProvider";
+import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
 export const metadata = {
   title: "حكيم للرعاية الطبية  | حكيم للرعاية الطبية",
   description: "Hakeem healthcare",
@@ -68,6 +69,7 @@ export default async function LocaleLayout({ children }) {
                     <Header />
                     <BreadCrumb />
                     {children}
+                    <WhatsAppFloatButton />
                   </div>
                 </UserProvider>
               </ThemeProvider>

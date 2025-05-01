@@ -7,9 +7,9 @@ import AppGalleryDark from "@/assets/images/AppGalleryDark.png";
 import HakeemApp from "@/assets/images/HakeemApp.png";
 import Arrow from "@/assets/images/Arrow.png";
 import HakeemAppQR from "@/assets/images/HakeemAppQR.png";
+import HakeemAppQR2 from "@/assets/images/HakeemAppQR2.png";
 import HeaderOfSection from "@/components/HeaderOfSection";
 import { Button } from "antd";
-import { useTranslations } from "next-intl";
 import HakeemCard from "@/components/LandingPageComponents/HakeemCard";
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 import Image from "next/image";
@@ -23,9 +23,12 @@ import TopMedicalCentresSection from "@/components/LandingPageSections/TopMedica
 import EmpoweringHealthcareSimplifyingAccessSection from "@/components/LandingPageSections/EmpoweringHealthcareSimplifyingAccessSection";
 import ArticlesSection from "@/components/LandingPageSections/ArticlesSection";
 import Footer from "@/components/Footer";
+import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
 
-export default function HomePage() {
-  const t = useTranslations();
+export default async function HomePage() {
+  const t = await getTranslations();
+  const locale = await getLocale();
   return (
     <div className="flex flex-col gap-[60px]">
       {/* <PostsPage /> */}
@@ -116,6 +119,12 @@ export default function HomePage() {
           ))}
         </div> */}
         <TopRatedDoctors />
+        <Link href={`/${locale}/Doctors`}>
+          <div className="flex gap-2 items-center rtl:[&>svg]:!rotate-[-135deg] hakeemCardDiv text-[var(--color1)] text-[14px] font-medium leading-6 tracking-[-0.03em]">
+            {t("viewAllDoctors")}
+            <ArrowIcon size={8} deg={45} color={"var(--color1)"} mt={1} />
+          </div>
+        </Link>
         {/* <DoctorsListSwiper key={2} slideWidth={"162px"} /> */}
       </div>
       {/* SERVICES CATEGORY SECTION */}
@@ -167,7 +176,7 @@ export default function HomePage() {
         <HakeemCard
           title={t("hakeemSmart")}
           subTitle={t("intelligentAssistant")}
-          actionText={t("startNow")}
+          actionText={t("comingSoon")}
           bgColor={"#D6F2FF"}
           imgSrc={RobotImage}
           bgCircleColor={"#518EF84D"}
@@ -178,7 +187,7 @@ export default function HomePage() {
         <HakeemCard
           title={t("hakeemPremium")}
           subTitle={t("exclusiveService")}
-          actionText={t("exploreNow")}
+          actionText={t("comingSoon")}
           bgColor={"#F4F2FF"}
           imgSrc={PercentageImage}
           bgCircleColor={"#7E53FD26"}
@@ -315,7 +324,13 @@ export default function HomePage() {
                 className="rtl:[transform:rotateY(180deg)]"
               />
             </div>
-            <Image src={HakeemAppQR} alt="Hakeem App QR Code" />
+            <div className="h-[200px] max-w-[200px] rounded-xl overflow-hidden">
+              <Image
+                src={HakeemAppQR2}
+                alt="Hakeem App QR Code"
+                className="w-full h-full"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -349,21 +364,3 @@ const dummyData = [
   },
 ];
 
-const statsData = [
-  {
-    title: "Total Reservations",
-    value: 1200,
-  },
-  {
-    title: "Users",
-    value: 2300,
-  },
-  {
-    title: "Total Doctors",
-    value: 300,
-  },
-  {
-    title: "Total Clinics",
-    value: 220,
-  },
-];

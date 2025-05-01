@@ -18,10 +18,10 @@ const Page = () => {
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
             <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText">
-              {t("smartPlatform")}
+              {t("smartPlatformDescription")}
             </h1>
             <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] whitespace-pre-line">
-              {t("trustedServices")}
+              {t("connectAndOfferServices")}
               {`\n`}
               {t("safeHands")}
             </p>
@@ -34,7 +34,7 @@ const Page = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-[60px]">
           {/* <div className="flex flex-col gap-4">
             <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText text-center">
               {t("mission")}
@@ -43,14 +43,14 @@ const Page = () => {
               {t("hakeemMission")}
             </p>
           </div> */}
-          <div className="flex flex-col gap-4">
+          {/* <div className="flex flex-col gap-4">
             <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText text-center">
               {t("ourValues")}
             </h1>
             <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] text-center">
               {t("hakeemValues")}
             </p>
-          </div>
+          </div> */}
           {/* <div className="flex flex-col gap-4">
             <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText text-center">
               {t("vision")}
@@ -62,18 +62,18 @@ const Page = () => {
           <Row gutter={[16, 16]} className="w-full">
             <ValueCard
               icon={<CompassionateCareIcon />}
-              title={t("compassionateCare")}
-              des={t("compassionateCareDescription")}
+              title={t("ourValues")}
+              des={t("hakeemValues")}
             />
             <ValueCard
               icon={<ExcellenceInServiceIcon />}
-              title={t("excellenceInService")}
-              des={t("excellenceInServiceDescription")}
+              title={t("vision")}
+              des={t("hakeemVision")}
             />
             <ValueCard
               icon={<TrustAndIntegrityIcon />}
-              title={t("trustAndIntegrity")}
-              des={t("trustAndIntegrityDescription")}
+              title={t("mission")}
+              des={t("hakeemMission")}
             />
           </Row>
           <div className="flex gap-9 max-md:flex-col">
