@@ -12,7 +12,9 @@ const ServicesSection = async () => {
       "X-localization": locale,
     },
   });
-
+  if (!res.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/main/services`);
+  }
   const { data: services } = await res.json();
   console.log(services);
   return (

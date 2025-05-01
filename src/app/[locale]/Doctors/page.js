@@ -25,11 +25,7 @@ const Page = async ({ params, searchParams }) => {
     }
   );
   const { data: doctors } = await doctorsRes.json();
-  // try {
-  //   console.log(await doctorsRes.json());
-  // } catch (error) {
-  //   console.log(error);
-  // }
+
   // Fetch cities
   const citiesRes = await fetch(`${BASE_URL_WithOutSite}/cities/194`, {
     headers: {
@@ -50,7 +46,6 @@ const Page = async ({ params, searchParams }) => {
           value={searchParams?.search}
         />
 
-        <SelectBox width={"273px"} placeholder={t("Hospitals")} />
         <SelectBox
           width={"273px"}
           placeholder={t("city")}
@@ -61,6 +56,7 @@ const Page = async ({ params, searchParams }) => {
           isServices
           value={searchParams?.city}
         />
+        <SelectBox width={"273px"} placeholder={t("Hospitals")} />
         <SelectBox width={"273px"} placeholder={t("Main Services")} />
         <SelectBox width={"273px"} placeholder={t("Clinic")} />
 
@@ -73,7 +69,7 @@ const Page = async ({ params, searchParams }) => {
       </div>
       <div className="flex flex-col gap-4">
         <span className="font-semibold text-xl leading-[24.2px] text-[var(--primary-700)]">
-          {t("results")} ({doctors.total})
+          {t("results")} ({doctors?.total})
         </span>
         <div className="flex gap-[18px] flex-wrap">
           {doctors?.data?.map((doc) => (
@@ -89,7 +85,7 @@ const Page = async ({ params, searchParams }) => {
             />
           ))}
         </div>
-        {doctors.last_page > 1 && (
+        {doctors?.last_page > 1 && (
           <DoctorsPagination
             total={doctors?.total}
             currentPage={Number(page)}

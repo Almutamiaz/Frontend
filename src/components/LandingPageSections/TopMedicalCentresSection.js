@@ -11,7 +11,9 @@ const TopMedicalCentresSection = async () => {
       "X-localization": locale,
     },
   });
-
+  if (!res.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/hospitals`);
+  }
   const { data: hospitals } = await res.json();
   // console.log(hospitals);
   return <MedicalCentresSwiper hospitals={hospitals} />;

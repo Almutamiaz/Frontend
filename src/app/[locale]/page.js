@@ -38,10 +38,12 @@ export default function HomePage() {
           <div className="circles thirdCircle absolute w-full max-w-[34.64vw] rounded-[50%] border border-[#FFFFFF1A] h-[34.64vw] top-[314.14px] left-0 right-0 mx-auto max-sm:top-[85%] max-sm:max-w-[54.64vw] max-sm:h-[54.64vw]      max-md:top-[75%] max-md:max-w-[44.64vw] max-md:h-[44.64vw]   max-lg:top-[380.14px] max-lg:max-w-[55.64vw] max-lg:h-[55.64vw]   max-xl:top-[358.14px] max-xl:max-w-[48.64vw] max-xl:h-[48.64vw]   max-2xl:top-[336.14px] max-2xl:max-w-[41.64vw] max-2xl:h-[41.64vw]"></div>
           <div className="circles testclass absolute w-full max-w-[586.93px] rounded-[50%] border border-[#FFFFFF1A] h-[586.93px] top-[397px] left-0 right-0 mx-auto"></div>
           <div className="HeroSecionHomePage flex flex-col gap-6 z-[1] max-[850px]:px-5">
-            <h1 className="herotext text-[52px] font-bold leading-[60px] tracking-[-0.0506em] max-w-[761px] text-[var(--neutral-100)] text-center">
-              {t("personalisedHealthcareSearch")}
+            <h1 className="herotext text-[52px] font-bold leading-[60px] tracking-[-0.0506em] max-w-[946px] text-[var(--neutral-100)] text-center whitespace-pre-line">
+              {t("easilyFindTopDoctors")}
+              {`\n`}
+              {t("allInOneHealth")}
             </h1>
-            <HeroSectionInput />
+            <HeroSectionInput width="660px" margin="auto" />
             {/* <Input
               style={{
                 height: "54px",
@@ -77,7 +79,7 @@ export default function HomePage() {
       <div className="container flex flex-col gap-8 items-center overflow-visible">
         <HeaderOfSection
           title={t("hakeemServices")}
-          description={t("bookServicesDescription")}
+          description={t("hakeemAppDescription")}
           titleCenter
           responsiveFontSizes
           DesCenter
@@ -90,7 +92,7 @@ export default function HomePage() {
       <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden">
         <HeaderOfSection
           title={t("topRatedDoctors")}
-          description={t("topRatedDoctorsDescription")}
+          description={t("topRatedDoctorsDes")}
           titleColor="var(--Black)"
           titleSize={24}
           titleLH={36}
@@ -119,8 +121,8 @@ export default function HomePage() {
       {/* SERVICES CATEGORY SECTION */}
       <div className="container flex flex-col gap-8 items-center">
         <HeaderOfSection
-          title={t("servicesCategory")}
-          description={t("servicesCategoryDescription")}
+          title={t("serviceCategories")}
+          description={t("hakeemAppServiceCategories")}
           titleCenter
           responsiveFontSizes
           DesCenter
@@ -143,8 +145,8 @@ export default function HomePage() {
       {/* TOP MEDICAL CENTRES SECTION */}
       <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden">
         <HeaderOfSection
-          title={t("topMedicalCentres")}
-          description={t("topMedicalCentresDescription")}
+          title={t("mostRequestedCenters")}
+          description={t("showcaseCenters")}
           titleColor="var(--titleColor)"
           titleSize={36}
           titleLH={54}
@@ -164,7 +166,7 @@ export default function HomePage() {
       <div className="container flex gap-5 flex-wrap">
         <HakeemCard
           title={t("hakeemSmart")}
-          subTitle={t("hakeemSmartDescription")}
+          subTitle={t("intelligentAssistant")}
           actionText={t("startNow")}
           bgColor={"#D6F2FF"}
           imgSrc={RobotImage}
@@ -175,7 +177,7 @@ export default function HomePage() {
         />
         <HakeemCard
           title={t("hakeemPremium")}
-          subTitle={t("hakeemPremiumDescription")}
+          subTitle={t("exclusiveService")}
           actionText={t("exploreNow")}
           bgColor={"#F4F2FF"}
           imgSrc={PercentageImage}
@@ -189,10 +191,10 @@ export default function HomePage() {
       <div className="bg-[var(--Gray-100)] flex pt-[58px] pb-[67px]">
         <div className="container flex flex-col items-center gap-12">
           <div>
-            <p className="text-[56px] font-extrabold leading-[67.2px] text-[var(--darkColor)] max-w-[641px] rtl:max-w-[518px] text-center max-[450px]:text-[32px] max-[450px]:leading-[40px]">
-              {t("empowering")}{" "}
-              <span className="text-[#6441EF]">{t("healthcare")}</span>{" "}
-              {t("simplifyingAccess")}
+            <p className="text-[56px] font-extrabold leading-[67.2px] text-[var(--darkColor)] max-w-[650px] rtl:max-w-[600px] text-center max-[450px]:text-[32px] max-[450px]:leading-[40px]">
+              {t("betterHealthEasy")}{" "}
+              {/* <span className="text-[#6441EF]">{t("healthcare")}</span>{" "}
+              {t("simplifyingAccess")} */}
             </p>
           </div>
           <div className="flex gap-8 items-center flex-wrap justify-center">
@@ -264,10 +266,10 @@ export default function HomePage() {
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2 align-center">
               <span className="text-[32px] font-extrabold leading-[38.4px] text-[var(--color1)] max-[750px]:text-center">
-                {t("downloadHakeemApp")}
+                {t("downloadHakeemAppNow")}
               </span>
               <span className="text-base font-medium leading-[19.84px] text-[var(--DescriptionColor2)] max-[750px]:text-center">
-                {t("downloadHakeemAppDescription")}
+                {t("downloadHakeemAppDetails")}
               </span>
             </div>
             <div className="flex gap-6 flex-wrap justify-center">
@@ -285,13 +287,13 @@ export default function HomePage() {
               >
                 <Image src={AppStoreDark} alt="App Store Download App" />
               </a>
-              <a
+              {/* <a
                 href="https://play.google.com/store/apps/details?id=com.hakeem.patient.hakeem_patient&hl=en_US"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image src={AppGalleryDark} alt="App Gallery Download App" />
-              </a>
+              </a> */}
             </div>
             <div className="flex items-center justify-between w-full">
               <div className="h-[1px] bg-[#ccc] flex-1"></div>

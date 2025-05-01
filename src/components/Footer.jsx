@@ -10,10 +10,11 @@ import InstagramIcon from "@/assets/icons/InstagramIcon";
 import CallIcon from "@/assets/icons/CallIcon";
 import LetterIcon from "@/assets/icons/LetterIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
-import { useTranslations } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 
-const Footer = () => {
-  const t = useTranslations();
+const Footer = async () => {
+  const t = await getTranslations();
+  const locale = await getLocale();
   return (
     <div className="min-h-[397px] bg-[#2A193C]">
       <div className="container flex flex-col gap-[75px] pt-[59px] justify-between h-full">
@@ -48,10 +49,10 @@ const Footer = () => {
               <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
                 {t("pages")}
               </span>
-              <Link href={"#"}>{t("aboutUs")}</Link>
-              <Link href={"#"}>{t("bestDoctor")}</Link>
-              <Link href={"#"}>{t("offers")}</Link>
-              <Link href={"#"}>{t("blogs")}</Link>
+              <Link href={`${locale}/AboutUs`}>{t("aboutUs")}</Link>
+              <Link href={`${locale}/Doctors`}>{t("bestDoctor")}</Link>
+              <Link href={`${locale}/Services`}>{t("offers")}</Link>
+              {/* <Link href={"#"}>{t("blogs")}</Link> */}
               <Link href={"#"}>{t("termsConditions")}</Link>
             </div>
             {/* SERVICES */}
@@ -59,11 +60,13 @@ const Footer = () => {
               <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
                 {t("services")}
               </span>
-              <Link href={"#"}>{t("homeVisits")}</Link>
-              <Link href={"#"}>{t("onlineConsultation")}</Link>
-              <Link href={"#"}>{t("findDoctor")}</Link>
-              <Link href={"#"}>{t("laboratory")}</Link>
-              <Link href={"#"}>{t("xRay")}</Link>
+              <Link href={`${locale}/Doctors`}>{t("homeVisits")}</Link>
+              <Link href={`${locale}/Doctors`}>{t("onlineConsultation")}</Link>
+              <Link href={`${locale}/Doctors`}>{t("findDoctor")}</Link>
+              <Link href={`${locale}/Services?category=3`}>
+                {t("laboratory")}
+              </Link>
+              {/* <Link href={"#"}>{t("xRay")}</Link> */}
             </div>
             {/* CONTACT */}
             <div className="flex flex-col gap-5">
@@ -75,7 +78,7 @@ const Footer = () => {
                   <CallIcon />
                 </div>
                 <span className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]">
-                  (406) 555-0120
+                  +966533373079
                 </span>
               </div>
               <div className="flex gap-4 items-center">
@@ -83,7 +86,7 @@ const Footer = () => {
                   <LetterIcon />
                 </div>
                 <span className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]">
-                  hakeem_support@gmail.com
+                  info@hakeem.com.sa
                 </span>
               </div>
               <div className="flex gap-4 items-center">
@@ -91,7 +94,7 @@ const Footer = () => {
                   <LocationIcon />
                 </div>
                 <span className="text-sm font-medium leading-[16.94px] text-[var(--neutral-100)]">
-                  2972 Dammam Rd. Santa Ana, Illinois 85486
+                  2895 King Saud St, Al Athir, 9311, Dammam 32248, Saudi Arabia
                 </span>
               </div>
             </div>
@@ -100,11 +103,35 @@ const Footer = () => {
               <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)]">
                 {t("followUs")}
               </span>
-              <div className="flex gap-2">
-                <FacebookIcon />
-                <TwitterIcon />
-                <LinkedInIcon />
-                <InstagramIcon />
+              <div className="flex gap-3">
+                <a
+                  href="https://www.facebook.com/HakeemMedical"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookIcon />
+                </a>
+                <a
+                  href="https://x.com/Hakeem_Medical"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TwitterIcon />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/1hakeem"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedInIcon />
+                </a>
+                <a
+                  href="https://www.instagram.com/hakeemhealthcare"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramIcon />
+                </a>
               </div>
             </div>
           </div>

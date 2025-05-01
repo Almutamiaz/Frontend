@@ -13,6 +13,9 @@ const TopRatedDoctorsSection = async () => {
       "X-localization": locale,
     },
   });
+  if (!res.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/doctors`);
+  }
 
   const { data: doctors } = await res.json();
   // console.log(doctors)

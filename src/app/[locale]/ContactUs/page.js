@@ -14,7 +14,7 @@ const Page = () => {
             {t("contactUs")}
           </h1>
           <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] max-w-[800px]">
-            {t("customerSupportMessage")}
+            {t("supportMessage")}
           </p>
         </div>
         <div className="flex gap-4">
@@ -25,7 +25,7 @@ const Page = () => {
                   {t("phoneNumber")}
                 </span>
                 <span className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)]">
-                  19091
+                  +966533373079
                 </span>
               </div>
               <p className="font-normal text-lg leading-[26px] tracking-[0px] text-[var(--neutral-900)]">
@@ -38,11 +38,11 @@ const Page = () => {
                   {t("emailLabel")}
                 </span>
                 <span className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)]">
-                  support@gmail.com
+                  info@hakeem.com.sa
                 </span>
               </div>
               <p className="font-normal text-lg leading-[26px] tracking-[0px] text-[var(--neutral-900)]">
-                {t("useEmailInfo")}
+                {t("supportTeamAvailable")}
               </p>
             </div>
           </div>

@@ -5,7 +5,10 @@ import { Autoplay, FreeMode, Pagination } from "swiper/modules";
 import "swiper/css";
 import Image from "next/image";
 import SaudiHospital from "@/assets/images/SaudiHospital.png";
+import { useParams, useRouter } from "next/navigation";
 const MedicalCentresSwiper = ({ hospitals }) => {
+  const { locale } = useParams();
+  const router = useRouter();
   return (
     <div className="py-3 flex gap-2 flex-nowrap overflow-x-auto w-full testr1">
       <Swiper
@@ -27,7 +30,10 @@ const MedicalCentresSwiper = ({ hospitals }) => {
         {hospitals?.map((hospital) => (
           <SwiperSlide
             key={hospital?.id}
-            className="max-w-[72px] max-h-[72px] min-w-[72px] min-h-[72px]"
+            className="max-w-[72px] max-h-[72px] min-w-[72px] min-h-[72px] cursor-pointer"
+            onClick={() => {
+              router.push(`/${locale}/Hospital/${hospital?.id}`);
+            }}
           >
             {/* <div className="h-[100%] w-[100%] rounded-[50%] border-[0.5px] border-solid border-[var(--primary-color)] flex justify-center items-center bg-[var(--neutral-100)]"></div> */}
             <Image
@@ -49,26 +55,4 @@ const MedicalCentresSwiper = ({ hospitals }) => {
   );
 };
 
-const dummyData = [
-  {
-    id: 1,
-    category: "Eye Specialist",
-  },
-  {
-    id: 2,
-    category: "Dentist",
-  },
-  {
-    id: 3,
-    category: "Dermatology",
-  },
-  {
-    id: 4,
-    category: "Pulmonologist",
-  },
-  {
-    id: 5,
-    category: "Audiology",
-  },
-];
 export default MedicalCentresSwiper;

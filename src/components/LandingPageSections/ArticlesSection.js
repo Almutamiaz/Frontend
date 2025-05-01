@@ -11,7 +11,9 @@ const ArticlesSection = async () => {
       "X-localization": locale,
     },
   });
-
+  if (!res.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/articles`);
+  }
   const { data: articles } = await res.json();
   // console.log(articles);
   return (

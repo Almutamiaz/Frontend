@@ -23,17 +23,14 @@ import BookNowSection from "../BookNowSection";
 export async function generateMetadata({ params }) {
   const { locale, docId } = params;
   const t = await getTranslations();
-  const doctorRes = await fetch(
-    `${BASE_URL}/view/doctor/profile?userId=${docId}`,
-    {
-      headers: {
-        "X-localization": locale,
-      },
-    }
-  );
+  const doctorRes = await fetch(`${BASE_URL}/doctor/profile?userId=${docId}`, {
+    headers: {
+      "X-localization": locale,
+    },
+  });
   const { data: Doctor } = await doctorRes.json();
 
-  const title = `${t("doctor")} ${Doctor?.first_name} ${Doctor?.last_name} - ${
+  const title = `${t("doctor")} ${Doctor?.first_name} ${Doctor?.last_name} | ${t("hakeem")}  | ${
     Doctor?.setting?.speciality
   } `;
   const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
@@ -86,14 +83,11 @@ export async function generateMetadata({ params }) {
 const Page = async ({ params }) => {
   const { locale, docId } = await params;
   const t = await getTranslations();
-  const doctorRes = await fetch(
-    `${BASE_URL}/view/doctor/profile?userId=${docId}`,
-    {
-      headers: {
-        "X-localization": locale,
-      },
-    }
-  );
+  const doctorRes = await fetch(`${BASE_URL}/doctor/profile?userId=${docId}`, {
+    headers: {
+      "X-localization": locale,
+    },
+  });
   const { data: Doctor } = await doctorRes.json();
   console.log(Doctor);
 
@@ -137,7 +131,7 @@ const Page = async ({ params }) => {
               <div className="flex gap-[8px] items-center">
                 <RateIcon color="var(--secondary-300)" />
                 <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--primary-800)] mt-[3px]">
-                  {Doctor?.rate}
+                  {Doctor?.rate < 1 ? t("recentlyAdded") : Doctor?.rate}
                   <span className="ps-1 text-[var(--neutral-800)]">
                     ({doctorReviews?.length} {t("rating")})
                   </span>

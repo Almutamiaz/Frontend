@@ -246,7 +246,8 @@
   "insurances": "Insurances",
   "noAvailableTimes": "No available times at the moment.",
   "recentlyAdded": "Recently added",
-  "easilyFindTopDoctors": "Easily find top doctors and medical services",
+
+  "easilyFindTopDoctors": "Easily find top doctors and medical services.",
   "allInOneHealth": "Everything you need for your health, all in one place",
   "hakeemAppDescription": "With the Hakeem app, we provide you with a full suite of healthcare services",
   "topRatedDoctorsDes": "At Hakeem, we present a list of top-rated doctors who have received the highest patient reviews, based on quality of care, expertise",
@@ -270,6 +271,9 @@
   "hakeemValues": "At Hakeem, our values are the foundation of everything we do. We believe that true healthcare goes beyond treatment — it starts with compassion, thrives on innovation, and builds on trust. Every interaction is guided by a deep sense of responsibility, transparency, and commitment to excellence.",
   "healthPriority": "Your Health Is Our Priority",
   "accessHealthcare": "At Hakeem, your health is at the heart of everything we do. We believe that accessing reliable healthcare should be simple, fast, and secure for everyone. Whether you need a consultation, a lab test, or an appointment, our services are designed to meet your needs with efficiency and ease.",
+  "serviceCategories": "Service Categories",
+  "mission": "Mission",
+  "vision": "Vision",
 
   "hakeem": "Hakeem healthcare"
 }

@@ -141,15 +141,15 @@ const Page = () => {
       <div className="ExploreSection h-[384px] w-full flex flex-col justify-end">
         <div className="container h-[calc(100%-156px)] flex justify-center items-center">
           <div className="flex flex-col gap-2">
-            <h1 className="text-[56px] font-extrabold leading-[67.2px] text-[var(--primary-800)]">
-              <span className="">{t("explore")}</span>{" "}
+            <h1 className="text-[56px] font-extrabold leading-[67.2px] text-[var(--primary-800)] text-center">
+              {/* <span className="">{t("exploreHakeemServices")}</span>{" "} */}
               <span className="text-[var(--primary-200)]">
-                {t("healthcare")}
+                {t("exploreHakeemServices")}
               </span>{" "}
-              <span className="">{t("options")}</span>
+              {/* <span className="">{t("options")}</span> */}
             </h1>
-            <h6 className="text-[var(--neutral-900)] text-center">
-              {t("searchHealthcareProviders")}
+            <h6 className="text-[var(--neutral-900)] text-center max-w-[800px]">
+              {t("hakeemAllInOneApp")}
             </h6>
           </div>
         </div>

@@ -14,6 +14,7 @@ const HeroSectionInput = ({
   placeholder,
   isServices,
   value,
+  margin = "0px",
 }) => {
   const t = useTranslations();
   const pathname = usePathname();
@@ -38,6 +39,7 @@ const HeroSectionInput = ({
         height: height,
         borderRadius: "100px",
         maxWidth: width || "auto",
+        margin: margin,
         // fontFamily: "var(--fontFamily)",
       }}
       placeholder={placeholder || t("searchPlaceholder")}

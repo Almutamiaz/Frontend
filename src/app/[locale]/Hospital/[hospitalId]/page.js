@@ -13,10 +13,9 @@ import StarIcon2 from "@/assets/icons/StarIcon2";
 import { BASE_URL } from "@/constants";
 import HospitalSpecialties from "@/components/HospitalSpecialties";
 import HospitalReviews from "@/components/HospitalReviews";
- 
+
 export async function generateMetadata({ params }) {
   const { hospitalId, locale } = await params;
-  const t = await getTranslations();
   const hospitalRes = await fetch(
     `${BASE_URL}/hospital/profile?hospital_id=${hospitalId}`,
     {
@@ -43,7 +42,7 @@ const Page = async ({ params, searchParams }) => {
 
   // Fetch hospital profile data
   const hospitalRes = await fetch(
-    `${BASE_URL}/view/hospital/profile?hospital_id=${hospitalId}`,
+    `${BASE_URL}/hospital/profile?hospital_id=${hospitalId}`,
     {
       headers: {
         "X-localization": locale,
@@ -71,7 +70,7 @@ const Page = async ({ params, searchParams }) => {
     }
   );
   const { data: hospitalInsurances } = await hospitalInsurancesRes.json();
-  // console.log(hospitalInsurances);
+  console.log(hospitalInsurances);
 
   // FETCH HOSPITAL REVIEWS
   // const hospitalReviewsRes = await fetch(
@@ -214,8 +213,8 @@ const Page = async ({ params, searchParams }) => {
                 />
               </div>
               {/* <div className="flex-1">
-                <SelectBox placeholder={t("selectSpecialist")} />
-              </div> */}
+              <SelectBox placeholder={t("selectSpecialist")} />
+            </div> */}
               <div className="flex-1">
                 <SelectBox placeholder={t("branches")} />
               </div>
@@ -225,7 +224,7 @@ const Page = async ({ params, searchParams }) => {
                 {t("doctors")} ({hospitalData?.doctors_count})
               </span>
               <div className="flex gap-[18px] flex-wrap">
-                {hospitalData.doctors.map((doc) => (
+                {hospitalData?.doctors.map((doc) => (
                   <DoctorCardResults
                     key={doc.id}
                     name={doc.first_name}
@@ -275,8 +274,8 @@ const Page = async ({ params, searchParams }) => {
                 {t("reviews")}
               </span>
               {/* <span className="font-normal text-sm leading-6 tracking-[0px] text-[var(--DescriptionsColor)]">
-                {t("seeMore")}
-              </span> */}
+              {t("seeMore")}
+            </span> */}
             </div>
             <div className="flex gap-[8px] items-center">
               <RateIcon color="var(--secondary-300)" />

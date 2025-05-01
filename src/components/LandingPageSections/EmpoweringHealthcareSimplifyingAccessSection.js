@@ -11,7 +11,9 @@ const EmpoweringHealthcareSimplifyingAccessSection = async () => {
       "X-localization": locale,
     },
   });
-
+  if (!res.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/statistics`);
+  }
   const { data: statistics } = await res.json();
   const formattedStatistics = Object.entries(statistics).map(
     ([title, value]) => ({

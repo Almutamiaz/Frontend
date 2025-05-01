@@ -12,7 +12,9 @@ const ServiceCategorySection = async () => {
       "X-localization": locale,
     },
   });
-
+  if (!res.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/offer/categories`);
+  }
   const { data: services } = await res.json();
   return (
     <div className="flex flex-col gap-4 w-full">

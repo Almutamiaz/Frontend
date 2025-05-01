@@ -18,10 +18,12 @@ const Page = () => {
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
             <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText">
-              {t("trustedHealthcare")}
+              {t("smartPlatform")}
             </h1>
-            <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)]">
-              {t("healthcareBeyondTreatment")}
+            <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] whitespace-pre-line">
+              {t("trustedServices")}
+              {`\n`}
+              {t("safeHands")}
             </p>
           </div>
           <div className="h-[492px] w-full">
@@ -33,14 +35,30 @@ const Page = () => {
           </div>
         </div>
         <div className="flex flex-col gap-8">
+          {/* <div className="flex flex-col gap-4">
+            <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText text-center">
+              {t("mission")}
+            </h1>
+            <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] text-center">
+              {t("hakeemMission")}
+            </p>
+          </div> */}
           <div className="flex flex-col gap-4">
             <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText text-center">
               {t("ourValues")}
             </h1>
             <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] text-center">
-              {t("ourValuesDescription")}
+              {t("hakeemValues")}
             </p>
           </div>
+          {/* <div className="flex flex-col gap-4">
+            <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText text-center">
+              {t("vision")}
+            </h1>
+            <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] text-center">
+              {t("hakeemVision")}
+            </p>
+          </div> */}
           <Row gutter={[16, 16]} className="w-full">
             <ValueCard
               icon={<CompassionateCareIcon />}
@@ -61,10 +79,10 @@ const Page = () => {
           <div className="flex gap-9 max-md:flex-col">
             <div className="flex-1 flex flex-col gap-4 bg-[#F2F2F2] rounded-[16px] p-6">
               <h2 className="font-bold text-3xl leading-[44px] tracking-[0px] text-[var(--Black-900)]">
-                {t("ourPriority")}
+                {t("healthPriority")}
               </h2>
               <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--Black-400)]">
-                {t("ourMissionStatement")}
+                {t("accessHealthcare")}
               </p>
             </div>
             <div className="h-[344px] flex-1">
