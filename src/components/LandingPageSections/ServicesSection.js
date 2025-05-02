@@ -22,7 +22,7 @@ const ServicesSection = async () => {
       {services.map((service) => (
         <Col
           key={service?.id}
-          xs={24}
+          xs={12}
           sm={12}
           md={8} // 24 / 8 = 3 cards per row on md
           xl={6} // 24 / 6 = 4 cards per row on lg

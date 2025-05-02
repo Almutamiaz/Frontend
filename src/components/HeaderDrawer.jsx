@@ -50,27 +50,52 @@ const HeaderDrawer = () => {
             {t("hakeem")}
           </h2>
           <div className="flex flex-col *:text-[15px] *:font-medium *:leading-[22px] *:text-[var(--DescriptionsColor)] *:border-b *:border-b-solid *:border-b-[#ddd] *:py-3">
-            <Link href={"#"} className="hover:text-[var(--primary-color)]">
+            <Link
+              href={`/${locale}/Account/SignIn`}
+              className="hover:text-[var(--primary-color)]"
+            >
+              {" "}
+              {t("loginSignup")}
+            </Link>
+            <Link
+              href={`/${locale}`}
+              className="hover:text-[var(--primary-color)]"
+            >
               {" "}
               {t("home")}
             </Link>
-            <Link href={"#"} className="hover:text-[var(--primary-color)]">
+            <Link
+              href={`/${locale}/Explore`}
+              className="hover:text-[var(--primary-color)]"
+            >
               {" "}
               {t("explore")}
             </Link>
-            <Link href={"#"} className="hover:text-[var(--primary-color)]">
+            <Link
+              href={`/${locale}/Services`}
+              className="hover:text-[var(--primary-color)]"
+            >
               {" "}
               {t("services")}
             </Link>
-            <Link href={"#"} className="hover:text-[var(--primary-color)]">
+            <Link
+              href={`/${locale}/AboutUs`}
+              className="hover:text-[var(--primary-color)]"
+            >
               {" "}
               {t("aboutUs")}
             </Link>
-            <Link href={"#"} className="hover:text-[var(--primary-color)]">
+            <Link
+              href={`/${locale}/ContactUs`}
+              className="hover:text-[var(--primary-color)]"
+            >
               {" "}
               {t("contactUs")}
             </Link>
-            <Link href={"#"} className="hover:text-[var(--primary-color)]">
+            <Link
+              href={`/${locale}`}
+              className="hover:text-[var(--primary-color)]"
+            >
               {" "}
               {t("support")}
             </Link>

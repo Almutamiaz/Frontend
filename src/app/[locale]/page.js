@@ -267,7 +267,7 @@ export default async function HomePage() {
         </Button>
       </div>
       {/* DOWNLOAD HAKEEM APP SECTION */}
-      <div className="container rounded-[24px] bg-[#F3F1FD] flex py-[70] px-[60px] max-sm:px-5 gap-5 flex-wrap">
+      <div className="container rounded-[24px] bg-[#F3F1FD] flex py-[70px] px-[60px] max-sm:px-5 gap-5 flex-wrap">
         <div className="flex justify-center items-center flex-1 h-full min-w-[300px] max-sm:min-w-full">
           <Image src={HakeemApp} alt="Hakeem App" />
         </div>

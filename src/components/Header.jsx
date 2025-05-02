@@ -8,7 +8,7 @@ import HakeemHealthCareLogo from "@/assets/icons/HakeemHealthCareLogo";
 import LoginSignUpHeaderLink from "./LoginSignUpHeaderLink";
 import HeaderDrawer from "./HeaderDrawer";
 import ClientLink from "./ClientLink";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useUser } from "@/Context/UserContext";
 // import axiosServices from "../../utils/axios";
 import { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const Header = () => {
   const pathName = pathname.replace(/^\/[a-z]{2}/, "");
   const { user, setUser } = useUser();
   const [loading, setLoading] = useState(true);
-
+  const { locale } = useParams();
   const fetchUserData = async () => {
     try {
       const { data } = await axiosInstance.get("/my-profile");
@@ -51,8 +51,9 @@ const Header = () => {
           : "#FFFFFFAD",
       }}
     >
-      {/* <HakeemHealthCareLogo /> */}
-      <HakeemHealthCareLogo w={100} h={45} />
+      <Link href={`/${locale}`}>
+        <HakeemHealthCareLogo w={100} h={45} />
+      </Link>
       {/* *:font-['Public_Sans'] */}
       <div className="flex gap-[30px] *:text-[15px] *:font-medium *:leading-[22px] *:text-[#EBEDF0] max-[850px]:hidden">
         <ClientLink

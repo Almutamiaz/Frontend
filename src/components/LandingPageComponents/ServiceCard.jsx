@@ -35,7 +35,7 @@ const ServiceCard = async ({ bgColor, icon, title, description, id }) => {
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         </div>
-        <div className="p-6 flex flex-col gap-8">
+        <div className="p-6 flex flex-col max-h-[85px] overflow-hidden">
           <HeaderOfSection
             title={title}
             description={description}
@@ -50,12 +50,12 @@ const ServiceCard = async ({ bgColor, icon, title, description, id }) => {
             DesAlignSelfStart
             DesMaxWidth={320}
           />
-          <div className="flex gap-3 items-center">
-            <span className="text-[var(--color1)] text-base font-medium leading-6 tracking-[-0.03em]">
-              {t("bookNow")}
-            </span>
-            <ArrowIcon />
-          </div>
+        </div>
+        <div className="p-6 flex gap-3 items-center">
+          <span className="text-[var(--color1)] text-base font-medium leading-6 tracking-[-0.03em]">
+            {t("bookNow")}
+          </span>
+          <ArrowIcon />
         </div>
       </div>
     </Link>

@@ -20,7 +20,9 @@ const Footer = async () => {
       <div className="container flex flex-col gap-[75px] pt-[59px] justify-between h-full">
         <div className="flex justify-between gap-8 flex-wrap max-[1440px]:justify-center">
           <div className="flex flex-col gap-5">
-            <HakeemHealthCareLogo />
+            <Link href={`/${locale}`}>
+              <HakeemHealthCareLogo />
+            </Link>
             <div className="flex flex-col gap-[13px]">
               <span className="text-base font-medium leading-6 text-[var(--neutral-100)] max-[1440px]:text-center">
                 {t("downloadOurApp")}
