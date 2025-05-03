@@ -206,17 +206,14 @@ export default async function HomePage() {
               {t("simplifyingAccess")} */}
             </p>
           </div>
-          <div className="flex gap-8 items-center flex-wrap justify-center">
+          {/* <div className="flex gap-8 items-center flex-wrap justify-center"> */}
+          <Row
+            gutter={[16, 16]}
+            className="w-full justify-center max-w-[1000px]"
+          >
             <EmpoweringHealthcareSimplifyingAccessSection />
-            {/* {statsData.map((item, i) => (
-              <>
-                <StatisticCard num={item.value} title={item.title} />
-                {i + 1 != statsData.length && (
-                  <div className="rounded-[4px] w-[2px] h-[84px] bg-[#023C5D] max-[660px]:hidden"></div>
-                )}
-              </>
-            ))} */}
-          </div>
+          </Row>
+          {/* </div> */}
         </div>
       </div>
       {/* ARTICLES FROM HEALTH EXPERTS SECTION */}
@@ -363,4 +360,3 @@ const dummyData = [
     category: "Audiology",
   },
 ];
-

@@ -15,6 +15,7 @@ const SelectBox = ({
   onScrollEnd,
   loading,
   fullWidthInSm,
+  disabled = false,
 }) => {
   const screens = useBreakpoint();
   const isLessThanSM = !screens.sm;
@@ -47,10 +48,12 @@ const SelectBox = ({
         width: isLessThanSM && fullWidthInSm ? "100%" : width,
         height: height,
       }}
+      disabled={disabled}
       // allowClear
       showSearch
       // onSearch={(value) => console.log(value)}
       options={options}
+      loading={loading}
       value={onChange ? value : +newValue || null}
       optionFilterProp="label"
       placeholder={placeholder}
@@ -84,10 +87,9 @@ const SelectBox = ({
           ? onChange
           : (e) => {
               if (isServices) {
-                console.log(e);
                 setNewValue(e);
                 const url = new URL(window.location.href);
-                url.searchParams.set("city", e);
+                url.searchParams.set(isServices, e);
                 window.history.pushState({}, "", url.toString());
               }
             }

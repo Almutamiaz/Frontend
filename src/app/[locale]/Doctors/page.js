@@ -7,15 +7,20 @@ import { getTranslations } from "next-intl/server";
 import { BASE_URL, BASE_URL_WithOutSite } from "@/constants";
 import DoctorsPagination from "./DoctorsPagination";
 import SearchButton from "@/components/SearchButton";
+import FiltersSection from "./FiltersSection";
 const Page = async ({ params, searchParams }) => {
   const { locale } = await params;
   const t = await getTranslations();
   const page = searchParams?.page || 1;
-
   const queryParams = new URLSearchParams({
     filterDoctorName: searchParams?.search || "",
+    hospital: searchParams?.hospital || "",
+    city: searchParams?.city || "",
+    main_service_id: searchParams?.service || "",
+    specialization_id: searchParams?.clinic || "",
     page: searchParams?.page || 1,
   });
+  console.log(queryParams.toString())
   const doctorsRes = await fetch(
     `${BASE_URL}/doctor/list?${queryParams.toString()}`,
     {
@@ -24,7 +29,11 @@ const Page = async ({ params, searchParams }) => {
       },
     }
   );
+  if (!doctorsRes.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/doctor/list`);
+  }
   const { data: doctors } = await doctorsRes.json();
+  // console.log(doctors);
 
   // Fetch cities
   const citiesRes = await fetch(`${BASE_URL_WithOutSite}/cities/194`, {
@@ -32,9 +41,49 @@ const Page = async ({ params, searchParams }) => {
       "X-localization": locale,
     },
   });
+  if (!citiesRes.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/cities/194`);
+  }
   const { data: cities } = await citiesRes.json();
-  console.log(cities);
+  // console.log(cities);
 
+  // // Fetch SPECIALIZATIONS
+  // const specializationsRes = await fetch(
+  //   `${BASE_URL_WithOutSite}/specializations/main-service?mainServicesId=13&page=1&search=&hospitalId=2`,
+  //   {
+  //     headers: {
+  //       "X-localization": locale,
+  //     },
+  //   }
+  // );
+  // const { data: specializations } = await specializationsRes.json();
+  // console.log(specializations);
+
+  // FETCH HOSPITALS
+  const hospitalsRes = await fetch(`${BASE_URL}/hospitals`, {
+    cache: "no-store",
+    headers: {
+      "X-localization": locale,
+    },
+  });
+  if (!hospitalsRes.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/hospitals`);
+  }
+  const { data: hospitals } = await hospitalsRes.json();
+  // console.log(hospitals);
+
+  // FETCH MAIN SERVICES
+  const mainServicesRes = await fetch(`${BASE_URL}/main/services`, {
+    cache: "no-store",
+    headers: {
+      "X-localization": locale,
+    },
+  });
+  if (!mainServicesRes.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/main/services`);
+  }
+  const { data: services } = await mainServicesRes.json();
+  console.log(services);
   return (
     <div className="container h-[calc(100%-156px)] mt-[156px] flex flex-col gap-6  pt-4 pb-10">
       <div className="flex inputStyles gap-4 flex-wrap">
@@ -45,7 +94,28 @@ const Page = async ({ params, searchParams }) => {
           placeholder={t("searchOnOffer")}
           value={searchParams?.search}
         />
-
+        <FiltersSection searchParams={await searchParams} services={services} />
+        {/* <SelectBox
+          width={"273px"}
+          placeholder={t("Main Services")}
+          options={services.map((service) => ({
+            value: service.id,
+            label: service.title,
+          }))}
+          isServices="service"
+          value={searchParams?.service}
+        />
+        <SelectBox width={"273px"} placeholder={t("Clinic")} /> */}
+        <SelectBox
+          width={"273px"}
+          placeholder={t("hospital")}
+          options={hospitals.map((hospital) => ({
+            value: hospital.id,
+            label: hospital.name,
+          }))}
+          isServices="hospital"
+          value={searchParams?.hospital}
+        />
         <SelectBox
           width={"273px"}
           placeholder={t("city")}
@@ -53,14 +123,10 @@ const Page = async ({ params, searchParams }) => {
             value: city.id,
             label: city.title,
           }))}
-          isServices
+          isServices="city"
           value={searchParams?.city}
         />
-        <SelectBox width={"273px"} placeholder={t("Hospitals")} />
-        <SelectBox width={"273px"} placeholder={t("Main Services")} />
-        <SelectBox width={"273px"} placeholder={t("Clinic")} />
-
-        <div className="flex gap-2 ms-auto">
+        <div className="flex gap-2">
           <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center">
             <SettingsIcon />
           </div>

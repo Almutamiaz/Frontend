@@ -71,9 +71,13 @@ const Header = () => {
         <ClientLink href={"ContactUs"}> {t("contactUs")}</ClientLink>
       </div>
       <div className="flex gap-6 items-center max-[1200px]:hidden">
-        <span className="text-base font-normal leading-[19.2px] text-[var(--neutral-100)]">
+        <Link
+          href="https://api.whatsapp.com/send/?phone=966533373079"
+          target="_blank"
+          className="text-base font-normal leading-[19.2px] text-[var(--neutral-100)]"
+        >
           {t("support")}
-        </span>
+        </Link>
         <LanguageSwitcher />
         {loading ? (
           <LoadingSpinner color="white" />

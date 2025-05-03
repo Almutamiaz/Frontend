@@ -93,7 +93,7 @@ const HeaderDrawer = () => {
               {t("contactUs")}
             </Link>
             <Link
-              href={`/${locale}`}
+              href="https://api.whatsapp.com/send/?phone=966533373079"
               className="hover:text-[var(--primary-color)]"
             >
               {" "}
