@@ -252,7 +252,7 @@ body {
     padding-right: 24px;
   }
 }
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 500px) {
   .HeroSecionHomePage h1 {
     font-size: 32px;
     font-weight: 700;

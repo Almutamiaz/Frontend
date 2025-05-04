@@ -141,35 +141,37 @@ const Page = () => {
       <div className="ExploreSection h-[384px] w-full flex flex-col justify-end">
         <div className="container h-[calc(100%-156px)] flex justify-center items-center">
           <div className="flex flex-col gap-2">
-            <h1 className="text-[56px] font-extrabold leading-[67.2px] text-[var(--primary-800)] text-center">
+            <h1 className="text-[56px] font-extrabold leading-[67.2px] text-[var(--primary-200)] text-center max-[853px]:text-[32px] max-[853px]:leading-[40px]">
               {/* <span className="">{t("exploreHakeemServices")}</span>{" "} */}
-              <span className="text-[var(--primary-200)]">
-                {t("exploreHakeemServices")}
-              </span>{" "}
+              {/* <span className="text-[var(--primary-200)] text-[20px]"> */}
+              {t("exploreHakeemServices")}
+              {/* </span>{" "} */}
               {/* <span className="">{t("options")}</span> */}
             </h1>
-            <h6 className="text-[var(--neutral-900)] text-center max-w-[800px]">
+            <h6 className="text-[var(--neutral-900)] text-center max-w-[800px] ltr:max-sm:mb-4">
               {t("hakeemAllInOneApp")}
             </h6>
           </div>
         </div>
       </div>
       <div className="container flex flex-col gap-[13px]  overflow-hidden transform translate-y-[-27px] items-center">
-        <div className="ExplorePageParentOfInput !max-w-[658px] min-w-[658px] overflow-hidden">
+        <div className="ExplorePageParentOfInput !max-w-[658px] w-full overflow-hidden">
           <HeroSectionInput
             suffix={
               <div className="w-10 h-10 rounded-[50%] bg-[var(--neutral-200)] flex justify-center items-center">
                 <SettingsIcon />
               </div>
             }
+            width={"100%"}
             height="60px"
+            fullWidthInSm
             onChange={onChange}
           />
         </div>
         {loading ? (
           <LoadingSpinner />
         ) : (
-          <div className="flex mt-[11px] gap-2">
+          <div className="flex mt-[11px] gap-2 max-[965px]:w-full overflow-x-auto">
             {services.map((service) => (
               <Tag
                 active={activeOption === service.id}

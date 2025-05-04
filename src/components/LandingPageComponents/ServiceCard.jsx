@@ -20,7 +20,7 @@ const ServiceCard = async ({ bgColor, icon, title, description, id }) => {
         }}
       >
         <div
-          className="h-[193px] flex items-center justify-center overflow-hidden"
+          className="h-[193px] flex items-center justify-center overflow-hidden max-sm:p-[5px]"
           style={{ background: bgColor }}
         >
           <Image

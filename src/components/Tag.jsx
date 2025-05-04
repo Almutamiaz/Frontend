@@ -52,7 +52,7 @@ const Tag = ({
 
   const content = (
     <div
-      className={`px-6 py-[10px] rounded-[1000px] cursor-pointer text-[16px] font-medium leading-[19.36px] flex gap-[10px] items-center ${classNameProp}`}
+      className={`px-6 py-[10px] rounded-[1000px] cursor-pointer text-[16px] font-medium leading-[19.36px] flex gap-[10px] items-center whitespace-nowrap ${classNameProp}`}
       style={{
         background: active
           ? activBgColorProp || "var(--primary-300)"

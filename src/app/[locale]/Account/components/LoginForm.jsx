@@ -129,7 +129,7 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-[466] w-full max-[900px]:w-[90%]">
+    <div className="flex flex-col gap-6 max-w-[466px] w-full max-[900px]:w-[90%]">
       <div className="flex flex-col gap-4">
         <Form form={form}>
           <div className="flex flex-col gap-3">
