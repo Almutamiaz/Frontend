@@ -1,0 +1,16 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.hakeem.patient.hakeem_patient",
+      "sha256_cert_fingerprints": [
+        "5E:3D:15:86:4C:58:F2:92:EC:FD:2D:F8:2B:CE:B5:20:E2:1C:EE:66:3B:9E:0C:B2:8D:AB:13:50:5B:F5:C8:06",
+        "43:24:92:28:44:00:BC:6B:BD:E9:BA:9F:06:52:81:B2:07:1B:DE:8F:5A:40:B0:2C:4C:FF:D4:FD:79:D6:70:C6",
+        "78:9D:94:89:2C:99:7D:5B:C6:A6:F5:9D:C8:50:FD:39:EF:46:B4:50:42:E6:4E:17:53:B1:02:AB:EF:1F:CB:E5"
+      ]
+    }
+  }
+]

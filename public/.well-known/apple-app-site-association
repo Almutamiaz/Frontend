@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "5T4T52N9HW.com.hakeem.patient.hakeemPatient"
+        ],
+        "paths": [
+          "*"
+        ],
+        "components": [
+          {
+            "/": "/*"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "5T4T52N9HW.com.hakeem.patient.hakeemPatient"
+    ]
+  }
+}
