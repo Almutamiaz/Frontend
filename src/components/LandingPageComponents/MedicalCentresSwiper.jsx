@@ -30,7 +30,7 @@ const MedicalCentresSwiper = ({ hospitals }) => {
         {hospitals?.map((hospital) => (
           <SwiperSlide
             key={hospital?.id}
-            className="max-w-[72px] max-h-[72px] min-w-[72px] min-h-[72px] cursor-pointer"
+            className="max-w-[72px] max-h-[72px] min-w-[72px] min-h-[72px] cursor-pointer flex"
             onClick={() => {
               router.push(`/${locale}/Hospital/${hospital?.id}`);
             }}
@@ -46,6 +46,7 @@ const MedicalCentresSwiper = ({ hospitals }) => {
                 border: "0.5px solid var(--primary-color)",
                 borderRadius: "50%",
                 backgroundColor: "var(--neutral-100)",
+                objectFit: "cover",
               }}
             />
           </SwiperSlide>

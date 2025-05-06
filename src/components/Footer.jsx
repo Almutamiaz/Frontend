@@ -51,21 +51,23 @@ const Footer = async () => {
               <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
                 {t("pages")}
               </span>
-              <Link href={`${locale}/AboutUs`}>{t("aboutUs")}</Link>
-              <Link href={`${locale}/Doctors`}>{t("bestDoctor")}</Link>
-              <Link href={`${locale}/Services`}>{t("offers")}</Link>
+              <Link href={`/${locale}/AboutUs`}>{t("aboutUs")}</Link>
+              <Link href={`/${locale}/Doctors`}>{t("bestDoctor")}</Link>
+              <Link href={`/${locale}/Services`}>{t("offers")}</Link>
               {/* <Link href={"#"}>{t("blogs")}</Link> */}
-              <Link href={"#"}>{t("termsConditions")}</Link>
+              <Link href={`/${locale}/privacy-policy`}>
+                {t("termsConditions")}
+              </Link>
             </div>
             {/* SERVICES */}
             <div className="flex flex-col gap-5 [&_a]:text-sm [&_a]:font-medium [&_a]:leading-[16.94px] [&_a]:text-[var(--neutral-100)]">
               <span className="text-lg font-bold leading-[21.78px] text-[var(--neutral-100)] mb-1">
                 {t("services")}
               </span>
-              <Link href={`${locale}/Doctors`}>{t("homeVisits")}</Link>
-              <Link href={`${locale}/Doctors`}>{t("onlineConsultation")}</Link>
-              <Link href={`${locale}/Doctors`}>{t("findDoctor")}</Link>
-              <Link href={`${locale}/Services?category=3`}>
+              <Link href={`/${locale}/Doctors`}>{t("homeVisits")}</Link>
+              <Link href={`/${locale}/Doctors`}>{t("onlineConsultation")}</Link>
+              <Link href={`/${locale}/Doctors`}>{t("findDoctor")}</Link>
+              <Link href={`/${locale}/Services?category=3`}>
                 {t("laboratory")}
               </Link>
               {/* <Link href={"#"}>{t("xRay")}</Link> */}
