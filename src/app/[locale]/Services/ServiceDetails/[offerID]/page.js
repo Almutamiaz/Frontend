@@ -226,7 +226,7 @@ const Page = async ({ params }) => {
                 className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)]"
                 // onClick={() => setBookNow(true)}
               >
-                {t("bookNow")}
+                <Link href={`/${locale}/Download`}>{t("bookNow")}</Link>
               </Button>
             </div>
           </div>

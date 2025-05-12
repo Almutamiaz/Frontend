@@ -19,6 +19,7 @@ import AntdFormItem from "@/components/AntdFormItem";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/constants";
 import BookNowSection from "../BookNowSection";
+import Link from "next/link";
 
 export async function generateMetadata({ params }) {
   const { locale, docId } = params;
@@ -30,9 +31,9 @@ export async function generateMetadata({ params }) {
   });
   const { data: Doctor } = await doctorRes.json();
 
-  const title = `${t("doctor")} ${Doctor?.first_name} ${Doctor?.last_name} | ${t("hakeem")}  | ${
-    Doctor?.setting?.speciality
-  } `;
+  const title = `${t("doctor")} ${Doctor?.first_name} ${
+    Doctor?.last_name
+  } | ${t("hakeem")}  | ${Doctor?.setting?.speciality} `;
   const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
     Doctor?.last_name
   }, ${Doctor?.setting?.speciality} specialist at ${
@@ -172,7 +173,7 @@ const Page = async ({ params }) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3 p-6 border border-[#E7E7E7] rounded-[16px] bg-[var(--neutral-100)]">
+          {/* <div className="flex flex-col gap-3 p-6 border border-[#E7E7E7] rounded-[16px] bg-[var(--neutral-100)]">
             <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
               {t("insurance")}
             </span>
@@ -193,7 +194,7 @@ const Page = async ({ params }) => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
           <div className="flex flex-col gap-2 p-6 border border-[#E7E7E7] rounded-[16px] bg-[var(--neutral-100)]">
             <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
               {t("reviews")}
@@ -289,9 +290,8 @@ const Page = async ({ params }) => {
                   borderColor: "var(--primary-300)",
                 }}
                 className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)]"
-                // onClick={() => setBookNow(true)}
               >
-                {t("bookNow")}
+                <Link href={`/${locale}/Download`}>{t("bookNow")}</Link>
               </Button>
             </div>
           </div>

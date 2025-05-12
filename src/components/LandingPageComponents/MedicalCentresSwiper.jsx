@@ -40,13 +40,16 @@ const MedicalCentresSwiper = ({ hospitals }) => {
               src={hospital?.photo}
               alt={hospital?.name}
               // className="h-[100%] w-[100%] rounded-[50%] border-[0.5px] border-solid border-[var(--Primary-Color)]"
-              width={72}
-              height={72}
+              width={0}
+              height={0}
+              sizes="100vw"
               style={{
                 border: "0.5px solid var(--primary-color)",
                 borderRadius: "50%",
                 backgroundColor: "var(--neutral-100)",
-                objectFit: "cover",
+                objectFit: "contain",
+                width: "100%",
+                height: "100%",
               }}
             />
           </SwiperSlide>

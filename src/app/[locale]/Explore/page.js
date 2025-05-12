@@ -148,7 +148,7 @@ const Page = () => {
               {/* </span>{" "} */}
               {/* <span className="">{t("options")}</span> */}
             </h1>
-            <h6 className="text-[var(--neutral-900)] text-center max-w-[800px] ltr:max-sm:mb-4">
+            <h6 className="text-[var(--neutral-900)] text-center max-w-[800px] max-sm:mb-4">
               {t("hakeemAllInOneApp")}
             </h6>
           </div>

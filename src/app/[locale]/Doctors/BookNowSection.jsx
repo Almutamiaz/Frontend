@@ -172,7 +172,7 @@ const BookNowSection = ({ Offer, Doctor }) => {
                   : t("noAvailableTimes")}
               </span>
             </div>
-            <div className="flex gap-4 flex-wrap">
+            <div className="grid grid-rows-[repeat(2,auto)] grid-flow-col auto-cols-max gap-2 overflow-y-hidden overflow-x-auto pb-3">
               {availableTimeSlots?.map((time) => (
                 <div
                   className="rounded-[100px] flex min-w-[97px] h-10 items-center justify-center gap-3"

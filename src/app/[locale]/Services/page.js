@@ -79,7 +79,7 @@ const Page = async ({ searchParams }) => {
               <SearchButton destination={`Services`} />
             </div>
           </div>
-          <div className="flex gap-1 flex-wrap gap-y-2">
+          <div className="flex gap-1 gap-y-2 overflow-x-auto">
             <Tag
               active={!searchParams?.category}
               key="all"

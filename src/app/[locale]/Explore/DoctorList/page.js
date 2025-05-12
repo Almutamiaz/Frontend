@@ -17,9 +17,12 @@ import CloudIcon from "@/assets/icons/CloudIcon";
 import { Input } from "antd";
 import CashIcon from "@/assets/icons/CashIcon";
 import AntdFormItem from "@/components/AntdFormItem";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 const { TextArea } = Input;
 const Page = () => {
   const t = useTranslations();
+  const { locale } = useParams();
   const [bookNow, setBookNow] = useState(true);
   const [goToCheckOut, setGoToCheckOut] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -90,7 +93,7 @@ const Page = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-3 p-6 border border-[#E7E7E7] rounded-[16px] bg-[var(--neutral-100)]">
+              {/* <div className="flex flex-col gap-3 p-6 border border-[#E7E7E7] rounded-[16px] bg-[var(--neutral-100)]">
                 <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
                   {t("insurance")}
                 </span>
@@ -111,7 +114,7 @@ const Page = () => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
               <div className="flex flex-col gap-2 p-6 border border-[#E7E7E7] rounded-[16px] bg-[var(--neutral-100)]">
                 <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
                   {t("reviews")}
@@ -292,7 +295,7 @@ const Page = () => {
                     className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)]"
                     onClick={() => setBookNow(true)}
                   >
-                    {t("bookNow")}
+                    <Link href={`/${locale}/Download`}>{t("bookNow")}</Link>
                   </Button>
                 </div>
               </div>
