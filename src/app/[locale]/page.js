@@ -87,12 +87,12 @@ export default async function HomePage() {
           responsiveFontSizes
           DesCenter
         />
-        <Row gutter={[16, 16]} className="w-full">
+        <Row gutter={[8, 8]} className="w-full">
           <ServicesSection />
         </Row>
       </div>
       {/* TOP RATED DOCTORS SECTION */}
-      <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden">
+      <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden max-[430px]:ps-0 max-[430px]:!max-w-full max-[430px]:rounded-[0px]">
         <HeaderOfSection
           title={t("topRatedDoctors")}
           description={t("topRatedDoctorsDes")}
@@ -152,7 +152,7 @@ export default async function HomePage() {
         </div> */}
       </div>
       {/* TOP MEDICAL CENTRES SECTION */}
-      <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden">
+      <div className="container py-6 ps-6 bg-[#F2F2F2] rounded-[20px] flex flex-col gap-3 items-center overflow-hidden max-[430px]:ps-0 max-[430px]:!max-w-full max-[430px]:rounded-[0px]">
         <HeaderOfSection
           title={t("mostRequestedCenters")}
           description={t("showcaseCenters")}

@@ -29,9 +29,9 @@ const ServiceCategoryCard = async ({
           <span className="text-2xl font-bold  tracking-[-0.03em]">
             {title}
           </span>
-          <span className="text-base font-medium tracking-[-0.03em]">
+          {/* <span className="text-base font-medium tracking-[-0.03em]">
             Skin care Skin care
-          </span>
+          </span> */}
         </div>
         <div className="flex gap-[9px] items-center z-[2]">
           <span className="text-base font-medium leading-[60px] tracking-[-0.03em]">

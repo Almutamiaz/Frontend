@@ -171,7 +171,7 @@ const Page = () => {
         {loading ? (
           <LoadingSpinner />
         ) : (
-          <div className="flex mt-[11px] gap-2 max-[965px]:w-full overflow-x-auto">
+          <div className="flex mt-[11px] gap-2 max-[965px]:w-full overflow-x-auto scrollbar-hide">
             {services.map((service) => (
               <Tag
                 active={activeOption === service.id}

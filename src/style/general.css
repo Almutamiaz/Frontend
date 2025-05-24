@@ -242,6 +242,30 @@ body {
   font-family: var(--fontFamily) !important;
 }
 
+.ExploreSection {
+  background: linear-gradient(
+    90deg,
+    rgba(100, 65, 239, 0.1) 0%,
+    rgba(100, 65, 239, 0.52) 100%
+  );
+}
+
+.ant-typography-expand {
+  display: none !important;
+}
+
+.ant-float-btn-content {
+  padding: 0px !important;
+}
+
+.ant-float-btn-icon {
+  width: 100% !important;
+}
+
+.ant-float-btn-icon svg {
+  transform: translate(1px, -1px);
+}
+
 /* LANDINGPAGE RESPONSIVE DESIGN */
 @media screen and (max-width: 600px) {
   .HakeemHeader {
@@ -272,26 +296,17 @@ body {
   }
 }
 
-.ExploreSection {
-  background: linear-gradient(
-    90deg,
-    rgba(100, 65, 239, 0.1) 0%,
-    rgba(100, 65, 239, 0.52) 100%
-  );
-}
-
-.ant-typography-expand {
-  display: none !important;
-}
-
-.ant-float-btn-content {
-  padding: 0px !important;
-}
-
-.ant-float-btn-icon {
-  width: 100% !important;
-}
-
-.ant-float-btn-icon svg {
-  transform: translate(1px, -1px);
+@media screen and (max-width: 430px) {
+  .serviceCard h2 {
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    line-height: 22px !important;
+    letter-spacing: 0% !important;
+  }
+  .serviceCard p {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 22px !important;
+    letter-spacing: 0% !important;
+  }
 }

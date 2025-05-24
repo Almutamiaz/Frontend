@@ -13,14 +13,14 @@ const ServiceCard = async ({ bgColor, icon, title, description, id }) => {
   return (
     <Link href={`${locale}/Explore?service_id=${id}`}>
       <div
-        className="h-[369px] rounded-[20px] overflow-hidden shadow-[0px_3px_12px_0px_#88888824] w-full"
+        className="h-[369px] rounded-[20px] overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.35)] w-full max-[430px]:h-[270px]"
         style={{
           fontFamily: "var(--fontFamily)",
           cursor: "pointer",
         }}
       >
         <div
-          className="h-[193px] flex items-center justify-center overflow-hidden max-sm:p-[5px]"
+          className="h-[193px] flex items-center justify-center overflow-hidden max-[430px]:h-[150px] max-[430px]:[&>img]:!w-[70%]"
           style={{ background: bgColor }}
         >
           <Image
@@ -32,10 +32,14 @@ const ServiceCard = async ({ bgColor, icon, title, description, id }) => {
             width={0}
             height={0}
             sizes="100vw"
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }}
           />
         </div>
-        <div className="p-6 flex flex-col max-h-[85px] overflow-hidden">
+        <div className="p-6 flex flex-col overflow-hidden max-[430px]:pt-0">
           <HeaderOfSection
             title={title}
             description={description}
@@ -49,9 +53,12 @@ const ServiceCard = async ({ bgColor, icon, title, description, id }) => {
             DesWeight={400}
             DesAlignSelfStart
             DesMaxWidth={320}
+            responsiveFontSizes
+            lineClamp={2}
+            extraClass="serviceCard"
           />
         </div>
-        <div className="p-6 flex gap-3 items-center">
+        <div className="p-6 flex gap-3 items-center max-[430px]:hidden">
           <span className="text-[var(--color1)] text-base font-medium leading-6 tracking-[-0.03em]">
             {t("bookNow")}
           </span>
