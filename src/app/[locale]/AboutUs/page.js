@@ -17,16 +17,16 @@ const Page = () => {
       <div className="container overflow-visible mt-[150px] flex flex-col gap-[60px]">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText">
+            <h1 className="font-bold text-[54px] leading-[60px] tracking-[-6%] AboutUsText titlePage">
               {t("smartPlatformDescription")}
             </h1>
-            <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] whitespace-pre-line">
+            <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--neutral-900)] whitespace-pre-line descriptionPage">
               {t("connectAndOfferServices")}
               {`\n`}
               {t("safeHands")}
             </p>
           </div>
-          <div className="h-[492px] w-full">
+          <div className="h-[492px] w-full max-[430px]:h-[234px]">
             <Image
               src={AboutUsImage}
               alt="About Us"
@@ -76,12 +76,12 @@ const Page = () => {
               des={t("hakeemMission")}
             />
           </Row>
-          <div className="flex gap-9 max-md:flex-col">
+          <div className="flex gap-9 max-md:flex-col-reverse">
             <div className="flex-1 flex flex-col gap-4 bg-[#F2F2F2] rounded-[16px] p-6">
-              <h2 className="font-bold text-3xl leading-[44px] tracking-[0px] text-[var(--Black-900)]">
+              <h2 className="font-bold text-3xl leading-[44px] tracking-[0px] text-[var(--Black-900)] AboutLastTitle">
                 {t("healthPriority")}
               </h2>
-              <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--Black-400)]">
+              <p className="font-normal text-xl leading-[32px] tracking-[0px] text-[var(--Black-400)] AboutLastDescription">
                 {t("accessHealthcare")}
               </p>
             </div>

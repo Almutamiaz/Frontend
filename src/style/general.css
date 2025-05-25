@@ -309,4 +309,92 @@ body {
     line-height: 22px !important;
     letter-spacing: 0% !important;
   }
+
+  /* START ABOUT US PAGE */
+  .titlePage {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.06em;
+  }
+  .descriptionPage {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+  }
+
+  .AboutCardTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 60px;
+    letter-spacing: 0px;
+    text-align: center;
+  }
+
+  .AboutCardDescription {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: center;
+  }
+
+  .AboutLastTitle {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+    letter-spacing: 0px;
+  }
+
+  .AboutLastDescription {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: 0px;
+  }
+  /* END ABOUT US PAGE */
+
+  /* START CONTACT US PAGE */
+  .ContactUsTitlePage {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.06em;
+  }
+  .ContactUsDescriptionPage {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: 0px;
+  }
+
+  .ContactUsCardTitle {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 60px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+  }
+
+  .ContactUsCardDescription {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 32px;
+    letter-spacing: 0px;
+  }
+  .ContactUsDropMessage {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 60px;
+    letter-spacing: 0px;
+  }
+
+  .ContactUsDropMessageDes {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+  }
+  /* END CONTACT US PAGE */
 }

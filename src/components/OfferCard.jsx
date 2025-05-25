@@ -19,7 +19,7 @@ const OfferCard = async ({ offer }) => {
       xxl={6} // 24 / 6 = 4 cards per row on lg
     >
       <div
-        className="h-[548px] w-full rounded-[12px] shadow-[0_3px_8px_0_#D2D2D240] border border-[#FCFCFC] flex flex-col overflow-hidden relative py-[22px] gap-3"
+        className="h-[578px] w-full rounded-[12px] shadow-[0_3px_8px_0_#D2D2D240] border border-[#FCFCFC] flex flex-col overflow-hidden relative py-[22px] gap-3"
         style={{
           fontFamily: "var(--fontFamily)",
         }}
@@ -34,6 +34,7 @@ const OfferCard = async ({ offer }) => {
               alt="Offer Img"
               style={{
                 height: "100%",
+                minHeight: "286px",
                 width: "100%",
                 objectFit: "cover",
               }}
@@ -51,7 +52,7 @@ const OfferCard = async ({ offer }) => {
         <div className="flex flex-col gap-6 px-4">
           <div className="flex justify-between">
             <div className="flex flex-col">
-              <span className="font-bold text-xl leading-[150%] tracking-[0px] text-[var(--color1)]">
+              <span className="font-bold text-xl leading-[150%] tracking-[0px] text-[var(--color1)] min-h-[60px] line-clamp-2">
                 {offer?.title}
               </span>
               <div className="flex gap-2">
@@ -66,7 +67,7 @@ const OfferCard = async ({ offer }) => {
                 </span>
               </div>
             </div>
-            <div className="rounded-[12px] flex flex-col py-[7px] px-3 bg-[#EFE6FD] justify-between">
+            <div className="rounded-[12px] flex flex-col py-[7px] px-3 bg-[#EFE6FD] justify-between max-h-[51px]">
               <span className="font-normal text-xs leading-[150%] tracking-[0px] text-[var(--purple-900)]">
                 {t("offerCode")}
               </span>
