@@ -50,7 +50,7 @@ const OfferCard = async ({ offer }) => {
           </div>
         </div>
         <div className="flex flex-col gap-6 px-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between">  
             <div className="flex flex-col">
               <span className="font-bold text-xl leading-[150%] tracking-[0px] text-[var(--color1)] min-h-[60px] line-clamp-2">
                 {offer?.title}
