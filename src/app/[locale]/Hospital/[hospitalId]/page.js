@@ -226,13 +226,14 @@ const Page = async ({ params, searchParams }) => {
               <div className="flex gap-[18px] flex-wrap">
                 {hospitalData?.doctors.map((doc) => (
                   <DoctorCardResults
-                    key={doc.id}
-                    name={doc.first_name}
-                    specialization={`${doc.speciality} | ${doc.hospital.first_name}`}
+                    key={doc?.id}
+                    id={doc?.id}
+                    name={doc?.first_name}
+                    specialization={`${doc?.speciality} | ${doc?.hospital.first_name}`}
                     city={doc?.city?.title}
-                    rate={doc.rating}
-                    img={doc.photo}
-                    price={doc.setting.in_hospital_price}
+                    rate={doc?.rating}
+                    img={doc?.photo}
+                    price={doc?.setting.in_hospital_price}
                   />
                 ))}
               </div>
