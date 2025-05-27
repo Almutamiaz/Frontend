@@ -30,10 +30,9 @@ export async function generateMetadata({ params }) {
     },
   });
   const { data: Doctor } = await doctorRes.json();
-
   const title = `${t("doctor")} ${Doctor?.first_name} ${
     Doctor?.last_name
-  } | ${t("hakeem")}  | ${Doctor?.setting?.speciality} `;
+  } | ${t("hakeem")}`;
   const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
     Doctor?.last_name
   }, ${Doctor?.setting?.speciality} specialist at ${

@@ -82,7 +82,7 @@ export async function generateMetadata() {
   // Enhanced metadata with SEO data
   return {
     ...defaultMetadata,
-    title: seoData.title_website,
+    title: `${t("hakeem")} | ${seoData.title_website}`,
     description: seoData.meta_description,
     keywords: seoData.meta_keywords,
     authors: [{ name: t("hakeem") }],

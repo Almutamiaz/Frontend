@@ -96,6 +96,7 @@
   "searchHealthcareProviders": "ابحث بسهولة عن الأطباء، الأخصائيين، المستشفيات، والعيادات لتلبية احتياجاتك الصحية.",
   "options": "خيارات",
   "doctors": "الأطباء",
+  "Doctors": "أطباء",
   "viewMore": "عرض المزيد",
   "view": "عرض",
   "searchOnDoctorsMedicalCenter": "البحث عن الأطباء، المراكز الطبية",
@@ -142,6 +143,7 @@
   "speciality": "التخصص",
   "noDoctors": "عدد الأطباء",
   "doctor": "الطبيب",
+  "Doctor": "طبيب",
   "aboutHospital": "عن المستشفى",
   "searchOnDoctorsName": "البحث عن اسم الطبيب",
   "branches": "الفروع",
@@ -246,7 +248,6 @@
   "insurances": "شركات التأمين",
   "noAvailableTimes": "لا توجد أوقات متاحة في الوقت الحالي.",
   "recentlyAdded": "أضيف حديثاً",
-
   "easilyFindTopDoctors": "ابحث بسهولة عن أفضل الأطباء والخدمات الطبية",
   "allInOneHealth": "كل ما تحتاجه لصحتك في مكان واحد",
   "hakeemAppDescription": "في تطبيق حكيم، نوفر لك مجموعة متكاملة من الخدمات الطبية المصممة لتسهيل رحلتك الصحية",
@@ -284,6 +285,13 @@
   "clinic": "عيادة",
   "privacy-policy": "سياسة الخصوصية",
   "servicedetails": "تفاصيل الخدمة",
+  "offer": "عرض",
+  "book": "احجز",
+  "service": "خدمة",
+  "with": "مع",
+  "in": "في",
+  "saudiArabia": "المملكة العربية السعودية",
+  "best": "أفضل",
 
   "hakeem": "حكيم للرعاية الطبية",
   "hakeemDescription": "حكيم للرعاية الطبية - منصة الرعاية الطبية المتكاملة"

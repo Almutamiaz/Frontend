@@ -29,9 +29,10 @@ export async function generateMetadata({ params }) {
     }
   );
   const { data: Offer } = await offerDetailsRes.json();
-
-  const title = `${Offer?.title} - ${Offer?.description}`;
-  const description = `${Offer?.description}`;
+  const title = `${t("offer")} ${Offer?.title} | ${t("hakeem")}`;
+  const description = ` ${t("book")} ${Offer?.title} ${t("service")} ${t(
+    "with"
+  )} ${Offer?.hospital?.first_name}, ${Offer?.description} `;
 
   return {
     title: title,
@@ -71,8 +72,6 @@ const Page = async ({ params }) => {
 
   // The second part contains the rest of the elements.
   const rest = filtered.slice(2);
-
-  console.log("Hakeem");
 
   return (
     <div className="bg-[#FAFAFA] min-h-[988px] pb-10 flex flex-col gap-[34px]">
@@ -294,11 +293,6 @@ const Page = async ({ params }) => {
             {rest.map((offer) => (
               <OfferCard key={offer.id} offer={offer} />
             ))}
-
-            {/* <OfferCard />
-          <OfferCard />
-          <OfferCard />
-          <OfferCard /> */}
           </Row>
         </div>
       )}

@@ -16,6 +16,7 @@ import HospitalReviews from "@/components/HospitalReviews";
 
 export async function generateMetadata({ params }) {
   const { hospitalId, locale } = await params;
+  const t = await getTranslations();
   const hospitalRes = await fetch(
     `${BASE_URL}/hospital/profile?hospital_id=${hospitalId}`,
     {
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }) {
   );
   const { data: hospitalData } = await hospitalRes.json();
 
-  const title = `${hospitalData?.first_name}`;
+  const title = `${hospitalData?.first_name} | ${t("hakeem")}`;
   const description = `${hospitalData?.about_us}`;
 
   return {

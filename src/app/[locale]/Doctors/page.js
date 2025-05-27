@@ -8,6 +8,44 @@ import { BASE_URL, BASE_URL_WithOutSite } from "@/constants";
 import DoctorsPagination from "./DoctorsPagination";
 import SearchButton from "@/components/SearchButton";
 import FiltersSection from "./FiltersSection";
+
+export async function generateMetadata({ params, searchParams }) {
+  const { locale } = await params;
+  const t = await getTranslations();
+  const queryParams = new URLSearchParams({
+    filterDoctorName: searchParams?.search || "",
+    hospital: searchParams?.hospital || "",
+    city: searchParams?.city || "",
+    main_service_id: searchParams?.service || "",
+    specialization_id: searchParams?.clinic || "",
+    page: searchParams?.page || 1,
+  });
+  const doctorsRes = await fetch(
+    `${BASE_URL}/doctor/list?${queryParams.toString()}`,
+    {
+      headers: {
+        "X-localization": locale,
+      },
+    }
+  );
+  if (!doctorsRes.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/doctor/list`);
+  }
+  const { data: doctors } = await doctorsRes.json();
+
+  const title = ` ${t("best")} ${doctors?.total} ${t(
+    doctors?.total < 11 ? "Doctors" : "Doctor"
+  )} ${t("in")} ${t("saudiArabia")}`;
+  const description = `${t("best")} ${doctors?.total} ${t(
+    doctors?.total < 11 ? "Doctors" : "Doctor"
+  )} ${t("in")} ${t("saudiArabia")}`;
+
+  return {
+    title: title,
+    description: description,
+  };
+}
+
 const Page = async ({ params, searchParams }) => {
   const { locale } = await params;
   const t = await getTranslations();
@@ -20,7 +58,6 @@ const Page = async ({ params, searchParams }) => {
     specialization_id: searchParams?.clinic || "",
     page: searchParams?.page || 1,
   });
-  console.log(queryParams.toString())
   const doctorsRes = await fetch(
     `${BASE_URL}/doctor/list?${queryParams.toString()}`,
     {
