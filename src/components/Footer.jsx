@@ -11,6 +11,7 @@ import CallIcon from "@/assets/icons/CallIcon";
 import LetterIcon from "@/assets/icons/LetterIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import { getLocale, getTranslations } from "next-intl/server";
+import XIcon from "@/assets/icons/XIcon";
 
 const Footer = async () => {
   const t = await getTranslations();
@@ -123,7 +124,7 @@ const Footer = async () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <TwitterIcon />
+                  <XIcon />
                 </a>
                 <a
                   href="https://www.linkedin.com/company/1hakeem"
