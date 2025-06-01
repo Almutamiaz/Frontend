@@ -52,7 +52,7 @@ const DoctorCardResults = async ({
             </span>
           </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 overflow-x-auto scrollbar-hide">
           <div className="flex gap-[6px] items-center">
             <RateIcon color="var(--secondary-300)" />
             <span className="font-medium text-xs leading-[18px] text-[var(--primary-800)] mt-[3px] whitespace-nowrap">

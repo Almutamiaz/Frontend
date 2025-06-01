@@ -6,7 +6,7 @@ import WaitingRoomImage from "@/assets/images/WaitingRoomImage.png";
 import RateIcon from "@/assets/icons/RateIcon";
 import StarIcon2 from "@/assets/icons/StarIcon2";
 import ClockIcon from "@/assets/icons/ClockIcon";
-import { Button, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import DoctorHomeVisits from "@/assets/images/DoctorHomeVisits.png";
 import OnlineConsolations from "@/assets/images/OnlineConsolations.png";
 import OfferCard from "@/components/OfferCard";
@@ -133,15 +133,21 @@ const Page = async ({ params }) => {
             <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
               {t("reviews")}
             </span>
-            <div className="flex gap-[8px] items-center">
-              <RateIcon size={15} color="var(--secondary-300)" />
-              <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--primary-800)] mt-[3px]">
-                {Offer?.offer_rating_percentage}
-                <span className="ps-1 text-[var(--neutral-800)]">
-                  ({Offer?.count_order_rates} {t("rating")})
+            {Offer?.count_order_rates != 0 ? (
+              <div className="flex gap-[8px] items-center">
+                <RateIcon size={15} color="var(--secondary-300)" />
+                <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--primary-800)] mt-[3px]">
+                  {Offer?.offer_rating_percentage}
+                  <span className="ps-1 text-[var(--neutral-800)]">
+                    ({Offer?.count_order_rates} {t("rating")})
+                  </span>
                 </span>
+              </div>
+            ) : (
+              <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--neutral-800)] mt-[3px]">
+                {t("noReviewsFound")}
               </span>
-            </div>
+            )}
             <div className="flex flex-col gap-2">
               {Offer?.offer_rates.map((rate, i) => (
                 <div
@@ -233,32 +239,36 @@ const Page = async ({ params }) => {
             <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
               {t("exploreMoreOffer")}
             </span>
-            <div className="flex gap-[10px] flex-wrap">
-              {firstTwo.map((offer) => (
-                <Link
-                  href={`/${locale}/Services/ServiceDetails/${offer.id}`}
-                  key={offer.id}
-                >
-                  <div className="flex flex-col rounded-[12px] max-w-[204px] w-[204px] h-[234px] overflow-hidden border border-[#E7E7E7]">
-                    <Image
-                      src={offer?.photo}
-                      // alt="Available Service"
-                      // className="flex-1 object-cover"
+            <div className="flex gap-[10px] justify-center">
+              <Row gutter={[12, 12]} className="w-full">
+                {firstTwo.map((offer) => (
+                  <Col key={offer.id} xs={12}>
+                    <Link
+                      href={`/${locale}/Services/ServiceDetails/${offer.id}`}
+                    >
+                      <div className="flex flex-col rounded-[12px] w-full h-[234px] overflow-hidden border border-[#E7E7E7]">
+                        <Image
+                          src={offer?.photo}
+                          // alt="Available Service"
+                          // className="flex-1 object-cover"
 
-                      alt={offer?.title}
-                      className="w-full h-full object-cover max-h-[168px]"
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                    />
-                    <div className="flex justify-center items-center bg-[var(--neutral-200)] h-[66px]">
-                      <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
-                        {offer?.title}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                          alt={offer?.title}
+                          className="w-full h-full object-cover max-h-[168px]"
+                          width={0}
+                          height={0}
+                          sizes="100vw"
+                        />
+                        <div className="flex justify-center items-center bg-[var(--neutral-200)] h-[66px]">
+                          <span className="font-bold text-base leading-6 tracking-[0px] text-[var(--primary-800)]">
+                            {offer?.title}
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  </Col>
+                ))}
+              </Row>
+
               {/* <div className="flex flex-col rounded-[12px] max-w-[204px] w-[204px] h-[234px] overflow-hidden bg-gradient-to-r from-[#F4A7B1] to-[#DB7E89]">
                 <Image
                   src={OnlineConsolations}

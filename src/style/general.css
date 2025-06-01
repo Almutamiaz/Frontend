@@ -266,6 +266,10 @@ body {
   transform: translate(1px, -1px);
 }
 
+.search-button:hover svg {
+  color: var(--primary-color) !important;
+}
+
 /* LANDINGPAGE RESPONSIVE DESIGN */
 @media screen and (max-width: 600px) {
   .HakeemHeader {
@@ -287,7 +291,8 @@ body {
   }
 
   .HeroSectionParent {
-    height: 550px;
+    min-height: 550px;
+    /* height: 550px; */
     /* background: linear-gradient(
       179.09deg,
       rgba(126, 83, 253, 0.8) -17.71%,

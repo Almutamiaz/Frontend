@@ -68,10 +68,10 @@ const Page = async ({ params, searchParams }) => {
     }
   );
   if (!doctorsRes.ok) {
-    console.error(`Front Alert - ERROR || ${BASE_URL}/doctor/list`);
+    console.error(`Front2 Alert - ERROR || ${BASE_URL}/doctor/list`);
   }
   const { data: doctors } = await doctorsRes.json();
-  // console.log(doctors);
+  console.log(doctors);
 
   // Fetch cities
   const citiesRes = await fetch(`${BASE_URL_WithOutSite}/cities/194`, {
@@ -121,7 +121,7 @@ const Page = async ({ params, searchParams }) => {
     console.error(`Front Alert - ERROR || ${BASE_URL}/main/services`);
   }
   const { data: services } = await mainServicesRes.json();
-  console.log(services);
+  // console.log(services);
   return (
     <div className="container h-[calc(100%-156px)] mt-[156px] flex flex-col gap-6  pt-4 pb-10">
       <div className="flex inputStyles gap-4 flex-wrap">
@@ -147,7 +147,7 @@ const Page = async ({ params, searchParams }) => {
               <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center shrink-0">
                 <SettingsIcon />
               </div>
-              <SearchButton destination={`Doctors`} />
+              <SearchButton destination={`Doctors`} doctors={doctors} />
             </div>
           </Col>
         </Row>

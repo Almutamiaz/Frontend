@@ -171,6 +171,16 @@ export default async function HomePage() {
   // Generate structured data
   const structuredData = generateStructuredData(seoData, locale);
 
+  const specializationsRes = await fetch(`${BASE_URL}/home/specializations`, {
+    headers: {
+      "X-localization": locale,
+    },
+  });
+  if (!specializationsRes.ok) {
+    console.error(`Front Alert - ERROR || ${BASE_URL}/home/specializations`);
+  }
+  const { data: specializations } = await specializationsRes.json();
+
   return (
     <>
       <script
@@ -187,7 +197,7 @@ export default async function HomePage() {
             <div className="circles blurCircle absolute w-full max-w-[34.64vw] rounded-[50%] border border-[#FFFFFF1A] h-[34.64vw] top-[250px] left-0 right-0 mx-auto"></div>
             <div className="circles thirdCircle absolute w-full max-w-[34.64vw] rounded-[50%] border border-[#FFFFFF1A] h-[34.64vw] top-[314.14px] left-0 right-0 mx-auto max-sm:top-[85%] max-sm:max-w-[54.64vw] max-sm:h-[54.64vw]      max-md:top-[75%] max-md:max-w-[44.64vw] max-md:h-[44.64vw]   max-lg:top-[380.14px] max-lg:max-w-[55.64vw] max-lg:h-[55.64vw]   max-xl:top-[358.14px] max-xl:max-w-[48.64vw] max-xl:h-[48.64vw]   max-2xl:top-[336.14px] max-2xl:max-w-[41.64vw] max-2xl:h-[41.64vw]"></div>
             <div className="circles testclass absolute w-full max-w-[586.93px] rounded-[50%] border border-[#FFFFFF1A] h-[586.93px] top-[397px] left-0 right-0 mx-auto"></div>
-            <div className="HeroSecionHomePage flex flex-col gap-6 z-[1] max-[850px]:px-5">
+            <div className="container HeroSecionHomePage flex flex-col gap-6 z-[1] max-[850px]:px-5 items-center">
               <h1 className="herotext text-[52px] font-bold leading-[60px] tracking-[-0.0506em] max-w-[946px] text-[var(--neutral-100)] text-center whitespace-pre-line">
                 {t("easilyFindTopDoctors")}
                 {`\n`}
@@ -212,12 +222,12 @@ export default async function HomePage() {
                   </span>
                 </div>
                 <div className="flex gap-2 flex-wrap justify-center">
-                  {dummyData.map((item) => (
+                  {specializations.map((item) => (
                     <div
                       className="px-4 py-[10px] bg-[#C7C7C738] text-[var(--neutral-100)] text-xs font-normal leading-[14.52px] rounded-[87px] cursor-pointer"
                       key={item.id}
                     >
-                      {item.category}
+                      {item.title}
                     </div>
                   ))}
                 </div>

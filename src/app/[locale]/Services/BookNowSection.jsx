@@ -78,7 +78,7 @@ const BookNowSection = ({ Offer }) => {
                   {t("selectAvailableDayForYou")}
                 </span>
               </div>
-              <div className="flex gap-4 overflow-x-auto pb-3">
+              <div className="flex gap-4 overflow-x-auto pb-3 scrollbar-hide">
                 {availableDays?.map((day) => (
                   <div
                     className="rounded-[100px] py-[10px] px-2 flex flex-col min-w-[62px] min-h-[90px] justify-center items-center"
@@ -140,7 +140,7 @@ const BookNowSection = ({ Offer }) => {
                     : t("noAvailableTimes")}
                 </span>
               </div>
-              <div className="grid grid-rows-[repeat(2,auto)] grid-flow-col auto-cols-max gap-2 overflow-y-hidden overflow-x-auto pb-3">
+              <div className="grid grid-rows-[repeat(2,auto)] grid-flow-col auto-cols-max gap-2 overflow-y-hidden overflow-x-auto pb-3 scrollbar-hide">
                 {availableTimeSlots?.map((time) => (
                   <div
                     className="rounded-[100px] flex min-w-[97px] h-10 items-center justify-center gap-3"
