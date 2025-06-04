@@ -35,6 +35,8 @@ const ServiceCategorySection = async () => {
               minWidthMobile
               title={services[1]?.title}
               img={services[1]?.photo}
+              blurDiv
+              scaleMobile={0.7}
             />
           )}
           {services[2] && (
@@ -44,6 +46,8 @@ const ServiceCategorySection = async () => {
               minWidthMobile
               title={services[2]?.title}
               img={services[2]?.photo}
+              blurDiv
+              scaleMobile={0.7}
             />
           )}
         </div>
@@ -57,6 +61,8 @@ const ServiceCategorySection = async () => {
               minWidthMobile
               title={services[3]?.title}
               img={services[3]?.photo}
+              blurDiv
+              scaleMobile={0.7}
             />
           )}
           {services[4] && (
@@ -66,6 +72,8 @@ const ServiceCategorySection = async () => {
               minWidthMobile
               title={services[4]?.title}
               img={services[4]?.photo}
+              blurDiv
+              scaleMobile={0.7}
             />
           )}
         </div>

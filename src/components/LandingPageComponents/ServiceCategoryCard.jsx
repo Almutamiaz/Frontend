@@ -11,6 +11,9 @@ const ServiceCategoryCard = async ({
   flex,
   minWidthMobile,
   id,
+  blurDiv = false,
+  scale = 0.7,
+  scaleMobile = 0.6,
 }) => {
   const t = await getTranslations();
   const locale = await getLocale();
@@ -18,13 +21,17 @@ const ServiceCategoryCard = async ({
   return (
     <Link href={`${locale}/Services?category=${id}`} style={{ flex: flex }}>
       <div
-        className={`flex flex-col rounded-[40px] pt-10 pb-[30px] ps-8 justify-between h-[320px] bg-[var(--gray)] min-w-[300px] ${
+        className={`relative flex flex-col rounded-[40px] pt-10 pb-[30px] ps-8 justify-between h-[320px] bg-[var(--gray)] min-w-[300px] ${
           minWidthMobile
             ? "max-[785px]:!min-w-[166.5px] max-[785px]:h-[200px]"
             : ""
         } max-[1190px]:h-[245px] max-[380px]:min-w-full relative`}
         // style={{ flex: flex }}
       >
+        {blurDiv && (
+          <div className="blurDiv2 hidden max-md:block"></div>
+        )}
+
         <div className="flex flex-col gap-2 z-[2]">
           <span className="text-2xl font-bold  tracking-[-0.03em]">
             {title}
@@ -45,6 +52,7 @@ const ServiceCategoryCard = async ({
           width={0}
           height={0}
           sizes="100vw"
+          className={`scale-[${scale}] max-[430px]:scale-[${scaleMobile}]`}
           style={{
             width: "50%",
             height: "100%",

@@ -6,8 +6,7 @@ import AppStoreDark from "@/assets/images/AppStoreDark.png";
 import AppGalleryDark from "@/assets/images/AppGalleryDark.png";
 import HakeemApp from "@/assets/images/HakeemApp.png";
 import Arrow from "@/assets/images/Arrow.png";
-import HakeemAppQR from "@/assets/images/HakeemAppQR.png";
-import HakeemAppQR2 from "@/assets/images/HakeemAppQR2.png";
+import HakeemAppQR4 from "@/assets/images/HakeemAppQR4.png";
 import HeaderOfSection from "@/components/HeaderOfSection";
 import { Button } from "antd";
 import HakeemCard from "@/components/LandingPageComponents/HakeemCard";
@@ -50,7 +49,6 @@ async function getSeoData() {
     if (!data.success || !data.data?.[0]) {
       throw new Error("Invalid SEO data structure");
     }
-
     return data.data[0];
   } catch (error) {
     console.error("Error fetching SEO data:", error);
@@ -244,7 +242,7 @@ export default async function HomePage() {
             responsiveFontSizes
             DesCenter
           />
-          <Row gutter={[8, 8]} className="w-full">
+          <Row gutter={[12, 12]} className="w-full">
             <ServicesSection />
           </Row>
         </div>
@@ -482,7 +480,7 @@ export default async function HomePage() {
               </div>
               <div className="h-[200px] max-w-[200px] rounded-xl overflow-hidden">
                 <Image
-                  src={HakeemAppQR2}
+                  src={HakeemAppQR4}
                   alt="Hakeem App QR Code"
                   className="w-full h-full"
                 />

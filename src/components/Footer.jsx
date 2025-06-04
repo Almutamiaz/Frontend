@@ -12,6 +12,7 @@ import LetterIcon from "@/assets/icons/LetterIcon";
 import LocationIcon from "@/assets/icons/LocationIcon";
 import { getLocale, getTranslations } from "next-intl/server";
 import XIcon from "@/assets/icons/XIcon";
+import VisaIcon from "@/assets/icons/VisaIcon";
 
 const Footer = async () => {
   const t = await getTranslations();
@@ -144,8 +145,15 @@ const Footer = async () => {
             </div>
           </div>
         </div>
-        <div className="border-t-[0.5px] border-t-solid border-t-[#E7E7E7] py-[14px] text-base font-normal leading-[19.36px] flex justify-center text-[var(--neutral-100)]">
-          {t("copyright")}
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-center gap-2">
+            <div className="">
+              <VisaIcon />
+            </div>
+          </div>
+          <div className="border-t-[0.5px] border-t-solid border-t-[#E7E7E7] py-[14px] text-base font-normal leading-[19.36px] flex justify-center text-[var(--neutral-100)]">
+            {t("copyright")}
+          </div>
         </div>
       </div>
     </div>

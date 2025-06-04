@@ -21,7 +21,7 @@ const HeaderOfSection = ({
       <h2
         className={`line-clamp-2 font-extrabold ${
           titleCenter ? "text-center" : ""
-        } ${responsiveFontSizes ? "max-[430px]:!text-[24px]" : ""} pb-1`}
+        } ${responsiveFontSizes ? "max-[430px]:!text-[24px]" : ""}`}
         style={{
           fontSize: `${titleSize}px`,
           lineHeight: `${titleLH}px`,
