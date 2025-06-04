@@ -13,6 +13,10 @@ import LocationIcon from "@/assets/icons/LocationIcon";
 import { getLocale, getTranslations } from "next-intl/server";
 import XIcon from "@/assets/icons/XIcon";
 import VisaIcon from "@/assets/icons/VisaIcon";
+import MasterCard from "@/assets/icons/MasterCard";
+import ApplePay from "@/assets/icons/ApplePay";
+import PayTabsIcon from "@/assets/icons/PayTabsIcon";
+import TamaraIcon from "@/assets/icons/TamaraIcon";
 
 const Footer = async () => {
   const t = await getTranslations();
@@ -147,8 +151,20 @@ const Footer = async () => {
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex justify-center gap-2">
-            <div className="">
+            <div className="h-10 bg-[var(--neutral-100)] rounded overflow-hidden flex justify-center items-center">
               <VisaIcon />
+            </div>
+            <div className="h-10 bg-[var(--neutral-100)] rounded overflow-hidden flex justify-center items-center">
+              <MasterCard />
+            </div>
+            <div className="h-10 bg-[var(--neutral-100)] rounded overflow-hidden flex justify-center items-center">
+              <ApplePay />
+            </div>
+            <div className="h-10 bg-[var(--neutral-100)] rounded overflow-hidden flex justify-center items-center min-w-[60px]">
+              <PayTabsIcon />
+            </div>
+            <div className="h-10 bg-[var(--neutral-100)] rounded overflow-hidden flex justify-center items-center min-w-[60px]">
+              <TamaraIcon />
             </div>
           </div>
           <div className="border-t-[0.5px] border-t-solid border-t-[#E7E7E7] py-[14px] text-base font-normal leading-[19.36px] flex justify-center text-[var(--neutral-100)]">

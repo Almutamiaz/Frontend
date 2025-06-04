@@ -2,7 +2,7 @@ import React from "react";
 
 const VisaIcon = () => {
   return (
-    <svg height="60px" version="1.1" viewBox="0 0 512 512" width="60px">
+    <svg height="40px" version="1.1" viewBox="0 0 512 512" width="60px">
       <g id="形状_1_3_" enableBackground="new">
         <g id="形状_1">
           <g>
