@@ -8,7 +8,7 @@ import SearchButton from "@/components/SearchButton";
 import { BASE_URL, BASE_URL_WithOutSite, PRODUCTION_URL } from "@/constants";
 import { Row } from "antd";
 import { getLocale, getTranslations } from "next-intl/server";
-import React from "react";
+import React, { Suspense } from "react";
 
 async function getSeoData() {
   const locale = await getLocale();
@@ -187,7 +187,13 @@ const Page = async ({ searchParams }) => {
   const { data: offersData } = await offersRes.json();
   const offers = offersData.data;
   return (
-    <>
+    <Suspense
+      fallback={
+        <div>
+          Loading... Loading... Loading... Loading... Loading... Loading...
+        </div>
+      }
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -270,7 +276,7 @@ const Page = async ({ searchParams }) => {
         </div>
         <Footer />
       </div>
-    </>
+    </Suspense>
   );
 };
 

@@ -48,9 +48,12 @@ const BookNowSection = ({ Offer, Doctor }) => {
         `/hospital/specializations/main-service?mainServicesId=13&page=${pageNumber}&search=&hospitalId=${Doctor?.setting?.hospital?.id}`
       );
       if (response.data.code === 200) {
-        const newSpecialists = response?.data?.data?.data;
+        console.log(response?.data?.data?.specializations?.last_page);
+        const newSpecialists = response?.data?.data?.specializations?.data;
         setSpecialists((prev) => [...prev, ...newSpecialists]);
-        setHasMore(response?.data?.data?.last_page > pageNumber);
+        setHasMore(
+          response?.data?.data?.specializations?.last_page > pageNumber
+        );
       }
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);

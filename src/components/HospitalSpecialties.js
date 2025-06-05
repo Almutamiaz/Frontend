@@ -18,10 +18,10 @@ const HospitalSpecialties = ({ hospitalId }) => {
       const response = await axiosInstance.get(
         `/hospital/specializations/main-service?mainServicesId=13&page=${page}&search=&hospitalId=${hospitalId}`
       );
-      console.log(response.data.data.last_page);
-      setSpecialties(response.data.data.data);
-      setTotalItems(response.data.data.total);
-      setItemsPerPage(response.data.data.per_page);
+      // console.log(response.data.data.specializations.data);
+      setSpecialties(response.data.data.specializations.data);
+      setTotalItems(response.data.data.specializations.total);
+      setItemsPerPage(response.data.data.specializations.per_page);
     } catch (error) {
       console.error("Error fetching specialties:", error);
     } finally {
