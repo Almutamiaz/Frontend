@@ -25,6 +25,7 @@ const ServiceCategorySection = async () => {
             flex={1}
             title={services[0]?.title}
             img={services[0]?.photo}
+            imageTailwindStyle="scale-[0.7]"
           />
         )}
         <div className="flex gap-4 min-w-[624px] flex-1 flex-wrap max-[800px]:min-w-full">
@@ -36,7 +37,7 @@ const ServiceCategorySection = async () => {
               title={services[1]?.title}
               img={services[1]?.photo}
               blurDiv
-              scaleMobile={0.7}
+              imageTailwindStyle="scale-[0.7] max-[430px]:scale-[0.7]"
             />
           )}
           {services[2] && (
@@ -47,7 +48,7 @@ const ServiceCategorySection = async () => {
               title={services[2]?.title}
               img={services[2]?.photo}
               blurDiv
-              scaleMobile={0.7}
+              imageTailwindStyle="scale-[0.7] max-[430px]:scale-[0.7]"
             />
           )}
         </div>
@@ -62,7 +63,7 @@ const ServiceCategorySection = async () => {
               title={services[3]?.title}
               img={services[3]?.photo}
               blurDiv
-              scaleMobile={0.7}
+              imageTailwindStyle="scale-[0.7] max-[430px]:scale-[0.7]"
             />
           )}
           {services[4] && (
@@ -73,7 +74,7 @@ const ServiceCategorySection = async () => {
               title={services[4]?.title}
               img={services[4]?.photo}
               blurDiv
-              scaleMobile={0.7}
+              imageTailwindStyle="scale-[0.7] max-[430px]:scale-[0.7]"
             />
           )}
         </div>
@@ -83,6 +84,7 @@ const ServiceCategorySection = async () => {
             flex={1}
             title={services[5]?.title}
             img={services[5]?.photo}
+            imageTailwindStyle="scale-[0.7]"
           />
         )}
       </div>

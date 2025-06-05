@@ -37,7 +37,9 @@ export default async function LocaleLayout({ children }) {
           <NotificationProvider>
             <ConfigProvider
               theme={{
-                fontFamily: "var(--fontFamily)",
+                token: {
+                  fontFamily: "var(--fontFamily)",
+                },
                 components: {
                   Button: {
                     defaultBg: "var(--primary-color)",

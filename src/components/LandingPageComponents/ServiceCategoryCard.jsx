@@ -12,8 +12,7 @@ const ServiceCategoryCard = async ({
   minWidthMobile,
   id,
   blurDiv = false,
-  scale = 0.7,
-  scaleMobile = 0.6,
+  imageTailwindStyle = "",
 }) => {
   const t = await getTranslations();
   const locale = await getLocale();
@@ -28,9 +27,7 @@ const ServiceCategoryCard = async ({
         } max-[1190px]:h-[245px] max-[380px]:min-w-full relative`}
         // style={{ flex: flex }}
       >
-        {blurDiv && (
-          <div className="blurDiv2 hidden max-md:block"></div>
-        )}
+        {blurDiv && <div className="blurDiv2 hidden max-md:block"></div>}
 
         <div className="flex flex-col gap-2 z-[2]">
           <span className="text-2xl font-bold  tracking-[-0.03em]">
@@ -52,7 +49,7 @@ const ServiceCategoryCard = async ({
           width={0}
           height={0}
           sizes="100vw"
-          className={`scale-[${scale}] max-[430px]:scale-[${scaleMobile}]`}
+          className={imageTailwindStyle}
           style={{
             width: "50%",
             height: "100%",
