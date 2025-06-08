@@ -35,7 +35,7 @@ async function getSeoData() {
       },
       // Implement stale-while-revalidate caching strategy
       next: {
-        revalidate: 3600, // Revalidate every hour
+        // revalidate: 3600, // Revalidate every hour
         tags: ["seo-data"],
       },
     });
