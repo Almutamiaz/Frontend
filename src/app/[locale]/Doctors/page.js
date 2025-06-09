@@ -126,30 +126,14 @@ const Page = async ({ params, searchParams }) => {
     <div className="container h-[calc(100%-156px)] mt-[156px] flex flex-col gap-6  pt-4 pb-10">
       <div className="flex inputStyles gap-4 flex-wrap">
         <Row gutter={[12, 12]} className="w-full">
-          <Col xs={24} xxl={4} lg={12} md={8}>
-            <HeroSectionInput
-              height="56px"
-              // onChange={onChange}
-              // width="369px"
-              placeholder={t("searchOnOffer")}
-              value={searchParams?.search}
-            />
-          </Col>
-
           <FiltersSection
             searchParams={await searchParams}
             services={services}
             hospitals={hospitals}
             cities={cities}
+            doctors={doctors}
           />
-          <Col xs={12} xxl={4} lg={6} md={8}>
-            <div className="flex gap-2">
-              <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center shrink-0">
-                <SettingsIcon />
-              </div>
-              <SearchButton destination={`Doctors`} doctors={doctors} />
-            </div>
-          </Col>
+         
         </Row>
       </div>
       <div className="flex flex-col gap-4">

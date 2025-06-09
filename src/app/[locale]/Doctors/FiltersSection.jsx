@@ -1,14 +1,29 @@
 "use client";
 import SelectBox from "@/components/SelectBox";
 import { useTranslations } from "next-intl";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axiosInstance from "../../../../utils/axios";
-import { Col, Tooltip } from "antd";
+import { Col } from "antd";
+import HeroSectionInput from "@/components/LandingPageComponents/HeroSectionInput";
+import SettingsIcon from "@/assets/icons/SettingsIcon";
+import SearchButton from "@/components/SearchButton";
+import { useParams, useRouter } from "next/navigation";
 
-const FiltersSection = ({ services, searchParams, hospitals, cities }) => {
+const FiltersSection = ({
+  services,
+  searchParams,
+  hospitals,
+  cities,
+  doctors,
+}) => {
   // console.log(await searchParams)
   const t = useTranslations();
+  const { locale } = useParams();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const debounceTimer = useRef(null);
+
   const [currentActiveMainService, setCurrentActiveMainService] = useState(
     +searchParams?.service || undefined
   );
@@ -47,8 +62,42 @@ const FiltersSection = ({ services, searchParams, hospitals, cities }) => {
     currentActiveMainService && fetchSearchResults();
     // console.log(searchParams)
   }, [currentActiveMainService]);
+
+  useEffect(() => {
+    setSearchLoading(false);
+  }, [doctors]);
+
+  const onChangeFunction = (e) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("search", e.target.value);
+    window.history.pushState({}, "", url.toString());
+
+    // Clear any existing timer
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    // Set new timer
+    debounceTimer.current = setTimeout(() => {
+      setSearchLoading(true);
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set("search", e.target.value);
+      router.push(`/${locale}/Doctors?${currentParams.toString()}`);
+    }, 500);
+  };
   return (
     <>
+      <Col xs={24} xxl={4} lg={12} md={8}>
+        <HeroSectionInput
+          height="56px"
+          setLoading={setSearchLoading}
+          onChange={onChangeFunction}
+          // width="369px"
+          placeholder={t("searchOnOffer")}
+          value={searchParams?.search}
+          // doctors={doctors}
+        />
+      </Col>
       <Col xs={12} xxl={4} lg={6} md={8}>
         <SelectBox
           // width={"273px"}
@@ -64,6 +113,11 @@ const FiltersSection = ({ services, searchParams, hospitals, cities }) => {
             const url = new URL(window.location.href);
             url.searchParams.set("service", e);
             window.history.pushState({}, "", url.toString());
+
+            setSearchLoading(true);
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set("service", e);
+            router.push(`/${locale}/Doctors?${currentParams.toString()}`);
           }}
         />
       </Col>
@@ -85,6 +139,11 @@ const FiltersSection = ({ services, searchParams, hospitals, cities }) => {
             const url = new URL(window.location.href);
             url.searchParams.set("clinic", e);
             window.history.pushState({}, "", url.toString());
+
+            setSearchLoading(true);
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set("clinic", e);
+            router.push(`/${locale}/Doctors?${currentParams.toString()}`);
           }}
         />
       </Col>
@@ -98,7 +157,17 @@ const FiltersSection = ({ services, searchParams, hospitals, cities }) => {
             label: hospital.name,
           }))}
           isServices="hospital"
-          value={searchParams?.hospital}
+          value={+searchParams?.hospital || undefined}
+          onChange={(e) => {
+            const url = new URL(window.location.href);
+            url.searchParams.set("hospital", e);
+            window.history.pushState({}, "", url.toString());
+
+            setSearchLoading(true);
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set("hospital", e);
+            router.push(`/${locale}/Doctors?${currentParams.toString()}`);
+          }}
         />
       </Col>
       <Col xs={12} xxl={4} lg={6} md={8}>
@@ -110,8 +179,30 @@ const FiltersSection = ({ services, searchParams, hospitals, cities }) => {
             label: city.title,
           }))}
           isServices="city"
-          value={searchParams?.city}
+          value={+searchParams?.city || undefined}
+          onChange={(e) => {
+            const url = new URL(window.location.href);
+            url.searchParams.set("city", e);
+            window.history.pushState({}, "", url.toString());
+
+            setSearchLoading(true);
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set("city", e);
+            router.push(`/${locale}/Doctors?${currentParams.toString()}`);
+          }}
         />
+      </Col>
+      <Col xs={12} xxl={4} lg={6} md={8}>
+        <div className="flex gap-2">
+          <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center shrink-0">
+            <SettingsIcon />
+          </div>
+          <SearchButton
+            destination={`Doctors`}
+            doctors={doctors}
+            loading={searchLoading}
+          />
+        </div>
       </Col>
     </>
   );
