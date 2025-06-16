@@ -30,6 +30,7 @@ export async function generateMetadata({ params }) {
     },
   });
   const { data: Doctor } = await doctorRes.json();
+  console.log(Doctor);
   const title = `${t("doctor")} ${Doctor?.first_name} ${
     Doctor?.last_name
   } | ${t("hakeem")}`;
@@ -42,41 +43,41 @@ export async function generateMetadata({ params }) {
   return {
     title: title,
     description: description,
-    // openGraph: {
-    //   title: title,
-    //   description: description,
-    //   type: "profile",
-    //   images: [
-    //     {
-    //       url: Doctor?.photo,
-    //       width: 800,
-    //       height: 600,
-    //       alt: `${Doctor?.first_name} ${Doctor?.last_name} profile picture`,
-    //     },
-    //   ],
-    //   profile: {
-    //     firstName: Doctor?.first_name,
-    //     lastName: Doctor?.last_name,
-    //     username: `${Doctor?.first_name}${Doctor?.last_name}`,
-    //   },
-    // },
-    // twitter: {
-    //   card: "summary_large_image",
-    //   title: title,
-    //   description: description,
-    //   images: [Doctor?.photo],
-    // },
-    // alternates: {
-    //   canonical: `/Doctors/${docId}`,
-    // },
-    // robots: {
-    //   index: true,
-    //   follow: true,
-    //   googleBot: {
-    //     index: true,
-    //     follow: true,
-    //   },
-    // },
+    openGraph: {
+      title: title,
+      description: description,
+      type: "profile",
+      images: [
+        {
+          url: Doctor?.photo,
+          width: 800,
+          height: 600,
+          alt: `${Doctor?.first_name} ${Doctor?.last_name} profile picture`,
+        },
+      ],
+      profile: {
+        firstName: Doctor?.first_name,
+        lastName: Doctor?.last_name,
+        username: `${Doctor?.first_name}${Doctor?.last_name}`,
+      },
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [Doctor?.photo],
+    },
+    alternates: {
+      canonical: `/Doctors/${docId}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
   };
 }
 
