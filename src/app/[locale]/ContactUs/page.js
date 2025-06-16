@@ -44,7 +44,7 @@ export async function generateMetadata() {
   const defaultMetadata = {
     title: t("hakeem"),
     description: t("hakeemDescription"),
-    metadataBase: new URL(PRODUCTION_URL),
+    metadataBase: new URL(`https://dev.hakeem.com.sa`),
     alternates: {
       canonical: "/",
       languages: {
@@ -58,13 +58,11 @@ export async function generateMetadata() {
       googleBot: {
         index: true,
         follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
       },
-    },
-    verification: {
-      google: "temp",
+      facebookexternalhit: {
+        index: true,
+        follow: true,
+      },
     },
   };
 
