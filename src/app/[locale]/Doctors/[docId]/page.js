@@ -71,6 +71,10 @@ export async function generateMetadata({ params }) {
         index: true,
         follow: true,
       },
+      facebookexternalhit: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }
