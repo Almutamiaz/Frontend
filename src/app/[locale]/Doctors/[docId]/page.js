@@ -1,21 +1,12 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Image from "next/image";
-import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
-import ApplePayImage from "@/assets/images/ApplePayImage.png";
-import CreditCardImage from "@/assets/images/CreditCardImage.png";
 import CoinImage from "@/assets/images/CoinImage.png";
 import WaitingRoomImage from "@/assets/images/WaitingRoomImage.png";
 import RateIcon from "@/assets/icons/RateIcon";
-import { useTranslations } from "next-intl";
 import StarIcon2 from "@/assets/icons/StarIcon2";
-import ClockIcon from "@/assets/icons/ClockIcon";
-import { Button, InputNumber, Radio, Switch, Upload } from "antd";
+import { Button } from "antd";
 import DoctorHomeVisits from "@/assets/images/DoctorHomeVisits.png";
 import OnlineConsolations from "@/assets/images/OnlineConsolations.png";
-import CloudIcon from "@/assets/icons/CloudIcon";
-import { Input } from "antd";
-import CashIcon from "@/assets/icons/CashIcon";
-import AntdFormItem from "@/components/AntdFormItem";
 import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/constants";
 import BookNowSection from "../BookNowSection";
@@ -30,7 +21,6 @@ export async function generateMetadata({ params }) {
     },
   });
   const { data: Doctor } = await doctorRes.json();
-  console.log(Doctor);
   const title = `${t("doctor")} ${Doctor?.first_name} ${
     Doctor?.last_name
   } | ${t("hakeem")}`;
@@ -40,35 +30,39 @@ export async function generateMetadata({ params }) {
     Doctor?.setting?.hospital?.first_name
   }. ${Doctor?.experiences?.[0]?.description?.slice(0, 150) || ""}`;
 
+  // Ensure photo URL is absolute
+  const photoUrl = Doctor?.photo?.startsWith("http")
+    ? Doctor.photo
+    : `${BASE_URL}${Doctor.photo}`;
+
   return {
     title: title,
     description: description,
     openGraph: {
       title: title,
       description: description,
-      type: "profile",
+      type: "website",
+      url: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
+      siteName: t("hakeem"),
       images: [
         {
-          url: Doctor?.photo,
-          width: 800,
-          height: 600,
+          url: photoUrl,
+          width: 1200,
+          height: 630,
           alt: `${Doctor?.first_name} ${Doctor?.last_name} profile picture`,
+          // type: "image/jpeg",
         },
       ],
-      profile: {
-        firstName: Doctor?.first_name,
-        lastName: Doctor?.last_name,
-        username: `${Doctor?.first_name}${Doctor?.last_name}`,
-      },
+      locale: locale,
     },
     twitter: {
       card: "summary_large_image",
       title: title,
       description: description,
-      images: [Doctor?.photo],
+      images: [photoUrl],
     },
     alternates: {
-      canonical: `/Doctors/${docId}`,
+      canonical: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
     },
     robots: {
       index: true,
