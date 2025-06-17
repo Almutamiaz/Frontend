@@ -11,54 +11,78 @@ import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/constants";
 import BookNowSection from "../BookNowSection";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }) {
-  const { locale, docId } = params;
-  const t = await getTranslations();
-  const doctorRes = await fetch(`${BASE_URL}/doctor/profile?userId=${docId}`, {
-    headers: {
-      "X-localization": locale,
-    },
-  });
-  const { data: Doctor } = await doctorRes.json();
-  const title = `${t("doctor")} ${Doctor?.first_name} ${
-    Doctor?.last_name
-  } | ${t("hakeem")}`;
-  const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
-    Doctor?.last_name
-  }, ${Doctor?.setting?.speciality} specialist at ${
-    Doctor?.setting?.hospital?.first_name
-  }. ${Doctor?.experiences?.[0]?.description?.slice(0, 150) || ""}`;
+export async function generateMetadata({ params: { locale, docId } }) {
+  const t = await getTranslations(locale);
 
-  // Ensure photo URL is absolute
-  const photoUrl = Doctor?.photo?.startsWith("http")
-    ? Doctor.photo
-    : `${BASE_URL}${Doctor.photo}`;
+  let doctorData;
+  try {
+    const doctorRes = await fetch(
+      `${BASE_URL}/doctor/profile?userId=${docId}`,
+      {
+        headers: { "X-localization": locale },
+        // this makes sure the fetch is truly run at request time
+        next: { revalidate: 60 },
+      }
+    );
+
+    if (doctorRes.status === 404) {
+      // tell Next.js to render your 404 page
+      notFound();
+    }
+
+    if (!doctorRes.ok) {
+      // fallback metadata if your API is down
+      return {
+        title: t("hakeem"),
+        description: t("default_doctor_description"),
+      };
+    }
+
+    const json = await doctorRes.json();
+    doctorData = json.data;
+  } catch (err) {
+    console.error("❌ generateMetadata error:", err);
+    return {
+      title: t("hakeem"),
+      description: t("default_doctor_description"),
+    };
+  }
+
+  const name = `${doctorData.first_name} ${doctorData.last_name}`;
+  const title = `${t("doctor")} ${name} | ${t("hakeem")}`;
+  const description = `Book an appointment with Dr. ${name}, ${
+    doctorData.setting.speciality
+  } specialist at ${doctorData.setting.hospital.first_name}.`;
+
+  const photoUrl =
+    doctorData.photo?.startsWith("http")
+      ? doctorData.photo
+      : `${BASE_URL}${doctorData.photo}`;
 
   return {
-    title: title,
-    description: description,
+    title,
+    description,
     openGraph: {
-      title: title,
-      description: description,
-      type: "website",
+      title,
+      description,
       url: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
       siteName: t("hakeem"),
       images: [
         {
           url: photoUrl,
-          width: 1200,
+          width: 1_200,
           height: 630,
-          alt: `${Doctor?.first_name} ${Doctor?.last_name} profile picture`,
-          // type: "image/jpeg",
+          alt: `${name} profile picture`,
         },
       ],
-      locale: locale,
+      locale,
     },
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: description,
+      title,
+      description,
       images: [photoUrl],
     },
     alternates: {
@@ -67,14 +91,8 @@ export async function generateMetadata({ params }) {
     robots: {
       index: true,
       follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-      },
-      facebookexternalhit: {
-        index: true,
-        follow: true,
-      },
+      googleBot: { index: true, follow: true },
+      facebookexternalhit: { index: true, follow: true },
     },
   };
 }
