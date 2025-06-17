@@ -13,76 +13,53 @@ import BookNowSection from "../BookNowSection";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params: { locale, docId } }) {
-  const t = await getTranslations(locale);
+export async function generateMetadata({ params }) {
+  const { locale, docId } = params;
+  const t = await getTranslations();
+  const doctorRes = await fetch(`${BASE_URL}/doctor/profile?userId=${docId}`, {
+    headers: {
+      "X-localization": locale,
+    },
+  });
+  const { data: Doctor } = await doctorRes.json();
+  const title = `${t("doctor")} ${Doctor?.first_name} ${
+    Doctor?.last_name
+  } | ${t("hakeem")}`;
+  const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
+    Doctor?.last_name
+  }, ${Doctor?.setting?.speciality} specialist at ${
+    Doctor?.setting?.hospital?.first_name
+  }. ${Doctor?.experiences?.[0]?.description?.slice(0, 150) || ""}`;
 
-  let doctorData;
-  try {
-    const doctorRes = await fetch(
-      `${BASE_URL}/doctor/profile?userId=${docId}`,
-      {
-        headers: { "X-localization": locale },
-        // this makes sure the fetch is truly run at request time
-        next: { revalidate: 60 },
-      }
-    );
-
-    if (doctorRes.status === 404) {
-      // tell Next.js to render your 404 page
-      notFound();
-    }
-
-    if (!doctorRes.ok) {
-      // fallback metadata if your API is down
-      return {
-        title: t("hakeem"),
-        description: t("default_doctor_description"),
-      };
-    }
-
-    const json = await doctorRes.json();
-    doctorData = json.data;
-  } catch (err) {
-    console.error("❌ generateMetadata error:", err);
-    return {
-      title: t("hakeem"),
-      description: t("default_doctor_description"),
-    };
-  }
-
-  const name = `${doctorData.first_name} ${doctorData.last_name}`;
-  const title = `${t("doctor")} ${name} | ${t("hakeem")}`;
-  const description = `Book an appointment with Dr. ${name}, ${
-    doctorData.setting.speciality
-  } specialist at ${doctorData.setting.hospital.first_name}.`;
-
-  const photoUrl =
-    doctorData.photo?.startsWith("http")
-      ? doctorData.photo
-      : `${BASE_URL}${doctorData.photo}`;
+  // Ensure photo URL is absolute
+  const photoUrl = Doctor?.photo?.startsWith("http")
+    ? Doctor.photo
+    : `${BASE_URL}${Doctor.photo}`;
 
   return {
-    title,
-    description,
+    title: title,
+    description: description,
     openGraph: {
-      title,
-      description,
+      title: title,
+      description: description,
+      type: "website",
       url: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
       siteName: t("hakeem"),
       images: [
         {
           url: photoUrl,
-          width: 1_200,
+          width: 1200,
           height: 630,
-          alt: `${name} profile picture`,
+          alt: `${Doctor?.first_name} ${Doctor?.last_name} profile picture`,
+          // type: "image/jpeg",
         },
       ],
-      locale,
+      locale: locale,
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: title,
+      description: description,
       images: [photoUrl],
     },
     alternates: {
@@ -91,8 +68,14 @@ export async function generateMetadata({ params: { locale, docId } }) {
     robots: {
       index: true,
       follow: true,
-      googleBot: { index: true, follow: true },
-      facebookexternalhit: { index: true, follow: true },
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+      facebookexternalhit: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }
