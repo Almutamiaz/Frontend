@@ -11,43 +11,41 @@ import { getTranslations } from "next-intl/server";
 import { BASE_URL } from "@/constants";
 import BookNowSection from "../BookNowSection";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import Head from "next/head";
 
-export async function generateMetadata({ params }) {
-  const { locale, docId } = params;
-  const t = await getTranslations();
-  const doctorRes = await fetch(`${BASE_URL}/doctor/profile?userId=${docId}`, {
-    headers: {
-      "X-localization": locale,
-    },
-  });
-  const { data: Doctor } = await doctorRes.json();
-  const title = `${t("doctor")} ${Doctor?.first_name} ${
-    Doctor?.last_name
-  } | ${t("hakeem")}`;
-  const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
-    Doctor?.last_name
-  }, ${Doctor?.setting?.speciality} specialist at ${
-    Doctor?.setting?.hospital?.first_name
-  }. ${Doctor?.experiences?.[0]?.description?.slice(0, 150) || ""}`;
+export async function generateMetadata() {
+  // const { locale, docId } = params;
+  // const t = await getTranslations();
+  // const doctorRes = await fetch(`${BASE_URL}/doctor/profile?userId=${docId}`, {
+  //   headers: {
+  //     "X-localization": locale,
+  //   },
+  // });
+  // const { data: Doctor } = await doctorRes.json();
+  // const title = `${t("doctor")} ${Doctor?.first_name} ${
+  //   Doctor?.last_name
+  // } | ${t("hakeem")}`;
+  // const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
+  //   Doctor?.last_name
+  // }, ${Doctor?.setting?.speciality} specialist at ${
+  //   Doctor?.setting?.hospital?.first_name
+  // }. ${Doctor?.experiences?.[0]?.description?.slice(0, 150) || ""}`;
 
-  // Ensure photo URL is absolute
-  const photoUrl = Doctor?.photo?.startsWith("http")
-    ? Doctor.photo
-    : `${BASE_URL}${Doctor.photo}`;
+  // // Ensure photo URL is absolute
+  // const photoUrl = Doctor?.photo?.startsWith("http")
+  //   ? Doctor.photo
+  //   : `${BASE_URL}${Doctor.photo}`;
 
   return {
     title: "seoData.title",
     description: "seoData.description",
     alternates: {
-      canonical: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
+      canonical: `https://dev.hakeem.com.sa/en/Doctors/5`,
     },
     openGraph: {
       title: "seoData.openGraph.title",
       description: "seoData.openGraph.description",
       images: [`https://api-dev.hakeem.com.sa/storage/users/67f2972fe3371.jpg`],
-      url: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
+      url: `https://dev.hakeem.com.sa/en/Doctors/5`,
       type: "website",
     },
     twitter: {
