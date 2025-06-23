@@ -10,7 +10,8 @@ const ShareButton = ({ id }) => {
   const { locale } = useParams();
   const notificationApi = useAppNotification();
 
-  const handleShare = () => {
+  const handleShare = (e) => {
+    e.preventDefault();
     const url = `${window.location.origin}/${locale}/Services/ServiceDetails/${id}`;
     navigator.clipboard
       .writeText(url)

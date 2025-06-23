@@ -45,15 +45,12 @@ const BookNowSection = ({ Offer, Doctor }) => {
     setIsLoadingMore(true);
     try {
       const response = await axiosInstance.get(
-        `/hospital/specializations/main-service?mainServicesId=13&page=${pageNumber}&search=&hospitalId=${Doctor?.setting?.hospital?.id}`
+        `/doctor/main-service/specializations?doctor_id=${Doctor?.id}&main_service_id=13&page=${pageNumber}`
       );
       if (response.data.code === 200) {
-        console.log(response?.data?.data?.specializations?.last_page);
-        const newSpecialists = response?.data?.data?.specializations?.data;
+        const newSpecialists = response?.data?.data?.data;
         setSpecialists((prev) => [...prev, ...newSpecialists]);
-        setHasMore(
-          response?.data?.data?.specializations?.last_page > pageNumber
-        );
+        setHasMore(response?.data?.data?.last_page > pageNumber);
       }
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);

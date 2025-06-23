@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import LoadingSpinner from "./LoadingSpinner";
 import { useEffect, useState } from "react";
-const SearchButton = ({ destination, doctors, loading }) => {
+const SearchButton = ({ destination, doctors, loading, offers }) => {
   const searchParams = useSearchParams();
   const locale = useLocale();
   const t = useTranslations();
@@ -15,7 +15,8 @@ const SearchButton = ({ destination, doctors, loading }) => {
   const [buttonLoading, setButtonLoading] = useState(false);
   useEffect(() => {
     setButtonLoading(false);
-  }, [doctors]);
+  }, [doctors, offers]);
+
   return (
     <Link
       href={href}

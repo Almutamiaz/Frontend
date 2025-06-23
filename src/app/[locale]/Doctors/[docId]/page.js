@@ -12,114 +12,69 @@ import { BASE_URL } from "@/constants";
 import BookNowSection from "../BookNowSection";
 import Link from "next/link";
 
-export async function generateMetadata() {
-  const seoData = {
-    title: "Professional Camera Lens - Premium Photography | Your Store",
-    description:
-      "Professional telephoto lens with image stabilization for stunning photography.",
-    canonical: "https://example.com/products/3",
-    openGraph: {
-      title: "Professional Camera Lens - Premium Photography | Your Store",
-      description:
-        "Professional telephoto lens with image stabilization for stunning photography.",
-      image:
-        "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-      url: "https://example.com/products/3",
-      type: "product",
+export async function generateMetadata({ params }) {
+  const { locale, docId } = params;
+  const t = await getTranslations();
+  const doctorRes = await fetch(`${BASE_URL}/doctor/profile?userId=${docId}`, {
+    headers: {
+      "X-localization": locale,
     },
-    twitter: {
-      card: "summary_large_image",
-      title: "Professional Camera Lens - Premium Photography | Your Store",
-      description:
-        "Professional telephoto lens with image stabilization for stunning photography.",
-      image:
-        "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-    },
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      name: "Professional Camera Lens",
-      description:
-        "Capture stunning professional-quality images with this premium telephoto lens. Perfect for portrait photography, wildlife, and sports with exceptional image stabilization and crystal-clear optics.",
-      image: [
-        "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-        "https://images.pexels.com/photos/279906/pexels-photo-279906.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-        "https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-      ],
-      brand: { "@type": "Brand", name: "Your Store" },
-      offers: {
-        "@type": "Offer",
-        price: 899.99,
-        priceCurrency: "USD",
-        availability: "https://schema.org/InStock",
-        seller: {}, // Replace with actual seller object if available
-      },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: 4.9,
-        reviewCount: 456,
-      },
-    },
-  };
+  });
+  const { data: Doctor } = await doctorRes.json();
+  const title = `${t("doctor")} ${Doctor?.first_name} ${
+    Doctor?.last_name
+  } | ${t("hakeem")}`;
+  const description = `Book an appointment with Dr. ${Doctor?.first_name} ${
+    Doctor?.last_name
+  }, ${Doctor?.setting?.speciality} specialist at ${
+    Doctor?.setting?.hospital?.first_name
+  }. ${Doctor?.experiences?.[0]?.description?.slice(0, 150) || ""}`;
 
-  const product = {
-    id: "3",
-    name: "Professional Camera Lens",
-    price: 899.99,
-    originalPrice: 1199.99,
-    image:
-      "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-    images: [
-      "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-      "https://images.pexels.com/photos/279906/pexels-photo-279906.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-      "https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630",
-    ],
-    description:
-      "Capture stunning professional-quality images with this premium telephoto lens. Perfect for portrait photography, wildlife, and sports with exceptional image stabilization and crystal-clear optics.",
-    shortDescription:
-      "Professional telephoto lens with image stabilization for stunning photography.",
-    category: "Photography",
-    inStock: true,
-    rating: 4.9,
-    reviewCount: 456,
-    features: [
-      "85mm f/1.4 aperture",
-      "Image stabilization",
-      "Weather sealed",
-      "Ultra-fast autofocus",
-      "Professional build quality",
-    ],
-    specifications: {
-      "Focal Length": "85mm",
-      "Maximum Aperture": "f/1.4",
-      "Minimum Focus Distance": "0.8m",
-      Weight: "950g",
-      "Filter Thread": "77mm",
-    },
-  };
+  // Ensure photo URL is absolute
+  const photoUrl = Doctor?.photo?.startsWith("http")
+    ? Doctor.photo
+    : `${BASE_URL}${Doctor.photo}`;
 
   return {
-    title: seoData.title,
-    description: seoData.description,
-    alternates: {
-      canonical: seoData.canonical,
-    },
+    title: title,
+    description: description,
     openGraph: {
-      title: seoData.openGraph.title,
-      description: seoData.openGraph.description,
-      images: [seoData.openGraph.image],
-      url: seoData.openGraph.url,
+      title: title,
+      description: description,
       type: "website",
+      url: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
+      siteName: t("hakeem"),
+      images: [
+        {
+          url: photoUrl,
+          width: 1200,
+          height: 630,
+          alt: `${Doctor?.first_name} ${Doctor?.last_name} profile picture`,
+          // type: "image/jpeg",
+        },
+      ],
+      locale: locale,
     },
     twitter: {
       card: "summary_large_image",
-      title: seoData.twitter.title,
-      description: seoData.twitter.description,
-      images: [seoData.twitter.image],
+      title: title,
+      description: description,
+      images: [photoUrl],
     },
-    other: {
-      "product:price:amount": product.price.toString(),
-      "product:price:currency": "USD",
+    alternates: {
+      canonical: `https://dev.hakeem.com.sa/${locale}/Doctors/${docId}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+      facebookexternalhit: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }

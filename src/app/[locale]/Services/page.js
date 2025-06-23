@@ -9,6 +9,7 @@ import { BASE_URL, BASE_URL_WithOutSite, PRODUCTION_URL } from "@/constants";
 import { Row } from "antd";
 import { getLocale, getTranslations } from "next-intl/server";
 import React, { Suspense } from "react";
+import FiltersSection from "./FiltersSection";
 
 async function getSeoData() {
   const locale = await getLocale();
@@ -184,83 +185,21 @@ const Page = async ({ searchParams }) => {
   });
   const { data: offersData } = await offersRes.json();
   const offers = offersData.data;
+  console.log(offers);
   return (
-    <Suspense
-      fallback={
-        <div>
-          Loading... Loading... Loading... Loading... Loading... Loading...
-        </div>
-      }
-    >
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="bg-[#FAFAFA] min-h-screen flex flex-col gap-[60px]">
         <div className="container overflow-visible mt-[170px] flex flex-col gap-6 flex-1">
-          <div className="flex flex-col gap-4">
-            <div className="flex inputStyles gap-4 flex-wrap">
-              <HeroSectionInput
-                height="56px"
-                // onChange={onChange}
-                width="369px"
-                placeholder={t("searchOnOffer")}
-                value={searchParams?.search}
-                fullWidthInSm
-              />
-              <SelectBox
-                width={"273px"}
-                fullWidthInSm
-                placeholder={t("city")}
-                options={cities.map((city) => ({
-                  value: city.id,
-                  label: city.title,
-                }))}
-                isServices
-                value={searchParams?.city}
-              />
-              <div className="flex gap-2 ms-auto">
-                <div className="w-[56px] h-[56px] bg-[var(--neutral-200)] rounded-[1000px] flex justify-center items-center">
-                  <SettingsIcon />
-                </div>
-                <SearchButton destination={`Services`} />
-              </div>
-            </div>
-            <div className="flex gap-1 gap-y-2 overflow-x-auto scrollbar-hide">
-              <Tag
-                active={!searchParams?.category}
-                key="all"
-                text={t("allOffers")}
-                href={`/${locale}/Services`}
-                classNameProp={
-                  !searchParams?.category
-                    ? "shadow-[0_2px_6px_0_#7367F04D]"
-                    : ""
-                }
-                withoutBorder
-                bgColorProp="#F4F4F4"
-                textColorProp="#2F2B3DE5"
-                categoryId="all"
-              />
-              {categories.map((category) => (
-                <Tag
-                  active={searchParams?.category === category.id.toString()}
-                  key={category.id}
-                  text={category.title}
-                  href={`/${locale}/Services`}
-                  classNameProp={
-                    searchParams?.category === category.id.toString()
-                      ? "shadow-[0_2px_6px_0_#7367F04D]"
-                      : ""
-                  }
-                  withoutBorder
-                  bgColorProp="#F4F4F4"
-                  textColorProp="#2F2B3DE5"
-                  categoryId={category.id.toString()}
-                />
-              ))}
-            </div>
-          </div>
+          <FiltersSection
+            searchParams={await searchParams}
+            categories={categories}
+            cities={cities}
+            offers={offers}
+          />
           <div className="flex flex-col gap-4">
             <span className="font-semibold text-xl leading-[24.2px] text-[var(--primary-700)]">
               {t("results")} ({offers?.length || 0})
@@ -274,7 +213,7 @@ const Page = async ({ searchParams }) => {
         </div>
         <Footer />
       </div>
-    </Suspense>
+    </>
   );
 };
 
