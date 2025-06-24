@@ -7,6 +7,14 @@ const defaultLocale = routing.defaultLocale;
 
 export default function middleware(request) {
   const { pathname } = request.nextUrl;
+
+  // Skip middleware for API routes, static files, and other non-page routes
+  if (
+    pathname.includes("backend") // Skip files with extensions
+  ) {
+    return NextResponse.next();
+  }
+
   const localeMatch = pathname.match(/^\/([a-zA-Z0-9-]+)(\/|$)/);
   if (localeMatch) {
     const locale = localeMatch[1];
