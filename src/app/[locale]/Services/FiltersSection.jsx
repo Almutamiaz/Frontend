@@ -13,6 +13,7 @@ const FiltersSection = ({ searchParams, categories, cities, offers }) => {
   const { locale } = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [activeTag, setActiveTag] = useState(searchParams?.category || "all");
   const debounceTimer = useRef(null);
 
   const onChangeFunction = (e) => {
@@ -37,6 +38,22 @@ const FiltersSection = ({ searchParams, categories, cities, offers }) => {
   useEffect(() => {
     setLoading(false);
   }, [offers]);
+
+  const handleTagClick = (tag) => {
+    if (tag == "all") {
+      setActiveTag(tag);
+      setLoading(true);
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.delete("category");
+      router.push(`/${locale}/Services?${currentParams.toString()}`);
+      return;
+    }
+    setActiveTag(tag);
+    setLoading(true);
+    const currentParams = new URLSearchParams(window.location.search);
+    currentParams.set("category", tag);
+    router.push(`/${locale}/Services?${currentParams.toString()}`);
+  };
   return (
     <div className="flex flex-col gap-4">
       <div className="flex inputStyles gap-4 flex-wrap">
@@ -83,33 +100,33 @@ const FiltersSection = ({ searchParams, categories, cities, offers }) => {
       </div>
       <div className="flex gap-1 gap-y-2 overflow-x-auto scrollbar-hide">
         <Tag
-          active={!searchParams?.category}
+          active={activeTag == "all"}
           key="all"
           text={t("allOffers")}
-          href={`/${locale}/Services`}
+          // href={`/${locale}/Services`}
           classNameProp={
-            !searchParams?.category ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
+            activeTag == "all" ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
           }
           withoutBorder
           bgColorProp="#F4F4F4"
           textColorProp="#2F2B3DE5"
           categoryId="all"
+          onClick={() => handleTagClick("all")}
         />
         {categories.map((category) => (
           <Tag
-            active={searchParams?.category === category.id.toString()}
+            active={activeTag == category?.id}
             key={category.id}
             text={category.title}
-            href={`/${locale}/Services`}
+            // href={`/${locale}/Services`}
             classNameProp={
-              searchParams?.category === category.id.toString()
-                ? "shadow-[0_2px_6px_0_#7367F04D]"
-                : ""
+              activeTag == category?.id ? "shadow-[0_2px_6px_0_#7367F04D]" : ""
             }
             withoutBorder
             bgColorProp="#F4F4F4"
             textColorProp="#2F2B3DE5"
             categoryId={category.id.toString()}
+            onClick={() => handleTagClick(category?.id)}
           />
         ))}
       </div>

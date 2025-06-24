@@ -185,7 +185,7 @@ const Page = async ({ searchParams }) => {
   });
   const { data: offersData } = await offersRes.json();
   const offers = offersData.data;
-  console.log(offers);
+
   return (
     <>
       <script

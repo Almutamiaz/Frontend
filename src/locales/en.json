@@ -292,6 +292,10 @@
   "in": "In",
   "saudiArabia": "Saudi Arabia",
   "best": "Best",
+  "subject": "Subject",
+  "pleaseEnterYourSubject": "Please enter your subject",
+  "onlyImagesAndDocsAllowed": "Only images and documents are allowed.",
+  "messageSentSuccessfully": "Message sent successfully.",
 
   "hakeem": "Hakeem Healthcare",
   "hakeemDescription": "Hakeem - Your Healthcare Platform"

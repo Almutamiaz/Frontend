@@ -292,6 +292,10 @@
   "in": "في",
   "saudiArabia": "المملكة العربية السعودية",
   "best": "أفضل",
+  "subject": "الموضوع",
+  "pleaseEnterYourSubject": "الرجاء إدخال الموضوع",
+  "onlyImagesAndDocsAllowed": "يسمح بالصور والمستندات فقط.",
+  "messageSentSuccessfully": "تم إرسال الرسالة بنجاح.",
 
   "hakeem": "حكيم للرعاية الطبية",
   "hakeemDescription": "حكيم للرعاية الطبية - منصة الرعاية الطبية المتكاملة"
