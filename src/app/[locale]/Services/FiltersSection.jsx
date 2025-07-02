@@ -7,6 +7,7 @@ import Tag from "@/components/Tag";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import { useUser } from "@/Context/UserContext";
 
 const FiltersSection = ({ searchParams, categories, cities, offers }) => {
   const t = useTranslations();
@@ -15,7 +16,7 @@ const FiltersSection = ({ searchParams, categories, cities, offers }) => {
   const [loading, setLoading] = useState(false);
   const [activeTag, setActiveTag] = useState(searchParams?.category || "all");
   const debounceTimer = useRef(null);
-
+  const { servicesChangePageLoading, setServicesChangePageLoading } = useUser();
   const onChangeFunction = (e) => {
     const url = new URL(window.location.href);
     url.searchParams.set("search", e.target.value);
@@ -37,7 +38,14 @@ const FiltersSection = ({ searchParams, categories, cities, offers }) => {
 
   useEffect(() => {
     setLoading(false);
+    setServicesChangePageLoading(false);
   }, [offers]);
+
+  useEffect(() => {
+    if (servicesChangePageLoading) {
+      setLoading(true);
+    }
+  }, [servicesChangePageLoading]);
 
   const handleTagClick = (tag) => {
     if (tag == "all") {

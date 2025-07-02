@@ -270,6 +270,10 @@ body {
   color: var(--primary-color) !important;
 }
 
+[dir="rtl"] .ant-pagination-item-link {
+  transform: rotateY(180deg);
+}
+
 /* LANDINGPAGE RESPONSIVE DESIGN */
 @media screen and (max-width: 600px) {
   .HakeemHeader {

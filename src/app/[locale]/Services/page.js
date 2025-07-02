@@ -1,15 +1,11 @@
-import SettingsIcon from "@/assets/icons/SettingsIcon";
 import Footer from "@/components/Footer";
-import HeroSectionInput from "@/components/LandingPageComponents/HeroSectionInput";
 import OfferCard from "@/components/OfferCard";
-import SelectBox from "@/components/SelectBox";
-import Tag from "@/components/Tag";
-import SearchButton from "@/components/SearchButton";
 import { BASE_URL, BASE_URL_WithOutSite, PRODUCTION_URL } from "@/constants";
 import { Row } from "antd";
 import { getLocale, getTranslations } from "next-intl/server";
-import React, { Suspense } from "react";
+import React from "react";
 import FiltersSection from "./FiltersSection";
+import ServicesPagination from "./ServicesPagination";
 
 async function getSeoData() {
   const locale = await getLocale();
@@ -184,8 +180,8 @@ const Page = async ({ searchParams }) => {
     },
   });
   const { data: offersData } = await offersRes.json();
-  const offers = offersData.data;
-
+  const offers = offersData?.data;
+  // console.log(offersData);
   return (
     <>
       <script
@@ -209,6 +205,17 @@ const Page = async ({ searchParams }) => {
                 <OfferCard key={offer.id} offer={offer} />
               ))}
             </Row>
+            {offersData?.last_page > 1 && (
+              <ServicesPagination
+                paginationData={{
+                  total: offersData?.total,
+                  pageSize: offersData?.per_page,
+                  lastPage: offersData?.last_page,
+                }}
+                searchParams={await searchParams}
+                offers={offers}
+              />
+            )}
           </div>
         </div>
         <Footer />
