@@ -18,13 +18,13 @@ const DoctorCard = ({ img, name, rate, id }) => {
       <Image
         src={img}
         alt="Doctor Image"
-        className="w-[124px] h-[124px] object-cover rounded-[50%] border-[0.5px] border-[var(--primary-color)] shadow-[0px_3px_12px_0px_#6060604D]"
+        className="w-[124px] h-[124px] object-cover rounded-[50%] border-[0.5px] border-[var(--primary-color)] shadow-[0px_3px_12px_0px_#6060604D] flex-shrink-0"
         width={124}
         height={124}
         sizes="100vw"
       />
       <div className="flex flex-col gap-2 items-center">
-        <span className="text-sm font-semibold leading-[21px] text-[var(--Black)]">
+        <span className="text-sm font-semibold leading-[21px] text-[var(--Black)] line-clamp-1">
           {name}
         </span>
         <div className="flex gap-1 items-center">
