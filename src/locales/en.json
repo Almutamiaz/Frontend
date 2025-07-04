@@ -297,6 +297,10 @@
   "onlyImagesAndDocsAllowed": "Only images and documents are allowed.",
   "messageSentSuccessfully": "Message sent successfully.",
   "specialties": "Specialties",
+  "searchByDoctorName": "Search by doctor's name",
+  "selectDate": "Select date",
+  "selectDateBasedOnAvailability": "Select an appropriate date based on available appointments",
+  "selectTimeBasedOnAvailability": "Select an appropriate time based on available appointments",
 
   "hakeem": "Hakeem Healthcare",
   "hakeemDescription": "Hakeem - Your Healthcare Platform"

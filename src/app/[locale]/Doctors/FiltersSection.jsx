@@ -93,7 +93,7 @@ const FiltersSection = ({
           setLoading={setSearchLoading}
           onChange={onChangeFunction}
           // width="369px"
-          placeholder={t("searchOnOffer")}
+          placeholder={t("searchByDoctorName")}
           value={searchParams?.search}
           // doctors={doctors}
         />

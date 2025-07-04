@@ -69,7 +69,7 @@ const OfferCard = async ({ offer }) => {
                 </div>
               </div>
               <div className="rounded-[12px] flex flex-col py-[7px] px-3 bg-[#EFE6FD] justify-between max-h-[51px]">
-                <span className="font-normal text-xs leading-[150%] tracking-[0px] text-[var(--purple-900)]">
+                <span className="font-normal text-xs leading-[150%] tracking-[0px] text-[var(--purple-900)] whitespace-nowrap">
                   {t("offerCode")}
                 </span>
                 <span className="font-extrabold text-xs leading-[150%] tracking-[0px] text-[var(--purple-900)]">

@@ -244,7 +244,7 @@
   "hospitals": "المستشفيات",
   "noResultsFound": "لم يتم العثور على نتائج",
   "noReviewsFound": "لم يتم العثور على مراجعات",
-  "selectSpecialty": "اختر التخصص",
+  "selectSpecialty": "اختر الإختصاص",
   "insurances": "شركات التأمين",
   "noAvailableTimes": "لا توجد أوقات متاحة في الوقت الحالي.",
   "recentlyAdded": "أضيف حديثاً",
@@ -297,6 +297,10 @@
   "onlyImagesAndDocsAllowed": "يسمح بالصور والمستندات فقط.",
   "messageSentSuccessfully": "تم إرسال الرسالة بنجاح.",
   "specialties": "التخصصات",
+  "searchByDoctorName": "البحث في اسم الطبيب",
+  "selectDate": "اختر التاريخ",
+  "selectDateBasedOnAvailability": "اختر التاريخ المناسب بحسب المواعيد المتاحة",
+  "selectTimeBasedOnAvailability": "اختر الوقت المناسب بحسب المواعيد المتاحة",
 
   "hakeem": "حكيم للرعاية الطبية",
   "hakeemDescription": "حكيم للرعاية الطبية - منصة الرعاية الطبية المتكاملة"

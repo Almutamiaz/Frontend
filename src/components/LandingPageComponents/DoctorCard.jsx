@@ -23,7 +23,7 @@ const DoctorCard = ({ img, name, rate, id }) => {
         height={124}
         sizes="100vw"
       />
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col gap-2 items-center px-[10px]">
         <span className="text-sm font-semibold leading-[21px] text-[var(--Black)] line-clamp-1">
           {name}
         </span>

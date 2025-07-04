@@ -49,6 +49,9 @@ const BookNowSection = ({ Offer, Doctor }) => {
       );
       if (response.data.code === 200) {
         const newSpecialists = response?.data?.data?.data;
+        if (specialists?.length == 0 && newSpecialists?.length == 1) {
+          setSelectedSpecialty(newSpecialists[0]?.id);
+        }
         setSpecialists((prev) => [...prev, ...newSpecialists]);
         setHasMore(response?.data?.data?.last_page > pageNumber);
       }
@@ -104,10 +107,10 @@ const BookNowSection = ({ Offer, Doctor }) => {
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <span className="text-[var(--color1)] font-bold text-xl leading-[24.2px] tracking-[0px]">
-                {t("date")}
+                {t("selectDate")}
               </span>
               <span className="text-[var(--neutral-900)] font-medium text-sm leading-[22px] tracking-[0px]">
-                {t("selectAvailableDayForYou")}
+                {t("selectDateBasedOnAvailability")}
               </span>
             </div>
             <div className="flex gap-4 overflow-x-auto pb-3 scrollbar-hide">
@@ -168,7 +171,7 @@ const BookNowSection = ({ Offer, Doctor }) => {
               </span>
               <span className="text-[var(--neutral-900)] font-medium text-sm leading-[22px] tracking-[0px]">
                 {availableTimeSlots?.length > 0
-                  ? t("selectAvailableTimeForYou")
+                  ? t("selectTimeBasedOnAvailability")
                   : t("noAvailableTimes")}
               </span>
             </div>

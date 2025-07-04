@@ -286,11 +286,11 @@ const CsrPage = () => {
                     <div className="flex flex-col gap-3">
                       {searchResults.offers.map((offer) => (
                         <DoctorCardSearchSuggestion
-                          key={offer.id}
-                          name={offer.title}
-                          specialization={offer.description}
-                          img={offer.photo}
-                          href={`/${locale}/Services/ServiceDetails/${offer.id}`}
+                          key={offer?.id}
+                          name={offer?.title}
+                          specialization={offer?.hospital?.first_name}
+                          img={offer?.photo}
+                          href={`/${locale}/Services/ServiceDetails/${offer?.id}`}
                         />
                       ))}
                     </div>
