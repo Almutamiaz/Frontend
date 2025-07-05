@@ -36,7 +36,7 @@ const LanguageSwitcher = () => {
   return (
     <Dropdown
       menu={menuProps}
-      trigger={["click"]}
+      // trigger={["click"]}
       onOpenChange={(open) => {
         setDropDownOpened(open);
       }}
@@ -46,7 +46,7 @@ const LanguageSwitcher = () => {
       <div className="flex gap-[5px] items-center text-[var(--neutral-100)] cursor-pointer">
         <span>{locale.toUpperCase()}</span>
         <DownArrow
-          propsClassName={`transition-transform duration-300 ${dropDownOpened ? "rotate-180" : ""}`}
+          deg={dropDownOpened ? 180 : 0}
         />
       </div>
     </Dropdown>

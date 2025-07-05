@@ -16,6 +16,7 @@ import Image from "next/image";
 import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
 import axiosInstance from "../../utils/axios";
 import LoadingSpinner from "./LoadingSpinner";
+import ProfileSection from "./ProfileSection";
 
 const Header = () => {
   const t = useTranslations();
@@ -54,7 +55,6 @@ const Header = () => {
       <Link href={`/${locale}`}>
         <HakeemHealthCareLogo w={100} h={45} />
       </Link>
-      {/* *:font-['Public_Sans'] */}
       <div className="flex gap-[30px] *:text-[15px] *:font-medium *:leading-[22px] *:text-[#EBEDF0] max-[850px]:hidden">
         <ClientLink
           className="!font-[700] !text-[var(--neutral-100)]"
@@ -82,13 +82,7 @@ const Header = () => {
         {loading ? (
           <LoadingSpinner color="white" />
         ) : user ? (
-          <Image
-            src={user?.photo || DummyDoctorImage}
-            alt={t("userProfileImage")}
-            width={43}
-            height={43}
-            className="w-[43px] h-[43px] object-cover rounded-[50%] border border-[#FFFFFF]"
-          />
+          <ProfileSection />
         ) : (
           <Button
             style={{

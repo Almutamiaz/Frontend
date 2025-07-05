@@ -14,13 +14,15 @@ import HeaderOfSection from "@/components/HeaderOfSection";
 import CalendarIcon from "@/assets/icons/CalendarIcon";
 import ArrowIcon2 from "@/assets/icons/ArrowIcon2";
 import SelectBox from "@/components/SelectBox";
+import { useUser } from "@/Context/UserContext";
 
 const Page = () => {
   const t = useTranslations();
   const [completeProfileStatus, setCompleteProfileStatus] = useState(0);
   const [dob, setDob] = useState(null);
   const [gender, setGender] = useState(null);
-
+  const { user } = useUser();
+  console.log(user);
   const getStatusText = (status) => {
     switch (status) {
       case 0:
@@ -162,34 +164,39 @@ const Page = () => {
             <div className="flex gap-5 items-center flex-wrap">
               <div className="w-[91px] h-[91px]">
                 <Image
-                  src={DummyDoctorImage}
+                  src={user?.photo || DummyDoctorImage}
                   alt="User Name"
                   className="w-full h-full object-cover rounded-[50%]"
+                  width={91}
+                  height={91}
                 />
               </div>
               <div className="flex flex-col">
                 <span className="font-medium text-2xl leading-[38px] tracking-[0px] text-[#2F2B3DE5]">
-                  Mohamed Eslam
+                  {user?.first_name} {user?.last_name}
                 </span>
                 <div className="flex gap-4 flex-wrap">
                   <div className="flex gap-2 items-center">
                     <LocationIcon2 />
                     <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2]">
-                      Riyadh
+                      {user?.country?.title}
                     </span>
                   </div>
 
                   <div className="flex gap-2 items-center">
                     <CallIcon3 />
-                    <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2]">
-                      +966382423842
+                    <span
+                      className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2]"
+                      dir="ltr"
+                    >
+                      +{user?.intro} {user?.phone}
                     </span>
                   </div>
 
                   <div className="flex gap-2 items-center">
                     <MessageIcon />
                     <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2]">
-                      mdeslam1374@gmail.com
+                      {user?.email}
                     </span>
                   </div>
                 </div>
@@ -221,27 +228,73 @@ const Page = () => {
               {t("personalInformation")}
             </span>
             <div className="flex gap-x-6 gap-y-3 flex-wrap">
-              {/* <div className="flex justify-between w-[50%]">
-            <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5]">
-              test
-            </span>
-            <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2]">
-              test
-            </span>
-          </div> */}
-              {Object.entries(userProfile).map(([key, value]) => (
-                <div
-                  key={key}
-                  className="flex justify-between w-[48%] max-lg:w-full flex-wrap"
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("fullName")}:
+                </span>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%]">
+                  {user?.first_name} {user?.last_name}
+                </span>
+              </div>
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("birthDate")}:
+                </span>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%]">
+                  {user?.birth_date}
+                </span>
+              </div>
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("email")}:
+                </span>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%]">
+                  {user?.email}
+                </span>
+              </div>
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("phoneNumber")}:
+                </span>
+                <span
+                  className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%] rtl:text-right"
+                  dir="ltr"
                 >
-                  <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
-                    {key.replace(/([A-Z])/g, " $1").trim()}:
-                  </span>
-                  <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%]">
-                    {value}
-                  </span>
-                </div>
-              ))}
+                  +{user?.intro} {user?.phone}
+                </span>
+              </div>
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("gender")}:
+                </span>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%] capitalize">
+                  {user?.gender}
+                </span>
+              </div>
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("country")}:
+                </span>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%]">
+                  {user?.country?.title}
+                </span>
+              </div>
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("passportId")}:
+                </span>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%]">
+                  {user?.passport_id}
+                </span>
+              </div>
+              <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
+                <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
+                  {t("age")}:
+                </span>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[#2F2B3DB2] w-[50%]">
+                  {user?.age}
+                </span>
+              </div>
             </div>
             <Button className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)] font-medium text-[15px] leading-[22px] tracking-[0px] py-[6px] px-[32px] max-w-[158px] h-[32px]">
               {t("editProfile")}
@@ -335,12 +388,4 @@ const Page = () => {
 };
 
 export default Page;
-const userProfile = {
-  fullName: "Mohamed Eslam",
-  birthDate: "23 Feb 1999",
-  email: "mdeslam1999@gmail.com",
-  phoneNumber: "+9662175631223",
-  gender: "Male",
-  country: "KSA",
-  city: "Jaddeh",
-};
+// ... existing code ...

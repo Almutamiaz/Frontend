@@ -50,7 +50,7 @@ const SideBar = () => {
             ),
           },
           {
-            value: "wallet",
+            value: "Wallet",
             label: (
               <div className="flex gap-2 items-center">
                 <WalletIcon2 />
@@ -61,7 +61,7 @@ const SideBar = () => {
             ),
           },
           {
-            value: "favorite",
+            value: "Favorite",
             label: (
               <div className="flex gap-2 items-center">
                 <FavoriteIcon />
@@ -72,7 +72,7 @@ const SideBar = () => {
             ),
           },
           {
-            value: "notifications",
+            value: "Notifications",
             label: (
               <div className="flex gap-2 items-center">
                 <NotificationsIcon />

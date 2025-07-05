@@ -8,7 +8,16 @@ const LOCALES = ["en", "ar"]; // Define your supported locales
 
 const BreadCrumb = () => {
   const pathname = usePathname();
-  const BlockedPathes = ["MyReservations", "MyProfile", "AboutUs", "ContactUs","Download"];
+  const BlockedPathes = [
+    "MyReservations",
+    "MyProfile",
+    "AboutUs",
+    "ContactUs",
+    "Download",
+    "Wallet",
+    "Favorite",
+    "Notifications",
+  ];
   let pathSegments = pathname.split("/").filter((seg) => seg);
   const { locale } = useParams();
   const t = useTranslations();

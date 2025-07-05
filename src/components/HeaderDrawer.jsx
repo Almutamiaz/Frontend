@@ -53,6 +53,7 @@ const HeaderDrawer = () => {
             <Link
               href={`/${locale}/Account/SignIn`}
               className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
             >
               {" "}
               {t("loginSignup")}
@@ -60,6 +61,7 @@ const HeaderDrawer = () => {
             <Link
               href={`/${locale}`}
               className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
             >
               {" "}
               {t("home")}
@@ -67,6 +69,7 @@ const HeaderDrawer = () => {
             <Link
               href={`/${locale}/Explore`}
               className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
             >
               {" "}
               {t("explore")}
@@ -74,6 +77,7 @@ const HeaderDrawer = () => {
             <Link
               href={`/${locale}/Services`}
               className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
             >
               {" "}
               {t("services")}
@@ -81,6 +85,7 @@ const HeaderDrawer = () => {
             <Link
               href={`/${locale}/AboutUs`}
               className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
             >
               {" "}
               {t("aboutUs")}
@@ -88,6 +93,7 @@ const HeaderDrawer = () => {
             <Link
               href={`/${locale}/ContactUs`}
               className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
             >
               {" "}
               {t("contactUs")}
@@ -95,6 +101,7 @@ const HeaderDrawer = () => {
             <Link
               href="https://api.whatsapp.com/send/?phone=966533373079"
               className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
             >
               {" "}
               {t("support")}
@@ -104,6 +111,7 @@ const HeaderDrawer = () => {
               className={`hover:text-[var(--primary-color)] ${
                 locale == "en" ? "AlmaraiFont" : "InterFont"
               }`}
+              onClick={onClose}
             >
               {" "}
               {locale == "ar" ? "English" : "العربية"}
