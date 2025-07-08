@@ -1,5 +1,4 @@
 import React from "react";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import HakeemHealthCareLogo from "@/assets/icons/HakeemHealthCareLogo";
 
 const loading = () => {

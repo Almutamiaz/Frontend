@@ -4,11 +4,20 @@ import { Drawer } from "antd";
 import BurgerIcon from "@/assets/icons/BurgerIcon";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { useUser } from "@/Context/UserContext";
+import axiosInstance from "../../utils/axios";
+import { useAppNotification } from "@/Context/NotificationProvider";
+import axios from "axios";
+import LoadingSpinner from "./LoadingSpinner";
 const HeaderDrawer = () => {
   const { locale } = useParams();
   const pathname = usePathname();
   const t = useTranslations();
+  const { user, setUser } = useUser();
+  const [logoutLoading, setLogoutLoading] = useState(false);
+  const router = useRouter();
+  const notificationApi = useAppNotification();
   const cleanPathname = () => {
     const components = pathname.replace(/^\/|\/$/g, "").split("/");
     if (components[0] === "ar" || components[0] === "en") {
@@ -23,6 +32,54 @@ const HeaderDrawer = () => {
   };
   const onClose = () => {
     setOpen(false);
+  };
+
+  const fetchCSRF = async () => {
+    try {
+      const response = await axios.get("/backend/sanctum/csrf-cookie", {
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+    }
+  };
+  const handleLogout = async () => {
+    setLogoutLoading(true);
+    await fetchCSRF();
+    try {
+      const response = await axiosInstance.post("/auth/logout");
+      if (response.data.code === 200) {
+        router.push(`/${locale}`);
+        notificationApi.success({
+          message: response.data.message,
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            fontFamily: "var(--fontFamily)",
+          },
+        });
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    } catch (error) {
+      console.log(error);
+      notificationApi.error({
+        message: error.response?.data?.message,
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          fontFamily: "var(--fontFamily)",
+        },
+      });
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+      setLogoutLoading(false);
+      onClose();
+    }
   };
 
   return (
@@ -51,12 +108,12 @@ const HeaderDrawer = () => {
           </h2>
           <div className="flex flex-col *:text-[15px] *:font-medium *:leading-[22px] *:text-[var(--DescriptionsColor)] *:border-b *:border-b-solid *:border-b-[#ddd] *:py-3">
             <Link
-              href={`/${locale}/Account/SignIn`}
+              href={user ? `/${locale}/MyProfile` : `/${locale}/Account/SignIn`}
               className="hover:text-[var(--primary-color)]"
               onClick={onClose}
             >
               {" "}
-              {t("loginSignup")}
+              {user ? t("myProfile") : t("loginSignup")}
             </Link>
             <Link
               href={`/${locale}`}
@@ -116,6 +173,18 @@ const HeaderDrawer = () => {
               {" "}
               {locale == "ar" ? "English" : "العربية"}
             </Link>
+            {user && (
+              <span
+                className="hover:!text-[var(--primary-color)] !text-[var(--red)] cursor-pointer flex items-center gap-2"
+                onClick={() => {
+                  !logoutLoading && handleLogout();
+                }}
+              >
+                {" "}
+                {t("logout")}
+                {logoutLoading && <LoadingSpinner />}
+              </span>
+            )}
           </div>
         </div>
       </Drawer>

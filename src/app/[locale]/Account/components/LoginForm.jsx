@@ -226,6 +226,21 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
                 { validator: passwordValidator },
               ]}
               hasFeedback
+              moreProps={{
+                onKeyDown: (e) => {
+                  if (e.key === "Enter") {
+                    form
+                      .validateFields()
+                      .then((values) => {
+                        setLoading(true);
+                        handleLogin(values);
+                      })
+                      .catch((error) => {
+                        console.log("Validation failed:", error);
+                      });
+                  }
+                },
+              }}
             />
           </div>
         </Form>

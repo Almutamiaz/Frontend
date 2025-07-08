@@ -111,6 +111,7 @@ const AntdFormItem = ({
               </svg>
             )
           }
+          {...moreProps}
         />
       ) : otpInput ? (
         <Input.OTP length={4} {...sharedProps} ref={otpRef} />

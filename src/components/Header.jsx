@@ -25,21 +25,43 @@ const Header = () => {
   const { user, setUser } = useUser();
   const [loading, setLoading] = useState(true);
   const { locale } = useParams();
+  
   const fetchUserData = async () => {
+    // Check if token exists in localStorage
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
     try {
       const { data } = await axiosInstance.get("/my-profile");
-      setUser(data?.data);
+      if (data?.data) {
+        setUser(data.data);
+      } else {
+        setUser(null);
+        localStorage.removeItem("token");
+      }
     } catch (error) {
+      console.error("Header authentication error:", error.response?.data || error.message);
       setUser(null);
-      console.error("Error:", error.response?.data || error.message);
+      localStorage.removeItem("token");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    user?.id ? setLoading(false) : fetchUserData();
-  }, []);
+    // If user is already authenticated, no need to check again
+    if (user?.id) {
+      setLoading(false);
+      return;
+    }
+    
+    fetchUserData();
+  }, [user?.id, setUser]);
+
   return (
     <div
       className="HakeemHeader border-2 border-[#FFFFFFAD] h-[76px] rounded-[100px] absolute top-8 container self-center px-10 flex items-center justify-between overflow-hidden"

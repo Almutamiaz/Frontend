@@ -161,12 +161,6 @@ const Page = async ({ params }) => {
                         <StarIcon2 key={index} />
                       )
                     )}
-
-                    {/* <StarIcon2 />
-                    <StarIcon2 />
-                    <StarIcon2 />
-                    <StarIcon2 />
-                    <StarIcon2 /> */}
                   </div>
                   <span className="font-[Almarai] text-[var(--neutral-900)] font-bold text-sm leading-6 tracking-[0px]">
                     {rate?.comment}

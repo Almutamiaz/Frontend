@@ -7,6 +7,7 @@ import axiosInstance from "../../../../utils/axios";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 const BookNowSection = ({ Offer }) => {
+  console.log(Offer)
   const t = useTranslations();
   const [selectedDoctor, setSelectedDoctor] = useState(
     Offer?.providers.length == 1 ? Offer?.providers[0]?.id : null

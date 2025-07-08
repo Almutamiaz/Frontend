@@ -6,17 +6,22 @@ import { useTranslations } from "next-intl";
 import SignUpForm from "../components/SignUpForm";
 import SignUpVerificationCode from "../components/SignUpVerificationCode";
 import { useState } from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const Page = () => {
   const t = useTranslations();
   const [showVerificationCode, setShowVerificationCode] = useState(false);
   const [phoneNum, setPhoneNum] = useState();
+  const { locale } = useParams();
   return !showVerificationCode ? (
     <div className="flex max-sm:flex-wrap z-[1]">
       <div className="w-[55.5%] max-sm:w-full bg-[var(--neutral-100)] pt-10">
         <div className=" flex justify-center items-center	gap-10 flex-col min-h-[800px]">
           <div className="flex justify-start max-w-[466px] w-full max-[900px]:justify-center">
-            <Logo />
+            <Link href={`/${locale}`}>
+              <Logo />
+            </Link>
           </div>
           <div className="flex flex-col gap-6 max-w-[466px] w-full">
             <div className="flex flex-col gap-8 max-[900px]:items-center">
@@ -49,7 +54,7 @@ const Page = () => {
       </div>
     </div>
   ) : (
-    <SignUpVerificationCode phoneNum={phoneNum}/>
+    <SignUpVerificationCode phoneNum={phoneNum} />
   );
 };
 
