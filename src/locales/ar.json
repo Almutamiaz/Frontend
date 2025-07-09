@@ -131,7 +131,7 @@
   "total": "الإجمالي",
   "discount": "الخصم",
   "fees": "الرسوم",
-  "enterPromoCode": "أدخل رمز الخصم",
+  "enterPromoCode": "أدخل كود الخصم",
   "apply": "تطبيق",
   "selectPaymentMethod": "اختر طريقة الدفع",
   "applePay": "أبل باي",
@@ -301,6 +301,11 @@
   "selectDate": "اختر التاريخ",
   "selectDateBasedOnAvailability": "اختر التاريخ المناسب بحسب المواعيد المتاحة",
   "selectTimeBasedOnAvailability": "اختر الوقت المناسب بحسب المواعيد المتاحة",
+  "pleaseSelectAvailableDayForYou": "الرجاء اختيار اليوم المتاح لك",
+  "pleaseSelectAvailableTimeForYou": "الرجاء اختيار الوقت المتاح لك",
+  "bookingDetails": "تفاصيل الحجز",
+  "priceDetails": "تفاصيل السعر",
+  "pleaseEnterPromoCode": "الرجاء إدخال كود العرض الترويجي",
 
   "hakeem": "حكيم للرعاية الطبية",
   "hakeemDescription": "حكيم للرعاية الطبية - منصة الرعاية الطبية المتكاملة"

@@ -17,6 +17,7 @@ const AntdFormItem = ({
   rules,
   dependencies,
   onOtpInput,
+  suffix,
 }) => {
   const otpRef = useRef(null);
   const [correctOtp, setCorrectOtp] = useState(false);
@@ -135,7 +136,7 @@ const AntdFormItem = ({
           placeholder={placeholder}
         />
       ) : (
-        <Input placeholder={placeholder} />
+        <Input placeholder={placeholder} suffix={suffix} />
       )}
     </Form.Item>
   );

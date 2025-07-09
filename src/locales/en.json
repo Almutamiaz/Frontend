@@ -301,6 +301,11 @@
   "selectDate": "Select date",
   "selectDateBasedOnAvailability": "Select an appropriate date based on available appointments",
   "selectTimeBasedOnAvailability": "Select an appropriate time based on available appointments",
+  "pleaseSelectAvailableDayForYou": "Please select available day for you",
+  "pleaseSelectAvailableTimeForYou": "Please select available time for you",
+  "bookingDetails": "Booking Details",
+  "priceDetails": "Price details",
+  "pleaseEnterPromoCode": "Please enter promo code",
 
   "hakeem": "Hakeem Healthcare",
   "hakeemDescription": "Hakeem - Your Healthcare Platform"

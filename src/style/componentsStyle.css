@@ -55,6 +55,10 @@
   background-color: var(--neutral-100);
   border: 1px solid #d4d4d48c;
 }
+.promoCodeInput input {
+  border: none !important;
+}
+
 .customInputNumberStyle input {
   border-radius: 8px;
   background-color: var(--neutral-100);

@@ -185,7 +185,7 @@ const Page = async ({ params }) => {
             >
               {t("bookAppointment")}
             </div>
-            <div className="mt-[96px] px-[17px] flex flex-col gap-8 ">
+            <div className="mt-[96px] px-[17px] flex flex-col gap-8">
               <div className="flex gap-8 flex-wrap">
                 <div className="flex gap-3">
                   <div className="w-[56px] h-[56px] flex justify-center items-center bg-[var(--neutral-200)] rounded-[50%] overflow-hidden">
@@ -216,17 +216,6 @@ const Page = async ({ params }) => {
               </div>
               <div className="h-[1px] w-full bg-[#E7E7E7]"></div>
               <BookNowSection Offer={Offer} />
-              <div className="h-[1px] w-full bg-[#E7E7E7]"></div>
-              <Button
-                style={{
-                  backgroundColor: "#6441EF",
-                  borderColor: "var(--primary-300)",
-                }}
-                className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)]"
-                // onClick={() => setBookNow(true)}
-              >
-                <Link href={`/${locale}/Download`}>{t("bookNow")}</Link>
-              </Button>
             </div>
           </div>
           <div className="border border-[#E7E7E7] rounded-[12px] bg-[var(--neutral-100)] relative flex flex-col h-fit p-6 pb-[38px] gap-6">

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import AntdFormItem from "@/components/AntdFormItem";
 import { Button, Form, Select } from "antd";
 import { useTranslations } from "next-intl";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import axiosInstance from "../../../../../utils/axios";
 import axios from "axios";
@@ -23,7 +23,8 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
   const [countryFetchLoading, setCountryFetchLoading] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const { setUser } = useUser();
-
+  const searchParams = useSearchParams();
+  const redirectRoute = searchParams.get("redirect");
   const notificationApi = useAppNotification();
   const router = useRouter();
   const showNotification = (message) => {
@@ -103,7 +104,11 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
         showNotification(response.data.message);
         localStorage.setItem("token", response?.data?.data?.token);
         setUser(response?.data?.data);
-        router.push(`/${locale}`);
+        if (redirectRoute) {
+          router.push(redirectRoute);
+        } else {
+          router.push(`/${locale}`);
+        }
       }
     } catch (error) {
       notificationApi.error({
