@@ -6,13 +6,14 @@ import React, { useEffect, useRef, useState } from "react";
 import axiosInstance from "../../../../utils/axios";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Link from "next/link";
-import { Button, Form, Switch } from "antd";
+import { Button, Form, Radio, Switch } from "antd";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useUser } from "@/Context/UserContext";
 import ArrowIcon from "@/assets/icons/ArrowIcon";
 import AntdFormItem from "@/components/AntdFormItem";
-import CalendarIcon from "@/assets/icons/CalendarIcon";
-
+import { CloseOutlined } from "@ant-design/icons";
+import { useAppNotification } from "@/Context/NotificationProvider";
+import Image from "next/image";
 const BookNowSection = ({ Offer }) => {
   const { user } = useUser();
   const { locale } = useParams();
@@ -20,6 +21,8 @@ const BookNowSection = ({ Offer }) => {
   const t = useTranslations();
   const pathname = usePathname();
   const BookingSectionRef = useRef(null);
+  const notificationApi = useAppNotification();
+  const [paymentMethod, setPaymentMethod] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState(
     Offer?.providers.length == 1 ? Offer?.providers[0]?.id : null
   );
@@ -37,7 +40,13 @@ const BookNowSection = ({ Offer }) => {
     useState(false);
   const [form] = Form.useForm();
   const [paymentMethods, setPaymentMethods] = useState([]);
+  const [fetchPaymentMethodsLoading, setFetchPaymentMethodsLoading] =
+    useState(false);
   const [walletDetails, setWalletDetails] = useState(null);
+  const [invoiceDetails, setInvoiceDetails] = useState(null);
+  const [useWallet, setUseWallet] = useState(null);
+  const [fetchInvoiceLoading, setFetchInvoiceLoading] = useState(false);
+  const [showPaymentMethods, setShowPaymentMethods] = useState(false);
   const getAvailableDays = async () => {
     setLoading(true);
     try {
@@ -57,16 +66,24 @@ const BookNowSection = ({ Offer }) => {
   };
 
   const getPaymentMethods = async () => {
+    setFetchPaymentMethodsLoading(true);
     try {
       const response = await axiosInstance.get(
         `/offer/payment/methods?offer_id=${Offer.id}`
       );
       if (response.data.code === 200) {
+        response?.data?.data?.length == 1 &&
+          setPaymentMethod(response?.data?.data[0]?.id);
         setPaymentMethods(response?.data?.data);
+        // Trigger animation after a short delay
+        setTimeout(() => {
+          setShowPaymentMethods(true);
+        }, 100);
       }
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
     } finally {
+      setFetchPaymentMethodsLoading(false);
     }
   };
   const getWalletDetails = async () => {
@@ -75,6 +92,7 @@ const BookNowSection = ({ Offer }) => {
         `/wallet/details?offer_id=${Offer.id}`
       );
       if (response.data.code === 200) {
+        setUseWallet(response?.data?.data?.total_price > 0 ? 1 : 0);
         setWalletDetails(response?.data?.data);
       }
     } catch (error) {
@@ -87,10 +105,14 @@ const BookNowSection = ({ Offer }) => {
     getAvailableDays();
   }, [selectedDoctor]);
 
+  useEffect(() => {
+    getWalletDetails();
+  }, []);
+
   const fetchData = async () => {
     setFetchWalletDetailsLoading(true);
     try {
-      await Promise.all([getPaymentMethods(), getWalletDetails()]);
+      await Promise.all([showInvoice()]);
       const element = BookingSectionRef.current;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - 220;
@@ -103,6 +125,47 @@ const BookNowSection = ({ Offer }) => {
       console.error("Error fetching data:", error);
     } finally {
       setFetchWalletDetailsLoading(false);
+    }
+  };
+
+  const showInvoice = async (formValues) => {
+    setFetchInvoiceLoading(true);
+    try {
+      const couponCode = formValues?.promoCode || "";
+      const response = await axiosInstance.get(
+        `/offer/show/invoice?offer_id=${Offer.id}&coupon_code=${couponCode}&main_service_id=14&use_wallet=${useWallet}`
+      );
+      if (response.data.code === 200) {
+        setInvoiceDetails(response?.data?.data);
+        formValues?.promoCode &&
+          notificationApi.success({
+            message: t("couponActivated"),
+            showProgress: true,
+            pauseOnHover: true,
+            style: {
+              fontFamily: "var(--fontFamily)",
+            },
+          });
+      }
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+      // notificationApi.error({
+      //   message: error.response?.data?.message,
+      //   showProgress: true,
+      //   pauseOnHover: true,
+      //   style: {
+      //     fontFamily: "var(--fontFamily)",
+      //   },
+      // });
+      // Set the promoCode field in error status
+      form.setFields([
+        {
+          name: "promoCode",
+          errors: [error.response?.data?.message || t("invalidPromoCode")],
+        },
+      ]);
+    } finally {
+      setFetchInvoiceLoading(false);
     }
   };
 
@@ -343,13 +406,20 @@ const BookNowSection = ({ Offer }) => {
             <div className="flex rounded-[16px] justify-between py-5 px-4 bg-[#7E53FD1A] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)]">
               <span className="font-bold text-sm leading-6 tracking-[0px] text-[var(--primary-800)]">
                 {t("wallet")}{" "}
-                {`(${walletDetails?.total_price} ${walletDetails?.currency})`}
+                <span className="font-medium">
+                  {`(${walletDetails?.total_price} ${walletDetails?.currency})`}
+                </span>
               </span>
               <Switch
                 className="antdSwitchStyle2"
+                checked={useWallet}
                 onChange={(e) => {
-                  // setInsuranceCompanyEnabled(e);
+                  setUseWallet(e ? 1 : 0);
                 }}
+                disabled={walletDetails?.total_price == 0}
+                unCheckedChildren={
+                  walletDetails?.total_price == 0 ? <CloseOutlined /> : null
+                }
               />
             </div>
             <Form form={form}>
@@ -359,14 +429,37 @@ const BookNowSection = ({ Offer }) => {
                 required
                 requiredMessage={t("pleaseEnterPromoCode")}
                 name="promoCode"
+                moreProps={{
+                  onKeyDown: (e) => {
+                    if (e.key === "Enter") {
+                      form
+                        .validateFields()
+                        .then((values) => {
+                          !fetchInvoiceLoading && showInvoice(values);
+                        })
+                        .catch((error) => {
+                          showInvoice();
+                          console.log("Validation failed:", error);
+                        });
+                    }
+                  },
+                }}
                 suffix={
                   <span
                     className="text-[var(--color1)] font-[500] text-[16px] leading-[24.2px] tracking-[0px] cursor-pointer"
                     onClick={() => {
-                      alert("f");
+                      form
+                        .validateFields()
+                        .then((values) => {
+                          !fetchInvoiceLoading && showInvoice(values);
+                        })
+                        .catch((error) => {
+                          showInvoice();
+                          console.log("Validation failed:", error);
+                        });
                     }}
                   >
-                    {t("apply")}
+                    {fetchInvoiceLoading ? <LoadingSpinner /> : t("apply")}
                   </span>
                 }
               />
@@ -416,37 +509,114 @@ const BookNowSection = ({ Offer }) => {
             <div className="flex flex-col gap-4">
               <div className="flex justify-between">
                 <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
-                  {t("servicesCost")}
+                  {t("servicePrice")}
                 </span>
                 <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
-                  700 SR
+                  {invoiceDetails?.original_price} {walletDetails?.currency}
                 </span>
               </div>
-              <div className="flex justify-between">
-                <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
-                  {t("fees")}
-                </span>
-                <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
-                  0 SR
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
-                  {t("discount")}
-                </span>
-                <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
-                  0 SR
-                </span>
-              </div>
+
+              {invoiceDetails?.coupon_discount_value > 0 && (
+                <div className="flex justify-between">
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
+                    {t("couponDiscount")}{" "}
+                    {`(${invoiceDetails?.coupon_discount_percentage}%)`}
+                  </span>
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
+                    {invoiceDetails?.coupon_discount_value}{" "}
+                    {walletDetails?.currency}
+                  </span>
+                </div>
+              )}
+
+              {invoiceDetails?.pay_in_hospital > 0 && (
+                <div className="flex justify-between">
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
+                    {t("remainingAmount")}
+                  </span>
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
+                    {invoiceDetails?.pay_in_hospital} {walletDetails?.currency}
+                  </span>
+                </div>
+              )}
+              {invoiceDetails?.wallet_deduction > 0 && (
+                <div className="flex justify-between">
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
+                    {t("walletDeduction")}
+                  </span>
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
+                    {invoiceDetails?.wallet_deduction} {walletDetails?.currency}
+                  </span>
+                </div>
+              )}
+              {invoiceDetails?.vat_value > 0 && (
+                <div className="flex justify-between">
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
+                    {t("tax")} {`(${invoiceDetails?.vat_percentage}%)`}
+                  </span>
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
+                    {invoiceDetails?.vat_value} {walletDetails?.currency}
+                  </span>
+                </div>
+              )}
+              {invoiceDetails?.must_pay_online > 0 && (
+                <div className="flex justify-between">
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--darkColor)]">
+                    {t("subtotal")}
+                  </span>
+                  <span className="font-medium text-sm leading-6 tracking-[0px] text-[var(--DescriptionColor)]">
+                    {invoiceDetails?.must_pay_online} {walletDetails?.currency}
+                  </span>
+                </div>
+              )}
             </div>
             <div className="flex justify-between items-center h-[61px] bg-[#7E53FD1A] rounded-xl p-[20px] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-2px_rgba(0,0,0,0.05)]">
               <span className="font-bold text-sm leading-6 tracking-[0px] text-[var(--primary-800)]">
                 {t("total")}
               </span>
               <span className="font-bold text-sm leading-6 tracking-[0px] text-[var(--primary-800)]">
-                700 SR
+                {invoiceDetails?.final_price} {walletDetails?.currency}
               </span>
             </div>
+          </div>
+          <div
+            className="flex flex-col gap-2"
+            style={{
+              // borderWidth: bookingForSomeone ? "1px" : "0px",
+              // paddingTop: bookingForSomeone ? "30px" : "0px",
+              // paddingBottom: bookingForSomeone ? "30px" : "0px",
+              maxHeight:
+                showPaymentMethods && paymentMethods?.length > 0
+                  ? "500px"
+                  : "0px",
+              opacity: showPaymentMethods && paymentMethods?.length > 0 ? 1 : 0,
+              overflow: "hidden",
+              transition: "all ease-in-out 0.6s",
+            }}
+          >
+            {paymentMethods?.map((method) => (
+              <div
+                key={method?.id}
+                className="flex rounded-[16px] py-2 px-6 border border-[#E7E7E7] bg-[var(--neutral-100)] justify-between items-center h-[64px]"
+              >
+                <div className="flex gap-4 items-center">
+                  <Image
+                    src={method?.photo}
+                    alt={method?.title}
+                    width={48}
+                    height={48}
+                  />
+                  <span className="font-semibold text-base leading-6 tracking-[0px] text-[var(--color1)]">
+                    {method?.title}
+                  </span>
+                </div>
+                <Radio
+                  className="radioPaymentMethod"
+                  checked={method?.id == paymentMethod}
+                  onClick={() => setPaymentMethod(method?.id)}
+                />
+              </div>
+            ))}
           </div>
         </>
       )}
@@ -471,7 +641,11 @@ const BookNowSection = ({ Offer }) => {
             backgroundColor: "#6441EF",
             borderColor: "var(--primary-300)",
           }}
-          disabled={fetchWalletDetailsLoading}
+          disabled={
+            fetchWalletDetailsLoading ||
+            fetchInvoiceLoading ||
+            fetchPaymentMethodsLoading
+          }
           className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)] w-full search-button"
           onClick={() => {
             if (!selectedDay || !selectedTime) {
@@ -486,22 +660,25 @@ const BookNowSection = ({ Offer }) => {
             if (user) {
               if (bookingStatus == 0) {
                 fetchData();
-              } else {
-                form
-                  .validateFields()
-                  .then((values) => {
-                    console.log(values);
-                  })
-                  .catch((error) => {
-                    console.log("Validation failed:", error);
-                  });
+              } else if (bookingStatus == 1) {
+                getPaymentMethods();
+                // form
+                //   .validateFields()
+                //   .then((values) => {
+                //     console.log(values);
+                //   })
+                //   .catch((error) => {
+                //     console.log("Validation failed:", error);
+                //   });
               }
             } else {
               router.push(`/${locale}/Account/SignIn?redirect=${pathname}`);
             }
           }}
         >
-          {fetchWalletDetailsLoading && (
+          {(fetchWalletDetailsLoading ||
+            fetchInvoiceLoading ||
+            fetchPaymentMethodsLoading) && (
             <LoadingSpinner color="var(--neutral-100)" />
           )}
           {t(bookingStatus == 0 ? "bookNow" : "goToPayment")}

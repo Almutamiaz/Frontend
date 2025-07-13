@@ -306,6 +306,12 @@
   "bookingDetails": "تفاصيل الحجز",
   "priceDetails": "تفاصيل السعر",
   "pleaseEnterPromoCode": "الرجاء إدخال كود العرض الترويجي",
+  "remainingAmount": "المبلغ المتبقي",
+  "tax": "الضريبة",
+  "subtotal": "المبلغ الجزئي",
+  "walletDeduction": "خصم المحفظة",
+  "couponDiscount": "قيمة الخصم",
+  "couponActivated": "تم تفعيل الكوبون",
 
   "hakeem": "حكيم للرعاية الطبية",
   "hakeemDescription": "حكيم للرعاية الطبية - منصة الرعاية الطبية المتكاملة"

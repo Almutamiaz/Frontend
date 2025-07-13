@@ -306,6 +306,12 @@
   "bookingDetails": "Booking Details",
   "priceDetails": "Price details",
   "pleaseEnterPromoCode": "Please enter promo code",
+  "remainingAmount": "Remaining Amount",
+  "tax": "Tax",
+  "subtotal": "Subtotal",
+  "walletDeduction": "Wallet Deduction",
+  "couponDiscount": "Coupon Discount",
+  "couponActivated": "Coupon activated.",
 
   "hakeem": "Hakeem Healthcare",
   "hakeemDescription": "Hakeem - Your Healthcare Platform"

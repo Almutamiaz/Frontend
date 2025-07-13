@@ -136,7 +136,7 @@ const AntdFormItem = ({
           placeholder={placeholder}
         />
       ) : (
-        <Input placeholder={placeholder} suffix={suffix} />
+        <Input placeholder={placeholder} suffix={suffix} {...moreProps} />
       )}
     </Form.Item>
   );
