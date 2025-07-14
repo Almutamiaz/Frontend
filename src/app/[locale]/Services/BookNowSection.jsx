@@ -47,6 +47,8 @@ const BookNowSection = ({ Offer }) => {
   const [useWallet, setUseWallet] = useState(null);
   const [fetchInvoiceLoading, setFetchInvoiceLoading] = useState(false);
   const [showPaymentMethods, setShowPaymentMethods] = useState(false);
+  const [addOrderLoading, setAddOrderLoading] = useState(false);
+  const [orderDetails, setOrderDetails] = useState(null);
   const getAvailableDays = async () => {
     setLoading(true);
     try {
@@ -166,6 +168,44 @@ const BookNowSection = ({ Offer }) => {
       ]);
     } finally {
       setFetchInvoiceLoading(false);
+    }
+  };
+
+  const addOrder = async () => {
+    setAddOrderLoading(true);
+    const body = {
+      offer_id: Offer.id,
+      doctor_id: selectedDoctor,
+      booking_date: selectedDay,
+      booking_hour: selectedTime,
+      main_service_id: 14,
+      payment_method_id: paymentMethod,
+      use_wallet: useWallet,
+      check_inside_hospital: 0,
+      hospital_id: Offer.hospital.id,
+    };
+    try {
+      const response = await axiosInstance.post("/add-order", body);
+      if (response.data.code === 200) {
+        setOrderDetails(response.data.data);
+        const width = 800;
+        const height = 600;
+        const left = window.screenX + (window.outerWidth - width) / 2;
+        const top = window.screenY + (window.outerHeight - height) / 2;
+        const url =
+          paymentMethod == 1
+            ? `https://api-dev.hakeem.com.sa/api/paytabs/payment?order_id=${response.data.data.id}`
+            : `https://api-dev.hakeem.com.sa/api/tamara/payment?order_id=${response.data.data.id}`;
+        window.open(
+          url,
+          "_blank",
+          `noopener,noreferrer,width=${width},height=${height},left=${left},top=${top}`
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+      setAddOrderLoading(false);
     }
   };
 
@@ -644,7 +684,8 @@ const BookNowSection = ({ Offer }) => {
           disabled={
             fetchWalletDetailsLoading ||
             fetchInvoiceLoading ||
-            fetchPaymentMethodsLoading
+            fetchPaymentMethodsLoading ||
+            addOrderLoading
           }
           className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)] w-full search-button"
           onClick={() => {
@@ -661,15 +702,11 @@ const BookNowSection = ({ Offer }) => {
               if (bookingStatus == 0) {
                 fetchData();
               } else if (bookingStatus == 1) {
-                getPaymentMethods();
-                // form
-                //   .validateFields()
-                //   .then((values) => {
-                //     console.log(values);
-                //   })
-                //   .catch((error) => {
-                //     console.log("Validation failed:", error);
-                //   });
+                if (paymentMethod) {
+                  addOrder();
+                } else {
+                  getPaymentMethods();
+                }
               }
             } else {
               router.push(`/${locale}/Account/SignIn?redirect=${pathname}`);
@@ -678,9 +715,8 @@ const BookNowSection = ({ Offer }) => {
         >
           {(fetchWalletDetailsLoading ||
             fetchInvoiceLoading ||
-            fetchPaymentMethodsLoading) && (
-            <LoadingSpinner color="var(--neutral-100)" />
-          )}
+            fetchPaymentMethodsLoading ||
+            addOrderLoading) && <LoadingSpinner color="var(--neutral-100)" />}
           {t(bookingStatus == 0 ? "bookNow" : "goToPayment")}
         </Button>
       </div>
