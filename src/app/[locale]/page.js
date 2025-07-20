@@ -159,7 +159,7 @@ async function generateStructuredData(seoData, locale) {
   };
 }
 
-export default async function HomePage() {
+export default async function HomePage({ params, isRootPage }) {
   const t = await getTranslations();
   const locale = await getLocale();
   const seoData = await getSeoData();
@@ -487,7 +487,8 @@ export default async function HomePage() {
           </div>
         </div>
         {/* FOOTER SECTION */}
-        <Footer />
+        {/* Only render Footer if not rendered from root page */}
+        {!isRootPage && <Footer />}
         <FiltersDrawer />
       </div>
     </>

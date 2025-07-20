@@ -8,6 +8,10 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: "ar",
   localeDetection: false,
+  // Make the default locale (Arabic) available without a prefix
+  localePrefix: "as-needed",
+  // Use pathname strategy for URLs
+  urlMappingStrategy: 'pathname',
 });
 
 // Lightweight wrappers around Next.js' navigation APIs

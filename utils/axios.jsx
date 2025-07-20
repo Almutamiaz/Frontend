@@ -1,43 +1,53 @@
 import axios from "axios";
+import { routing } from '@/i18n/routing';
 
-// const full = `${request}//${host}`;
-// const request = window.location.protocol;
-// const host = window.location.host;
-// const fullUrl = window.location.href;
-// console.log(request);
-// console.log(host);
-// console.log(fullUrl);
-
-// Get the pathname from the URL (e.g., "/ar/Account/SignUp")
-const pathName = window.location.pathname;
-
-// Split the pathname into segments and filter out any empty strings
-const segments = pathName.split("/").filter((segment) => segment.length > 0);
-
-// Check if the first segment is "ar" or "en". Default to "ar" if not.
-const locale =
-  segments[0] === "ar" || segments[0] === "en" ? segments[0] : "ar";
-
-// console.log(locale); // Outputs "ar" for http://localhost:3000/ar/Account/SignUp
-
+// Create an axios instance with server-side safe configuration
 const axiosInstance = axios.create({
   baseURL: "/backend/api/site",
   withCredentials: true,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: localStorage.getItem("token") || "",
-    "X-localization": locale,
+    // Don't set Authorization header by default on server
+    "X-localization": routing.defaultLocale,
   },
 });
-axiosInstance.interceptors.request.use(function (config) {
+
+// Client-side only code
+if (typeof window !== 'undefined') {
+  // Function to get the locale from the URL path
+  const getLocaleFromPath = () => {
+    const pathName = window.location.pathname;
+    const segments = pathName.split("/").filter((segment) => segment.length > 0);
+    
+    // If the first segment is "en", then use "en"
+    // Otherwise, for root path or any non-locale-prefixed path, use "ar"
+    return segments.length > 0 && segments[0] === "en" 
+      ? "en" 
+      : "ar";
+  };
+
+  // Set locale header based on current path
+  axiosInstance.defaults.headers["X-localization"] = getLocaleFromPath();
+  
+  // Set token if available
   const token = localStorage.getItem("token");
-  config.headers.Authorization = token;
-  return config;
-});
+  if (token) {
+    axiosInstance.defaults.headers.Authorization = token;
+  }
 
-//  console.log(document.querySelector('meta[name="csrf-token"]')?.getAttribute('content'))
-
-// axiosInstance.defaults.withCredentials = true;
+  // Add request interceptor to update headers on each request
+  axiosInstance.interceptors.request.use(function (config) {
+    // Update locale on each request in case it changed
+    config.headers["X-localization"] = getLocaleFromPath();
+    
+    // Update token on each request in case it changed
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = token;
+    }
+    return config;
+  });
+}
 
 export default axiosInstance;
