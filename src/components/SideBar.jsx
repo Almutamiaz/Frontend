@@ -12,15 +12,157 @@ import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 const AllowedPaths = ["/en/MyReservations"];
-const SideBar = () => {
+const SideBar = ({ responsive = false, setSideBarDrawer }) => {
   const pathname = usePathname();
   const t = useTranslations();
   const router = useRouter();
-  // return AllowedPaths.includes(pathname) ? <div>test</div> : null;
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 900);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   // accountSettings
-  return (
-    <div className="py-7 px-3 w-[273px] shadow-[0_2px_8px_0_#2F2B3D1F] flex flex-col gap-3">
+  return !responsive ? (
+    <div className="py-7 px-3 max-[900px]:px-2 max-[900px]:py-2 w-[273px] max-[900px]:w-[60px] shadow-[0_2px_8px_0_#2F2B3D1F] flex flex-col gap-3 max-[600px]:hidden transition-all duration-300 ease-in-out">
+      <Segmented
+        className="SideBarSegmented notDrawer w-full"
+        vertical
+        options={[
+          {
+            value: "MyReservations",
+            label: (
+              <div className="flex gap-2 items-center">
+                <MyReservationsIcon />
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
+                  {t("myReservations")}
+                </span>
+              </div>
+            ),
+          },
+          {
+            value: "MyProfile",
+            label: (
+              <div className="flex gap-2 items-center">
+                <div className="px-[2px]">
+                  <MyProfileIcon />
+                </div>
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
+                  {t("myProfile")}
+                </span>
+              </div>
+            ),
+          },
+          {
+            value: "Wallet",
+            label: (
+              <div className="flex gap-2 items-center">
+                <WalletIcon2 />
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
+                  {t("wallet")}
+                </span>
+              </div>
+            ),
+          },
+          {
+            value: "Favorite",
+            label: (
+              <div className="flex gap-2 items-center">
+                <FavoriteIcon />
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
+                  {t("favorite")}
+                </span>
+              </div>
+            ),
+          },
+          {
+            value: "Notifications",
+            label: (
+              <div className="flex gap-2 items-center">
+                <NotificationsIcon />
+                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
+                  {t("notifications")}
+                </span>
+              </div>
+            ),
+          },
+          ...(isMobile
+            ? [
+                {
+                  value: "settings",
+                  label: (
+                    <div className="flex gap-2 items-center">
+                      <SettingsIcon2 />
+                    </div>
+                  ),
+                },
+              ]
+            : []),
+          ...(isMobile
+            ? [
+                {
+                  value: "logout",
+                  label: (
+                    <div className="flex gap-2 items-center">
+                      <LogoutIcon />
+                    </div>
+                  ),
+                },
+              ]
+            : []),
+        ]}
+        value={pathname.split("/").pop()}
+        onChange={(e) => router.push(e)}
+      />
+      {!isMobile && (
+        <>
+          <div className="w-full h-[1px] bg-[#E7E7E7] max-[900px]:hidden"></div>
+          <Collapse
+            size="small"
+            className="SettingSideBarCollapse"
+            expandIconPosition={"end"}
+            bordered={false}
+            ghost
+            expandIcon={({ isActive }) => (
+              <DownArrow
+                color={"var(--DescriptionColor)"}
+                w={14}
+                h={7}
+                deg={isActive ? -90 : 0}
+              />
+            )}
+            items={[
+              {
+                key: "1",
+                label: (
+                  <div className="flex gap-2 items-center">
+                    <SettingsIcon2 />
+                    <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
+                      {t("accountSettings")}
+                    </span>
+                  </div>
+                ),
+                children: <p>accountSettings</p>,
+              },
+            ]}
+          />
+          <div className="flex gap-2 items-center ps-4 cursor-pointer">
+            <LogoutIcon />
+            <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--red)] max-[900px]:hidden">
+              {t("logout")}
+            </span>
+          </div>
+        </>
+      )}
+    </div>
+  ) : (
+    <div className="py-7 px-1 w-[273px] flex flex-col gap-3 ">
       <Segmented
         className="SideBarSegmented w-full"
         vertical
@@ -84,7 +226,10 @@ const SideBar = () => {
           },
         ]}
         value={pathname.split("/").pop()}
-        onChange={(e) => router.push(e)}
+        onChange={(e) => {
+          router.push(e);
+          setSideBarDrawer(false);
+        }}
       />
       <div className="w-full h-[1px] bg-[#E7E7E7]"></div>
       <Collapse

@@ -142,6 +142,7 @@ async function generateStructuredData(seoData, locale) {
 }
 
 const Page = async ({ searchParams }) => {
+  console.log("test here")
   const t = await getTranslations();
   const locale = await getLocale();
   const seoData = await getSeoData();

@@ -10,9 +10,9 @@ import CallIcon2 from "@/assets/icons/CallIcon2";
 const DoctorCardMyReservations = () => {
   const t = useTranslations();
   return (
-    <div className="p-6 rounded-xl shadow-[0_3px_8px_0_#D2D2D240] flex flex-col gap-4 min-w-[412px]">
+    <div className="p-6 rounded-xl shadow-[0_3px_8px_0_#D2D2D240] flex flex-col gap-4 w-full">
       <div className="flex gap-3 items-center">
-        <div className="w-[60px] h-[60px]">
+        <div className="w-[60px] h-[60px] flex-shrink-0">
           <Image
             src={DummyDoctorImage}
             alt="User Name"
@@ -21,7 +21,7 @@ const DoctorCardMyReservations = () => {
         </div>
         <div className="flex justify-between items-center flex-1">
           <div className="flex flex-col">
-            <span className="font-medium text-base leading-6 tracking-[0px] text-[#101010]">
+            <span className="font-medium text-base leading-6 tracking-[0px] text-[#101010] whitespace-nowrap">
               Dr. Salim Samy
             </span>
             <span className="font-medium text-sm leading-[21px] tracking-[0px] text-[var(--DescriptionsColor)]">
@@ -80,7 +80,7 @@ const DoctorCardMyReservations = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <div className="flex justify-center items-center cursor-pointer w-full px-[22px] py-[13px] text-[var(--DescriptionsColor)] border border-[var(--DescriptionsColor)] rounded-[100px] font-medium text-sm leading-[22px] tracking-[0px] h-12">
+          <div className="flex justify-center items-center cursor-pointer w-full px-[22px] py-[13px] text-[var(--DescriptionsColor)] border border-[var(--DescriptionsColor)] rounded-[100px] font-medium text-sm leading-[22px] tracking-[0px] h-12 whitespace-nowrap">
             {t("cancelReservation")}
           </div>
         </div>

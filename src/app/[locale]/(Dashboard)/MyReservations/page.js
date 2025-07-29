@@ -1,6 +1,7 @@
 "use client";
 import DoctorCardMyReservations from "@/components/DoctorCardMyReservations";
 import Tag from "@/components/Tag";
+import { Col, Row } from "antd";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
@@ -8,9 +9,9 @@ const Page = () => {
   const [activeTab, setActiveTab] = useState(1);
   const t = useTranslations();
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 pb-3">
       {/* tags section */}
-      <div className="flex gap-1">
+      <div className="flex gap-1 overflow-x-auto scrollbar-hide pb-2 ps-1">
         <Tag
           active={activeTab === 1}
           key={1}
@@ -68,9 +69,27 @@ const Page = () => {
           activeTextColorProp="var(--primary-color)"
         />
       </div>
-      <div className="flex gap-6 flex-wrap">
-        <DoctorCardMyReservations />
-      </div>
+      {/* <div className="flex gap-6 flex-wrap"> */}
+      <Row gutter={[12, 12]} className="w-full">
+        {Array.from({ length: 5 }, (_, index) => (
+          <Col
+            key={index}
+            // xs={24} sm={24} md={24}
+            xs={24}
+            sm={24}
+            md={24}
+            lg={24}
+            xl={12}
+            xxl={8}
+          >
+            <DoctorCardMyReservations />
+          </Col>
+        ))}
+      </Row>
+
+      {/* <DoctorCardMyReservations />
+        <DoctorCardMyReservations /> */}
+      {/* </div> */}
     </div>
   );
 };

@@ -227,7 +227,7 @@ const Page = () => {
             <span className="font-bold text-lg leading-[28px] tracking-[0px] text-[#2F2B3DE5]">
               {t("personalInformation")}
             </span>
-            <div className="flex gap-x-6 gap-y-3 flex-wrap">
+            <div className="flex gap-x-6 gap-y-3 flex-wrap overflow-hidden">
               <div className="flex justify-between w-[48%] max-lg:w-full flex-wrap">
                 <span className="font-medium text-sm leading-[22px] tracking-[0px] text-[#2F2B3DE5] capitalize w-[50%]">
                   {t("fullName")}:

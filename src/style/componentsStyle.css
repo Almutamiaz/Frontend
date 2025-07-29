@@ -193,6 +193,19 @@
   background-color: #e7e7e7;
   font-family: var(--fontFamily);
 }
+@media screen and (max-width: 900px) {
+  .SideBarSegmented.notDrawer .ant-segmented-item-selected {
+    padding-inline-start: 0;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .SideBarSegmented .ant-segmented-item {
+    padding-inline-start: 0;
+    padding: 8px;
+  }
+}
 .SideBarSegmented .ant-segmented-thumb {
   background-color: #e7e7e7;
 }

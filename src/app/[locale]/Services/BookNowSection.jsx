@@ -199,7 +199,7 @@ const BookNowSection = ({ Offer }) => {
         window.open(
           url,
           "_blank",
-          `noopener,noreferrer,width=${width},height=${height},left=${left},top=${top}`
+          // `noopener,noreferrer,width=${width},height=${height},left=${left},top=${top}`
         );
       }
     } catch (error) {
