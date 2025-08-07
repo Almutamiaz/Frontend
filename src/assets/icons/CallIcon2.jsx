@@ -1,4 +1,4 @@
-const CallIcon2 = ({ color = "white" }) => {
+const CallIcon2 = ({ color = "white", className = "" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ const CallIcon2 = ({ color = "white" }) => {
       height="16"
       viewBox="0 0 17 16"
       fill="none"
+      className={className}
     >
       <path
         fillRule="evenodd"

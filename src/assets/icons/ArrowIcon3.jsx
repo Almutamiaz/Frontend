@@ -16,10 +16,10 @@ const ArrowIcon3 = () => {
         d="m1.414 1.414 5.953 5.953 5.954-5.953"
         fill="none"
         stroke="#fff"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-miterlimit="10"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10"
+        strokeWidth="2"
         data-name="Down Arrow Icon"
       ></path>
     </svg>

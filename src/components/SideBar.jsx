@@ -9,13 +9,23 @@ import SettingsIcon2 from "@/assets/icons/SettingsIcon2";
 import WalletIcon2 from "@/assets/icons/WalletIcon2";
 import { Collapse, Segmented } from "antd";
 import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import { usePathname, useRouter, useParams } from "next/navigation";
+import React, { useState } from "react";
+import { useUser } from "@/Context/UserContext";
+import axiosInstance from "../../utils/axios";
+import { useAppNotification } from "@/Context/NotificationProvider";
+import axios from "axios";
+import LoadingSpinner from "./LoadingSpinner";
+
 const AllowedPaths = ["/en/MyReservations"];
 const SideBar = ({ responsive = false, setSideBarDrawer }) => {
   const pathname = usePathname();
+  const { locale } = useParams();
   const t = useTranslations();
   const router = useRouter();
+  const { user, setUser } = useUser();
+  const [logoutLoading, setLogoutLoading] = useState(false);
+  const notificationApi = useAppNotification();
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
@@ -27,6 +37,53 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  const fetchCSRF = async () => {
+    try {
+      const response = await axios.get("/backend/sanctum/csrf-cookie", {
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+    }
+  };
+
+  const handleLogout = async () => {
+    setLogoutLoading(true);
+    await fetchCSRF();
+    try {
+      const response = await axiosInstance.post("/auth/logout");
+      if (response.data.code === 200) {
+        router.push(`/${locale}`);
+        notificationApi.success({
+          message: response.data.message,
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            fontFamily: "var(--fontFamily)",
+          },
+        });
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    } catch (error) {
+      console.log(error);
+      notificationApi.error({
+        message: error.response?.data?.message,
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          fontFamily: "var(--fontFamily)",
+        },
+      });
+      console.error("Error:", error.response?.data || error.message);
+    } finally {
+      setLogoutLoading(false);
+    }
+  };
 
   // accountSettings
   return !responsive ? (
@@ -70,17 +127,17 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
               </div>
             ),
           },
-          {
-            value: "Favorite",
-            label: (
-              <div className="flex gap-2 items-center">
-                <FavoriteIcon />
-                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
-                  {t("favorite")}
-                </span>
-              </div>
-            ),
-          },
+          // {
+          //   value: "Favorite",
+          //   label: (
+          //     <div className="flex gap-2 items-center">
+          //       <FavoriteIcon />
+          //       <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)] max-[900px]:hidden">
+          //         {t("favorite")}
+          //       </span>
+          //     </div>
+          //   ),
+          // },
           {
             value: "Notifications",
             label: (
@@ -118,7 +175,13 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
             : []),
         ]}
         value={pathname.split("/").pop()}
-        onChange={(e) => router.push(e)}
+        onChange={(e) => {
+          if (e === "logout") {
+            handleLogout();
+          } else {
+            router.push(e);
+          }
+        }}
       />
       {!isMobile && (
         <>
@@ -148,15 +211,27 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
                     </span>
                   </div>
                 ),
-                children: <p>accountSettings</p>,
+                children: (
+                  <p
+                    onClick={() => {
+                      router.push(`/${locale}/Settings`);
+                    }}
+                  >
+                    accountSettings
+                  </p>
+                ),
               },
             ]}
           />
-          <div className="flex gap-2 items-center ps-4 cursor-pointer">
+          <div
+            className="flex gap-2 items-center ps-4 cursor-pointer"
+            onClick={() => !logoutLoading && handleLogout()}
+          >
             <LogoutIcon />
             <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--red)] max-[900px]:hidden">
               {t("logout")}
             </span>
+            {logoutLoading && <LoadingSpinner />}
           </div>
         </>
       )}
@@ -202,17 +277,17 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
               </div>
             ),
           },
-          {
-            value: "Favorite",
-            label: (
-              <div className="flex gap-2 items-center">
-                <FavoriteIcon />
-                <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)]">
-                  {t("favorite")}
-                </span>
-              </div>
-            ),
-          },
+          // {
+          //   value: "Favorite",
+          //   label: (
+          //     <div className="flex gap-2 items-center">
+          //       <FavoriteIcon />
+          //       <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--DescriptionColor)]">
+          //         {t("favorite")}
+          //       </span>
+          //     </div>
+          //   ),
+          // },
           {
             value: "Notifications",
             label: (
@@ -237,6 +312,7 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
         className="SettingSideBarCollapse"
         expandIconPosition={"end"}
         bordered={false}
+        activeKey={[1]}
         ghost
         expandIcon={({ isActive }) => (
           <DownArrow
@@ -248,7 +324,7 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
         )}
         items={[
           {
-            key: "1",
+            key: 1,
             label: (
               <div className="flex gap-2 items-center">
                 <SettingsIcon2 />
@@ -257,15 +333,27 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
                 </span>
               </div>
             ),
-            children: <p>accountSettings</p>,
+            children: (
+              <p
+                onClick={() => {
+                  router.push(`/${locale}/Settings`);
+                }}
+              >
+                accountSettings
+              </p>
+            ),
           },
         ]}
       />
-      <div className="flex gap-2 items-center ps-4 cursor-pointer">
+      <div
+        className="flex gap-2 items-center ps-4 cursor-pointer"
+        onClick={() => !logoutLoading && handleLogout()}
+      >
         <LogoutIcon />
         <span className="font-normal text-sm leading-[22px] tracking-[0px] text-[var(--red)]">
           {t("logout")}
         </span>
+        {logoutLoading && <LoadingSpinner />}
       </div>
     </div>
   );

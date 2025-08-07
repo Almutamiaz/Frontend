@@ -17,6 +17,7 @@ const BreadCrumb = () => {
     "Wallet",
     "Favorite",
     "Notifications",
+    "Settings",
   ];
   let pathSegments = pathname.split("/").filter((seg) => seg);
   const { locale } = useParams();

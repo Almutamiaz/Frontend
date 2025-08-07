@@ -17,6 +17,9 @@ const Tag = ({
   href,
   categoryId,
   tabId,
+  px,
+  py,
+  width,
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -52,8 +55,9 @@ const Tag = ({
 
   const content = (
     <div
-      className={`px-6 py-[10px] rounded-[1000px] cursor-pointer text-[16px] font-medium leading-[19.36px] flex gap-[10px] items-center whitespace-nowrap ${classNameProp}`}
+      className={`px-6 rounded-[1000px] cursor-pointer text-[16px] font-medium leading-[19.36px] flex gap-[10px] items-center whitespace-nowrap ${classNameProp}`}
       style={{
+        padding: `${py ? py : "10"}px ${px ? px : "24"}px`,
         background: active
           ? activBgColorProp || "var(--primary-300)"
           : bgColorProp || "var(--neutral-100)",
@@ -64,6 +68,7 @@ const Tag = ({
           ? "none"
           : `1px solid ${active ? "var(--primary-300)" : "var(--neutral-200)"}`,
         transition: "all ease-in-out 0.3s",
+        width: width ? width : "auto",
       }}
       onClick={handleClick}
     >
