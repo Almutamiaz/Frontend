@@ -1,5 +1,7 @@
 {
   "welcomeBack": "Welcome Back!",
+  "nationality": "Nationality",
+    
   "accessMedicalServices": "Access your medical services quickly and securely.",
   "forgotPassword": "Forgot Password?",
   "login": "Login",
@@ -153,6 +155,16 @@
   "wallet": "Wallet",
   "walletBalance": "Wallet Balance",
   "availableForTransactions": "Available for transactions",
+  "transactionHistory": "Transaction History",
+  "recentWalletTransactions": "Your recent wallet transactions",
+  "transaction": "Transaction",
+  "recent": "Recent",
+  "refund": "Refund",
+  "recharge": "Recharge",
+  "credit": "Credit",
+  "debit": "Debit",
+  "noTransactionsYet": "No transactions yet",
+  "transactionHistoryAppearHere": "Your transaction history will appear here once you make your first transaction.",
   "loadingWalletDetails": "Loading wallet details...",
   "errorLoadingWalletDetails": "Error loading wallet details",
   "favorite": "Favorite",
@@ -197,6 +209,8 @@
   "profileCompletedSuccessfully": "Profile Completed Successfully!",
   "congratulationsProfileComplete": "Congratulations! Your profile is now complete. You’ve unlocked exclusive features and are ready to enjoy the full experience. Start exploring and make the most of your journey!",
   "enterYourPhoneNumber": "Enter your Phone number",
+  "profileUpdatedSuccessfully": "Profile Updated Successfully!",
+  "errorUpdatingProfile": "Error updating profile. Please try again.",
   "passportId": "Passport ID",
   "dateOfBirth": "Date of Birth",
   "pleaseEnterFirstName": "Please enter your first name",
@@ -329,7 +343,13 @@
   "awaitingImplementation": "Awaiting Implementation",
   "inProgress": "In Progress",
   "rejected": "Rejected",
-
+  "accountData": "Account data",
+  "medicalRecordOptional": "Medical record (optional)",
+  "insuranceCompanyOptional": "Insurance company (optional)",
+  "personalProfile": "Personal Profile",
+  "update": "Update",
+  "idOrResidenceNumber": "ID / Residence Number",
+  "pleaseEnterIdOrResidenceNumber": "Please enter your ID or residence number",
   "hakeem": "Hakeem Healthcare",
   "hakeemDescription": "Hakeem - Your Healthcare Platform"
 }

@@ -31,7 +31,7 @@ const Page = () => {
     if (currency === "ر.س" || currency === "SAR") {
       isoCurrency = "SAR";
     }
-    
+
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: isoCurrency || "SAR",
@@ -76,20 +76,20 @@ const Page = () => {
           {/* Wallet Balance Card */}
           <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg">
             <div className="flex items-center justify-between">
-                              <div>
-                  <h2 className="text-lg font-medium opacity-90">
-                    {t("walletBalance")}
-                  </h2>
-                  <div className="text-3xl font-bold mt-2">
-                    {formatCurrency(
-                      walletDetails.total_price,
-                      walletDetails.currency
-                    )}
-                  </div>
-                  <p className="text-sm opacity-80 mt-1">
-                    {t("availableForTransactions")}
-                  </p>
+              <div>
+                <h2 className="text-lg font-medium opacity-90">
+                  {t("walletBalance")}
+                </h2>
+                <div className="text-3xl font-bold mt-2">
+                  {formatCurrency(
+                    walletDetails.total_price,
+                    walletDetails.currency
+                  )}
                 </div>
+                <p className="text-sm opacity-80 mt-1">
+                  {t("availableForTransactions")}
+                </p>
+              </div>
               <div className="bg-white bg-opacity-20 rounded-full p-3">
                 <svg
                   className="w-8 h-8"
@@ -109,13 +109,13 @@ const Page = () => {
           </div>
 
           {/* Transactions Section */}
-          {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="p-6 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-800">
-                Transaction History
+                {t("transactionHistory")}
               </h3>
               <p className="text-sm text-gray-600 mt-1">
-                Your recent wallet transactions
+                {t("recentWalletTransactions")}
               </p>
             </div>
 
@@ -129,46 +129,86 @@ const Page = () => {
                       className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
                     >
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <div
+                          className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                            transaction.type === "+" || transaction.is_recharge
+                              ? "bg-green-100"
+                              : transaction.is_refund
+                              ? "bg-orange-100"
+                              : "bg-red-100"
+                          }`}
+                        >
                           <svg
-                            className="w-5 h-5 text-blue-600"
+                            className={`w-5 h-5 ${
+                              transaction.type === "+" ||
+                              transaction.is_recharge
+                                ? "text-green-600"
+                                : transaction.is_refund
+                                ? "text-orange-600"
+                                : "text-red-600"
+                            }`}
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                            />
+                            {transaction.type === "+" ||
+                            transaction.is_recharge ? (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                              />
+                            ) : transaction.is_refund ? (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
+                              />
+                            ) : (
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                              />
+                            )}
                           </svg>
                         </div>
                         <div>
                           <div className="font-medium text-gray-800">
-                            {transaction.type || "Transaction"}
+                            {transaction.description || t("transaction")}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {transaction.date || "Recent"}
+                            {transaction.created_at || t("recent")}
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
                         <div
                           className={`font-semibold ${
-                            transaction.amount > 0
+                            transaction.type === "+" || transaction.is_recharge
                               ? "text-green-600"
                               : "text-red-600"
                           }`}
                         >
-                          {transaction.amount > 0 ? "+" : ""}
+                          {transaction.type === "+" || transaction.is_recharge
+                            ? "+"
+                            : "-"}
                           {formatCurrency(
-                            transaction.amount,
+                            Math.abs(transaction.amount),
                             walletDetails.currency
                           )}
                         </div>
                         <div className="text-xs text-gray-500">
-                          {transaction.status || "Completed"}
+                          {transaction.is_refund
+                            ? t("refund")
+                            : transaction.is_recharge
+                            ? t("recharge")
+                            : transaction.type === "+"
+                            ? t("credit")
+                            : t("debit")}
                         </div>
                       </div>
                     </div>
@@ -192,16 +232,15 @@ const Page = () => {
                     </svg>
                   </div>
                   <h4 className="text-lg font-medium text-gray-800 mb-2">
-                    No transactions yet
+                    {t("noTransactionsYet")}
                   </h4>
                   <p className="text-gray-500">
-                    Your transaction history will appear here once you make your
-                    first transaction.
+                    {t("transactionHistoryAppearHere")}
                   </p>
                 </div>
               )}
             </div>
-          </div> */}
+          </div>
         </>
       )}
     </div>

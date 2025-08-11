@@ -216,8 +216,9 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
                     onClick={() => {
                       router.push(`/${locale}/Settings`);
                     }}
+                    className="cursor-pointer"
                   >
-                    accountSettings
+                    {t("personalProfile")}
                   </p>
                 ),
               },
@@ -338,8 +339,9 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
                 onClick={() => {
                   router.push(`/${locale}/Settings`);
                 }}
+                className="cursor-pointer"
               >
-                accountSettings
+                {t("personalProfile")}
               </p>
             ),
           },

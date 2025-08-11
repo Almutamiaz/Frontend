@@ -274,6 +274,27 @@ body {
   transform: rotateY(180deg);
 }
 
+.avatar-uploader .ant-upload.ant-upload-select {
+  width: 120px !important;
+  height: 120px !important;
+  border: 2px dashed var(--primary-color) !important;
+}
+
+.avatar-uploader .ant-upload-list-item-container {
+  width: 120px !important;
+  height: 120px !important;
+}
+
+.avatar-uploader .ant-upload.ant-upload-select,
+.avatar-uploader .ant-upload-list-item-container {
+  margin: 0px !important;
+}
+
+.avatar-uploader .ant-upload-list-picture-circle {
+  width: 120px !important;
+  height: 120px !important;
+}
+
 /* LANDINGPAGE RESPONSIVE DESIGN */
 @media screen and (max-width: 600px) {
   .HakeemHeader {

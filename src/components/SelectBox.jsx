@@ -1,6 +1,7 @@
 "use client";
 import DownArrow from "@/assets/icons/DownArrow";
 import { Grid, Select, Spin } from "antd";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 const { useBreakpoint } = Grid;
 const SelectBox = ({
@@ -16,6 +17,7 @@ const SelectBox = ({
   loading,
   fullWidthInSm,
   disabled = false,
+  showImageInDropdown = false,
 }) => {
   const screens = useBreakpoint();
   const isLessThanSM = !screens.sm;
@@ -52,10 +54,54 @@ const SelectBox = ({
       // allowClear
       showSearch
       // onSearch={(value) => console.log(value)}
-      options={options}
+      options={
+        !showImageInDropdown
+          ? options
+          : (options || []).map((option) => {
+              if (option && option.flag) {
+                return {
+                  ...option,
+                  // keep a plain-text label for searching
+                  searchLabel:
+                    typeof option.label === "string" ? option.label : "",
+                  // render flag + label in UI
+                  label: (
+                    <div
+                      style={{ display: "flex", alignItems: "center", gap: 8 }}
+                    >
+                      {/* use img to avoid SSR/Next Image constraints inside dropdown */}
+                      <Image
+                        src={option.flag}
+                        alt=""
+                        width={18}
+                        height={12}
+                        style={{
+                          display: "block",
+                          objectFit: "cover",
+                          borderRadius: 2,
+                        }}
+                      />
+                      <span>
+                        {typeof option.label === "string"
+                          ? option.label
+                          : option?.text || ""}
+                      </span>
+                    </div>
+                  ),
+                };
+              }
+              return option;
+            })
+      }
       loading={loading}
       value={onChange ? value : +newValue || null}
-      optionFilterProp="label"
+      optionFilterProp={
+        !showImageInDropdown
+          ? "label"
+          : (options || []).some((o) => o && o.flag)
+          ? "searchLabel"
+          : "label"
+      }
       placeholder={placeholder}
       suffixIcon={
         <div

@@ -25,7 +25,7 @@ const axiosInstance = axios.create({
   withCredentials: true,
   headers: {
     Accept: "application/json",
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
     Authorization: localStorage.getItem("token") || "",
     "X-localization": locale,
   },

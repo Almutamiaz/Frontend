@@ -505,6 +505,14 @@
   border: 1px solid #c0c0c0 !important;
 }
 
+.selectBoxStyle2 .ant-select-selector {
+  border: 1px solid #e8ecf4 !important;
+}
+
+.selectBoxStyle2 .ant-select-selector:focus-within {
+  border: 1px solid var(--primary-color) !important;
+}
+
 .InputNumberStyle {
   width: 100%;
   border-radius: 100px;
