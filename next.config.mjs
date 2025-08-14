@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const isProd = process.env.NODE_ENV === "production";
 const nextConfig = {
   reactStrictMode: false,
-  trailingSlash: true,
+  trailingSlash: false,
   images: {
     domains: ["api-dev.hakeem.com.sa"],
   },
@@ -14,7 +14,7 @@ const nextConfig = {
   rewrites: () => [
     {
       source: "/backend/:path*",
-      destination: isProd
+      destination: false
         ? "https://api.hakeem.com.sa/:path*"
         : "https://api-dev.hakeem.com.sa/:path*",
     },

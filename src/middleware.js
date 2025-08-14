@@ -1,11 +1,14 @@
 import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 import { NextResponse } from "next/server";
 
-// Define the middleware function with specific handling for the root path
-export function middleware(request) {
+const supportedLocales = routing.locales;
+const defaultLocale = routing.defaultLocale;
+
+export default function middleware(request) {
   const { pathname } = request.nextUrl;
-  
-  // Skip middleware for certain paths to prevent infinite loops
+
+  // Skip static files, API, and backend paths
   if (
     pathname.startsWith("/api") ||
     pathname.includes("backend") ||
@@ -16,23 +19,30 @@ export function middleware(request) {
   ) {
     return NextResponse.next();
   }
-  
-  // For all other paths, use the next-intl middleware
-  const handleI18nRouting = createMiddleware({
-    // The locales you want to support
-    locales: ["ar", "en"],
-    // Arabic is available at / without a prefix
-    defaultLocale: "ar",
-    // Only add locale prefix for non-default locales (so only /en/... gets a prefix)
-    localePrefix: "as-needed",
-    // Don't automatically redirect based on the user's locale preference
-    localeDetection: false
-  });
-  
-  return handleI18nRouting(request);
+
+  // Match only the first path segment
+  const localeMatch = pathname.match(/^\/([^\/]+)(?:\/|$)/);
+  if (localeMatch) {
+    const maybeLocale = localeMatch[1];
+
+    if (supportedLocales.includes(maybeLocale)) {
+      // If the URL contains the default locale, redirect to the version without it
+      if (maybeLocale === defaultLocale) {
+        const withoutDefault = pathname.replace(new RegExp(`^\/${defaultLocale}(?:\/|$)`), "/");
+        const newPathname = withoutDefault === "" ? "/" : withoutDefault;
+        const url = request.nextUrl.clone();
+        url.pathname = newPathname;
+        return NextResponse.redirect(url);
+      }
+      // Non-default locale present: allow and continue
+    }
+    // If the first segment is not a locale, allow path as-is (default locale implied)
+  }
+
+  // Fallback to next-intl's middleware
+  return createMiddleware(routing)(request);
 }
 
-// Configure which paths should be processed by this middleware
 export const config = {
-  matcher: ["/((?!api|backend|_next|favicon.ico|robots.txt).*)"]
+  matcher: ["/((?!_next|favicon.ico|robots.txt|api|backend).*)"],
 };

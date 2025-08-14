@@ -140,6 +140,14 @@ const HeaderDrawer = () => {
               {t("services")}
             </Link>
             <Link
+              href={`/${locale}/Doctors`}
+              className="hover:text-[var(--primary-color)]"
+              onClick={onClose}
+            >
+              {" "}
+              {t("doctors")}
+            </Link>
+            <Link
               href={`/${locale}/AboutUs`}
               className="hover:text-[var(--primary-color)]"
               onClick={onClose}
