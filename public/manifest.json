@@ -1,0 +1,25 @@
+{
+  "name": "Hakeem - Your Health Companion",
+  "short_name": "Hakeem",
+  "theme_color": "#593BB4",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "description": "Find top doctors and book appointments with Hakeem - your healthcare companion in Saudi Arabia",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

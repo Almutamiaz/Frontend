@@ -13,6 +13,7 @@ export default function middleware(request) {
     pathname.startsWith("/api") ||
     pathname.includes("backend") ||
     pathname.startsWith("/_next") ||
+    pathname.startsWith("/.well-known") ||
     pathname === "/favicon.ico" ||
     pathname === "/robots.txt"
   ) {
@@ -20,25 +21,22 @@ export default function middleware(request) {
   }
 
   // Match only the first path segment
-  const localeMatch = pathname.match(/^\/([^\/]+)(\/|$)/);
+  const localeMatch = pathname.match(/^\/([^\/]+)(?:\/|$)/);
   if (localeMatch) {
-    const locale = localeMatch[1];
+    const maybeLocale = localeMatch[1];
 
-    // Redirect if the matched segment is not a valid locale
-    if (!supportedLocales.includes(locale)) {
-      const newPathname = `/${defaultLocale}${pathname.replace(
-        /^\/[^\/]+/,
-        ""
-      )}`;
-      const url = request.nextUrl.clone();
-      url.pathname = newPathname;
-      return NextResponse.redirect(url);
+    if (supportedLocales.includes(maybeLocale)) {
+      // If the URL contains the default locale, redirect to the version without it
+      if (maybeLocale === defaultLocale) {
+        const withoutDefault = pathname.replace(new RegExp(`^\/${defaultLocale}(?:\/|$)`), "/");
+        const newPathname = withoutDefault === "" ? "/" : withoutDefault;
+        const url = request.nextUrl.clone();
+        url.pathname = newPathname;
+        return NextResponse.redirect(url);
+      }
+      // Non-default locale present: allow and continue
     }
-  } else {
-    // If there's no locale in the path, prepend the default
-    const url = request.nextUrl.clone();
-    url.pathname = `/${defaultLocale}${pathname}`;
-    return NextResponse.redirect(url);
+    // If the first segment is not a locale, allow path as-is (default locale implied)
   }
 
   // Fallback to next-intl's middleware
