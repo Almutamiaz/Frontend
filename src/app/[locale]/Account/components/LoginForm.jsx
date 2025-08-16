@@ -12,6 +12,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAppNotification } from "@/Context/NotificationProvider";
 import Image from "next/image";
 import { useUser } from "@/Context/UserContext";
+import { fetchCSRFToken } from "../../../../../utils/csrf";
 const { Option } = Select;
 
 const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
@@ -76,30 +77,23 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
     return Promise.resolve();
   };
 
-  const fetchCSRF = async () => {
-    try {
-      const response = await axios.get("/backend/sanctum/csrf-cookie", {
-        withCredentials: true,
-        headers: {
-          Accept: "application/json",
-        },
-      });
-    } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-    } finally {
-    }
-  };
   const handleLogin = async (values) => {
-    await fetchCSRF();
-    const body = {
-      emailOrPhone: values.phone,
-      password: values.password,
-      intro: +countries.find((country) => country.id === selectedCountry)
-        ?.phone_code,
-    };
-
     try {
+      // Fetch CSRF token first
+      console.log("Fetching CSRF token...");
+      await fetchCSRFToken();
+      console.log("CSRF token fetched successfully");
+      
+      const body = {
+        emailOrPhone: values.phone,
+        password: values.password,
+        intro: +countries.find((country) => country.id === selectedCountry)
+          ?.phone_code,
+      };
+
+      console.log("Attempting login with body:", body);
       const response = await axiosInstance.post("/auth/login-patient", body);
+      
       if (response.data.code === 200) {
         showNotification(response.data.message);
         localStorage.setItem("token", response?.data?.data?.token);
@@ -111,15 +105,35 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
         }
       }
     } catch (error) {
-      notificationApi.error({
-        message: error.response?.data?.message,
-        showProgress: true,
-        pauseOnHover: true,
-        style: {
-          fontFamily: "var(--fontFamily)",
-        },
+      console.error("Login error details:", {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        headers: error.response?.headers,
       });
-      console.error("Error:", error.response?.data || error.message);
+      
+      if (error.response?.status === 419) {
+        // CSRF token mismatch
+        console.error("CSRF token mismatch detected");
+        notificationApi.error({
+          message: "CSRF token mismatch. Please try refreshing the page.",
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            fontFamily: "var(--fontFamily)",
+          },
+        });
+      } else {
+        notificationApi.error({
+          message: error.response?.data?.message || "Login failed. Please try again.",
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            fontFamily: "var(--fontFamily)",
+          },
+        });
+      }
+      
       if (error.response?.data?.code == 410) {
         setPhoneNum({
           phone: values.phone,

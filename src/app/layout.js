@@ -79,6 +79,9 @@ export default async function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         
+        {/* CSRF token meta tag - will be populated by the CSRF fetch */}
+        <meta name="csrf-token" content="" />
+        
         {/* Additional WhatsApp meta tags */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

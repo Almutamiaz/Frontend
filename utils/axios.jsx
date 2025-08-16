@@ -1,5 +1,6 @@
 import axios from "axios";
 import { routing } from '@/i18n/routing';
+import { fetchCSRFToken } from './csrf';
 
 // Create an axios instance with server-side safe configuration
 const axiosInstance = axios.create({
@@ -33,7 +34,7 @@ if (typeof window !== 'undefined') {
   // Set token if available
   const token = localStorage.getItem("token");
   if (token) {
-    axiosInstance.defaults.headers.Authorization = token;
+    axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
   }
 
   // Add request interceptor to update headers on each request
@@ -44,10 +45,41 @@ if (typeof window !== 'undefined') {
     // Update token on each request in case it changed
     const token = localStorage.getItem("token");
     if (token) {
-      config.headers.Authorization = token;
+      config.headers.Authorization = `Bearer ${token}`;
     }
+    
+    // Ensure CSRF token is included if available
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    if (csrfToken) {
+      config.headers['X-CSRF-TOKEN'] = csrfToken;
+    }
+    
     return config;
   });
+
+  // Add response interceptor to handle common errors
+  axiosInstance.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      if (error.response?.status === 419) {
+        // CSRF token mismatch - try to refresh it
+        console.log("CSRF token mismatch, attempting to refresh...");
+        try {
+          await fetchCSRFToken();
+          // Retry the original request with the new token
+          const originalRequest = error.config;
+          const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+          if (csrfToken) {
+            originalRequest.headers['X-CSRF-TOKEN'] = csrfToken;
+            return axiosInstance(originalRequest);
+          }
+        } catch (refreshError) {
+          console.error("Failed to refresh CSRF token:", refreshError);
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
 }
 
 export default axiosInstance;
