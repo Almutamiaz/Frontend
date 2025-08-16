@@ -17,7 +17,7 @@ const API_CONFIG = {
   },
 };
 
-const currentConfig = isProd ? API_CONFIG.production : API_CONFIG.development;
+const currentConfig = false ? API_CONFIG.production : API_CONFIG.development;
 
 const nextConfig = {
   reactStrictMode: false,
