@@ -90,7 +90,7 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
     }
   };
   const handleLogin = async (values) => {
-    await fetchCSRF();
+    // await fetchCSRF();
     const body = {
       emailOrPhone: values.phone,
       password: values.password,
