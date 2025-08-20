@@ -89,9 +89,9 @@ const LoginForm = ({ setShowVerificationCode, setPhoneNum }) => {
     } finally {
     }
   };
-  console.log("first")
+  
   const handleLogin = async (values) => {
-    // await fetchCSRF();
+    await fetchCSRF();
     const body = {
       emailOrPhone: values.phone,
       password: values.password,

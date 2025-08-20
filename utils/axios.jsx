@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
   withCredentials: true,
   headers: {
     Accept: "application/json",
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
     // Don't set Authorization header by default on server
     "X-localization": routing.defaultLocale,
   },

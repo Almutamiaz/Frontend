@@ -1,6 +1,10 @@
 {
   "welcomeBack": "مرحبًا بعودتك!",
   "nationality": "الجنسية",
+  "cancelReason": "سبب الإلغاء",
+  "close": "إغلاق",
+  "confirm": "تأكيد",
+
   "accessMedicalServices": "قم بالوصول إلى خدماتك الطبية بسرعة وأمان.",
   "forgotPassword": "هل نسيت كلمة المرور؟",
   "login": "تسجيل الدخول",

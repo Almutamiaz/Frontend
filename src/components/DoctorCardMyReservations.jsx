@@ -1,14 +1,18 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import DummyDoctorImage from "@/assets/images/DummyDoctorImage.jpg";
 import Tag from "./Tag";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "antd";
 import CallIcon from "@/assets/icons/CallIcon";
 import CallIcon2 from "@/assets/icons/CallIcon2";
+import { useRouter } from "next/navigation";
 
-const DoctorCardMyReservations = ({ reservation }) => {
+const DoctorCardMyReservations = ({ reservation, cancelReservation }) => {
   const t = useTranslations();
+  const router = useRouter();
+  const locale = useLocale();
 
   // Helper function to parse booking date and time
   const parseBookingDateTime = (bookingDateString) => {
@@ -108,19 +112,37 @@ const DoctorCardMyReservations = ({ reservation }) => {
       <div className="w-full h-[1px] bg-[#E7E7E7]"></div>
       <div className="flex gap-2">
         <div className="flex-1">
-          <Button className="group hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)] w-full h-12">
+          <Button
+            className={`group w-full h-12 ${
+              !reservation?.can_call
+                ? ""
+                : "hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)]"
+            }`}
+            onClick={() => {
+              router.push(`/${locale}/Download`);
+            }}
+            disabled={!reservation?.can_call}
+          >
             <CallIcon2
               color="white"
-              className="group-hover:[&>path]:fill-[#6441EF] transition-colors"
+              className={`${
+                !reservation?.can_call
+                  ? ""
+                  : "group-hover:[&>path]:fill-[#6441EF]"
+              } transition-colors`}
             />
             {t("call")}
           </Button>
         </div>
+
         {reservation?.can_cancel && (
           <div className="flex-1">
-            <div className="flex justify-center items-center cursor-pointer w-full px-[22px] py-[13px] text-[var(--DescriptionsColor)] border border-[var(--DescriptionsColor)] rounded-[100px] font-medium text-sm leading-[22px] tracking-[0px] h-12 whitespace-nowrap">
+            <Button
+              className="flex justify-center items-center cursor-pointer w-full px-[22px] py-[13px] text-[var(--DescriptionsColor)] border border-[var(--DescriptionsColor)] rounded-[100px] font-medium text-sm leading-[22px] tracking-[0px] h-12 whitespace-nowrap bg-[var(--neutral-100)]"
+              onClick={() => cancelReservation(reservation)}
+            >
               {t("cancelReservation")}
-            </div>
+            </Button>
           </div>
         )}
       </div>

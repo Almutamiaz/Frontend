@@ -197,7 +197,7 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
                 color={"var(--DescriptionColor)"}
                 w={14}
                 h={7}
-                deg={isActive ? -90 : 0}
+                deg={isActive ? (locale === "ar" ? 90 : -90) : 0}
               />
             )}
             items={[
@@ -320,7 +320,7 @@ const SideBar = ({ responsive = false, setSideBarDrawer }) => {
             color={"var(--DescriptionColor)"}
             w={14}
             h={7}
-            deg={isActive ? -90 : 0}
+            deg={isActive ? (locale === "ar" ? -90 : 90) : 0}
           />
         )}
         items={[

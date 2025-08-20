@@ -1,7 +1,10 @@
 {
   "welcomeBack": "Welcome Back!",
   "nationality": "Nationality",
-    
+  "cancelReason": "Cancel Reason",
+  "close": "Close",
+"confirm": "Confirm",
+
   "accessMedicalServices": "Access your medical services quickly and securely.",
   "forgotPassword": "Forgot Password?",
   "login": "Login",

@@ -21,6 +21,8 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import { useUser } from "@/Context/UserContext";
 import { useAppNotification } from "@/Context/NotificationProvider";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 import axios from "axios";
 import axiosInstance from "../../../../../utils/axios";
 const { Option } = Select;
@@ -96,8 +98,8 @@ const Page = () => {
   const convertDateStringToDayjs = (dateString) => {
     if (!dateString) return null;
 
-    // Parse date in format "17 Mar 2025"
-    const date = dayjs(dateString, "DD MMM YYYY");
+    // Parse date in formats like "6 Mar 2025" or "17 Mar 2025"
+    const date = dayjs(dateString, ["D MMM YYYY", "DD MMM YYYY"], true);
 
     // Check if the date is valid
     if (date.isValid()) {
@@ -106,7 +108,7 @@ const Page = () => {
 
     // If parsing fails, return null
     console.warn(
-      `Could not parse date "${dateString}" with format "DD MMM YYYY"`
+      `Could not parse date "${dateString}" with formats ["D MMM YYYY", "DD MMM YYYY"]`
     );
     return null;
   };

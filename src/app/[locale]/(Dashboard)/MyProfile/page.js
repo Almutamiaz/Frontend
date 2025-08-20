@@ -9,12 +9,13 @@ import LocationIcon2 from "@/assets/icons/LocationIcon2";
 import CallIcon3 from "@/assets/icons/CallIcon3";
 import MessageIcon from "@/assets/icons/MessageIcon";
 import { Button, DatePicker, InputNumber, Radio } from "antd";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import HeaderOfSection from "@/components/HeaderOfSection";
 import CalendarIcon from "@/assets/icons/CalendarIcon";
 import ArrowIcon2 from "@/assets/icons/ArrowIcon2";
 import SelectBox from "@/components/SelectBox";
 import { useUser } from "@/Context/UserContext";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const t = useTranslations();
@@ -22,7 +23,8 @@ const Page = () => {
   const [dob, setDob] = useState(null);
   const [gender, setGender] = useState(null);
   const { user } = useUser();
-  console.log(user);
+  const locale = useLocale();
+  const router = useRouter();
   const getStatusText = (status) => {
     switch (status) {
       case 0:
@@ -202,7 +204,7 @@ const Page = () => {
                 </div>
               </div>
             </div>
-            <div className="rounded-xl flex p-7 bg-[#6441EF1F] gap-5 flex-wrap">
+            {/* <div className="rounded-xl flex p-7 bg-[#6441EF1F] gap-5 flex-wrap">
               <Image src={ProfileImage} alt="P rofile Image" />
               <div className="flex flex-col gap-4 justify-between">
                 <div className="flex flex-col">
@@ -221,7 +223,7 @@ const Page = () => {
                   {t("completeProfile")}
                 </Button>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="p-6 flex flex-col gap-6 shadow-[0_3px_12px_0_#2F2B3D24] rounded-[6px]">
             <span className="font-bold text-lg leading-[28px] tracking-[0px] text-[#2F2B3DE5]">
@@ -296,7 +298,10 @@ const Page = () => {
                 </span>
               </div>
             </div>
-            <Button className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)] font-medium text-[15px] leading-[22px] tracking-[0px] py-[6px] px-[32px] max-w-[158px] h-[32px]">
+            <Button
+              onClick={() => router.push(`/${locale}/Settings`)}
+              className="hover:!text-[#6441EF] hover:!bg-[var(--neutral-100)] font-medium text-[15px] leading-[22px] tracking-[0px] py-[6px] px-[32px] max-w-[158px] h-[32px]"
+            >
               {t("editProfile")}
             </Button>
           </div>
