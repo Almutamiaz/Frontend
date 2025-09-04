@@ -1,4 +1,3 @@
-import { ORIGINAL_BASE_URL } from "./src/constants.js";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
@@ -14,7 +13,7 @@ const nextConfig = {
   rewrites: () => [
     {
       source: "/backend/:path*",
-      destination: ORIGINAL_BASE_URL,
+      destination: process.env.NEXT_PUBLIC_ORIGINAL_BASE_URL,
     },
   ],
   
