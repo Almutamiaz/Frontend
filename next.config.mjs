@@ -1,22 +1,20 @@
+import { ORIGINAL_BASE_URL } from "./src/constants.js";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === "production";
 const nextConfig = {
   reactStrictMode: false,
   trailingSlash: false,
   images: {
-    domains: ["api-dev.hakeem.com.sa"],
+    domains: ["api-dev.hakeem.com.sa", "api.hakeem.com.sa"],
   },
 
   rewrites: () => [
     {
       source: "/backend/:path*",
-      destination: false
-        ? "https://api.hakeem.com.sa/:path*"
-        : "https://api-dev.hakeem.com.sa/:path*",
+      destination: ORIGINAL_BASE_URL,
     },
   ],
   

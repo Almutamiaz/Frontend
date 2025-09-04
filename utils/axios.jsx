@@ -18,6 +18,7 @@ if (typeof window !== 'undefined') {
   // Function to get the locale from the URL path
   const getLocaleFromPath = () => {
     const pathName = window.location.pathname;
+    console.log(window.location.host)
     const segments = pathName.split("/").filter((segment) => segment.length > 0);
     
     // If the first segment is "en", then use "en"

@@ -14,6 +14,7 @@ import AntdFormItem from "@/components/AntdFormItem";
 import { CloseOutlined } from "@ant-design/icons";
 import { useAppNotification } from "@/Context/NotificationProvider";
 import Image from "next/image";
+import { BASE_URL_WithOutSite } from "@/constants";
 const BookNowSection = ({ Offer }) => {
   const { user } = useUser();
   const { locale } = useParams();
@@ -194,8 +195,8 @@ const BookNowSection = ({ Offer }) => {
         const top = window.screenY + (window.outerHeight - height) / 2;
         const url =
           paymentMethod == 1
-            ? `https://api-dev.hakeem.com.sa/api/paytabs/payment?order_id=${response.data.data.id}`
-            : `https://api-dev.hakeem.com.sa/api/tamara/payment?order_id=${response.data.data.id}`;
+            ? `${BASE_URL_WithOutSite}/paytabs/payment?order_id=${response.data.data.id}`
+            : `${BASE_URL_WithOutSite}/tamara/payment?order_id=${response.data.data.id}`;
         window.open(
           url,
           "_blank",

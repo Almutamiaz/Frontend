@@ -50,7 +50,7 @@ const HeroSectionInput = ({
       value={newValue}
       prefix={<SearchIcon />}
       onClick={
-        ["/en", "/ar"].includes(pathname)
+        ["/en", "/"].includes(pathname)
           ? () => router.push(`/${locale}/Explore`)
           : onClick
       }
