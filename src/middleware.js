@@ -15,6 +15,7 @@ export default function middleware(request) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/.well-known") ||
     pathname === "/favicon.ico" ||
+pathname === "/sitemap.xml" ||
     pathname === "/robots.txt"
   ) {
     return NextResponse.next();
@@ -44,5 +45,5 @@ export default function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|favicon.ico|robots.txt|api|backend).*)"],
+  matcher: ["/((?!_next|favicon.ico|sitemap.xml|robots.txt|api|backend).*)"],
 };
