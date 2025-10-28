@@ -3,6 +3,7 @@
   "nationality": "Nationality",
   "cancelReason": "Cancel Reason",
   "close": "Close",
+
 "confirm": "Confirm",
 
   "accessMedicalServices": "Access your medical services quickly and securely.",
@@ -220,7 +221,7 @@
   "pleaseEnterLastName": "Please enter your last name",
   "pleaseEnterEmailAddress": "Please enter your email address",
   "pleaseEnterPhoneNumber": "Please enter your phone number",
-  "pleaseEnterPassportId": "Please enter your passport ID",
+  "pleaseEnterPassportId": "Please enter your ID/Residence Number",
   "pleaseEnterDateOfBirth": "Please enter your date of birth",
   "pleaseEnterPassword": "Please enter your password",
   "pleaseConfirmPassword": "Please confirm your password",
@@ -229,7 +230,7 @@
   "pleaseEnterExactly9Digits": "Please enter exactly 9 digits",
   "newPasswordDoNotMatch": "The new password that you entered does not match!",
   "passwordMinLength": "Password must be at least 8 characters!",
-  "passportIdValidation": "Passport ID must be 6 to 9 characters, containing only uppercase letters and numbers.",
+  "passportIdValidation": "ID/Residence number must be exactly 10 digits only.",
   "pleaseEnterOtpCode": "Please enter OTP code",
   "userProfileImage": "User Profile Image",
   "searchOnOffer": "Search on Offer",

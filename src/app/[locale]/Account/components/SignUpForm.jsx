@@ -231,7 +231,7 @@ const SignUpForm = ({ setShowVerificationCode, setPhoneNum }) => {
               rules={[
                 { required: true, message: t("pleaseEnterPassportId") },
                 {
-                  pattern: /^[A-Z0-9]{6,9}$/,
+                  pattern: /^[0-9]{10}$/,
                   message: t("passportIdValidation"),
                 },
               ]}
